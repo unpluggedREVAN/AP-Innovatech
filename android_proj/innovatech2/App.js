@@ -89,11 +89,11 @@ const styles = StyleSheet.create({
     margin: 12,
   },
   logo: {
-    width: 200, // Ancho de la imagen
-    height: 200, // Altura de la imagen
-    resizeMode: 'contain', // Esto asegura que toda la imagen se ajuste dentro de las dimensiones dadas
-    alignSelf: 'center', // Esto centrará tu imagen en el contenedor de la vista
-    marginTop: 30, // Ajusta este valor para posicionar la imagen verticalmente
+    width: 200, 
+    height: 200, 
+    resizeMode: 'contain', 
+    alignSelf: 'center', 
+    marginTop: 30, 
   },
   buttonText: {
     fontSize: 18,
