@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation(); // Usa el hook aquí, así que no lo recibas como prop
 
   const handleLogin = () => {
     // Aquí puedes añadir la lógica para manejar el inicio de sesión
@@ -45,8 +47,8 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.linkText}>¿Olvidé mi contraseña?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => {/* Aquí manejas el registro de nuevos usuarios */}}>
-        <Text style={styles.linkText}>¿No tenés cuenta? Registrate aquí</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <Text style={styles.linkText}>¿No tenés cuenta? Regístrate aquí</Text>
       </TouchableOpacity>
 
       <StatusBar style="auto" />
