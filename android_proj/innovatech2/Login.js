@@ -15,7 +15,7 @@ const LoginScreen = () => {
     // Validamos que el usuario y contraseña sean 'admin'
     if (email === 'admin' && password === 'admin') {
         // Si las credenciales son correctas, navegar a la pantalla Home
-        navigation.navigate('Home');
+        navigation.navigate('Main');
       } else {
         // Si no, puedes mostrar un mensaje de error
         alert('Usuario o contraseña incorrectos');

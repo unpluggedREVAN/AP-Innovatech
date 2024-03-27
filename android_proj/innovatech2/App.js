@@ -20,27 +20,24 @@ function MainTabNavigator() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-
-          // Ajusta esto para que coincida con los nombres de tus rutas y los iconos que desees
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
           }
-          // Agrega más condiciones aquí para otros iconos de pestañas
-
-          // Asegúrate de que Ionicons esté instalado: npm install react-native-vector-icons
+          // Agrega aquí otros casos para diferentes pantallas si tienes más tabs
+          // ...
           return <Ionicons name={iconName} size={size} color={color} />;
         },
+        tabBarActiveTintColor: 'blue',
+        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: [{ display: 'flex' }, null],
       })}
-      tabBarOptions={{
-        activeTintColor: 'blue', // Colores y estilos para la pestaña activa
-        inactiveTintColor: 'gray', // Colores y estilos para las pestañas inactivas
-      }}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      {/* Agrega aquí más Tab.Screens para otras pantallas */}
+      {/* ... otras tabs para las pantallas principales */}
     </Tab.Navigator>
   );
 }
+
 
 export default function App() {
   return (
@@ -59,7 +56,7 @@ export default function App() {
         {/* Una vez que el usuario inicia sesión, se navegará a esta pantalla, 
             que es el BottomTabNavigator */}
         <Stack.Screen
-          name="Home"
+          name="Main"
           component={MainTabNavigator}
           options={{ headerShown: false }} // Puedes decidir mostrar el header o no
         />
