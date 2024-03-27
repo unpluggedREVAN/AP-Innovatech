@@ -22,7 +22,7 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('./path-to-innovatech-logo.png')}
+        source={require('./assets/logo_letra_nofondo.png')}
         style={styles.logo}
       />
       <Text style={styles.header}>Proyectos disponibles</Text>
