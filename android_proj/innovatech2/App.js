@@ -59,7 +59,7 @@ export default function App() {
         {/* Una vez que el usuario inicia sesión, se navegará a esta pantalla, 
             que es el BottomTabNavigator */}
         <Stack.Screen
-          name="Main"
+          name="Home"
           component={MainTabNavigator}
           options={{ headerShown: false }} // Puedes decidir mostrar el header o no
         />

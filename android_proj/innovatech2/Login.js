@@ -11,6 +11,15 @@ const LoginScreen = () => {
     // Aquí puedes añadir la lógica para manejar el inicio de sesión
     console.log('Login con:', email, password);
     // Navegación después del inicio de sesión exitoso puede ir aquí
+
+    // Validamos que el usuario y contraseña sean 'admin'
+    if (email === 'admin' && password === 'admin') {
+        // Si las credenciales son correctas, navegar a la pantalla Home
+        navigation.navigate('Home');
+      } else {
+        // Si no, puedes mostrar un mensaje de error
+        alert('Usuario o contraseña incorrectos');
+    }
   };
 
   return (

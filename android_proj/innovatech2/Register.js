@@ -20,7 +20,7 @@ const RegisterScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('./assets/logo_nofondo.png')} // Asegúrate de que este es el camino correcto para tu imagen
+        source={require('./assets/logo_letra_nofondo.png')} // Asegúrate de que este es el camino correcto para tu imagen
         style={styles.logo}
       />
       <Text style={styles.header}>Registrarse</Text>
