@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 // Importar otros componentes necesarios
 
 const HomeScreen = () => {
@@ -18,6 +19,20 @@ const HomeScreen = () => {
     // Aquí debes cargar los proyectos de la base de datos y establecerlos en el estado
     // fetchProjectsFromDatabase().then(setProyectos);
   }, []);
+
+  // Función dummy para simular la navegación al crear un nuevo proyecto
+  const handleCreateProject = () => {
+    // Navegar a la pantalla de creación de nuevo proyecto
+    // navigation.navigate('CreateProject');
+    console.log('Navegar a la pantalla de nuevo proyecto');
+  };
+
+  // Función dummy para simular la navegación al presionar opciones
+  const handleOptionsPress = () => {
+    // Navegar a las opciones del proyecto
+    // navigation.navigate('ProjectOptions');
+    console.log('Navegar a las opciones del proyecto');
+  };
 
   return (
     <View style={styles.container}>
@@ -40,7 +55,7 @@ const HomeScreen = () => {
       </ScrollView>
       <TouchableOpacity
         style={styles.nuevoProyectoButton}
-        onPress={() => {/* Navegar a la pantalla de creación de nuevo proyecto */}}
+        onPress={(handleCreateProject) => {/* Navegar a la pantalla de creación de nuevo proyecto */}}
       >
         <Text style={styles.nuevoProyectoText}>Crear Nuevo Proyecto</Text>
       </TouchableOpacity>
@@ -50,6 +65,25 @@ const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  footer: {
+    paddingVertical: 20, // Agrega padding vertical para separar del último elemento
+    borderTopWidth: 1, // Agrega un borde superior para simular un separador
+    borderColor: '#ccc', // El color del borde
+    backgroundColor: '#fff', // Fondo blanco para la barra inferior
+  },
+  nuevoProyectoButton: {
+    backgroundColor: '#4e9ec5', // Tu color de fondo para el botón
+    borderRadius: 20, // Bordes redondeados
+    paddingVertical: 10, // Padding vertical
+    paddingHorizontal: 20, // Padding horizontal
+    alignSelf: 'center', // Centrar el botón
+    marginBottom: 10, // Margen inferior
+  },
+  nuevoProyectoText: {
+    color: '#fff', // Texto blanco
+    fontWeight: 'bold', // Texto en negrita
+    textAlign: 'center', // Texto centrado
+  },
   container: {
     flex: 1,
     paddingTop: 20, // Ajusta según sea necesario para el logo
