@@ -8,29 +8,28 @@ import {
   ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Ionicons from 'react-native-vector-icons/Ionicons'; // Actualmente no se está usando este componente
+
+// Importa los datos de los proyectos desde el archivo JSON
+import projectData from './data.json'; // Asegúrate de que la ruta sea correcta
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [proyectos, setProyectos] = useState([]); // Aquí se supone que el manejo de proyectos es un array de objetos
+  const [proyectos, setProyectos] = useState([]); // Estado para manejar los proyectos
 
+  // Efecto para cargar los proyectos de la base de datos simulada (archivo JSON)
   useEffect(() => {
-    // cargar los proyectos de la base de datos y establecerlos en el estado
-    // fetchProjectsFromDatabase().then(setProyectos);
+    // Simula la carga de proyectos desde una base de datos estableciendo el estado
+    // En un escenario real, aquí se haría una llamada a la API
+    setProyectos(projectData);
   }, []);
 
-  // Función dummy para simular la navegación al crear un nuevo proyecto
+  // Funciones de ejemplo para navegación y manejo de opciones
   const handleCreateProject = () => {
-    // Navegar a la pantalla de creación de nuevo proyecto, aquí se incluye la lógica pero por ahora solo está el log para depuración
-    // navigation.navigate('CreateProject');
     console.log('Navegar a la pantalla de nuevo proyecto');
   };
 
-  // Función dummy para simular la navegación al presionar opciones
-  const handleOptionsPress = () => {
-    // Navegar a las opciones del proyecto
-    // navigation.navigate('ProjectOptions');
-    console.log('Navegar a las opciones del proyecto');
+  const handleOptionsPress = (id) => {
+    console.log('Navegar a las opciones del proyecto con ID:', id);
   };
 
   return (
@@ -41,12 +40,14 @@ const HomeScreen = () => {
       />
       <Text style={styles.header}>Proyectos disponibles</Text>
       <ScrollView style={styles.proyectosContainer}>
-        {proyectos.map((proyecto, index) => (
-          <View key={index} style={styles.proyectoCard}>
-            {/* aquí se representa la información del proyecto */}
-            <Text>Proyecto {index + 1}: {proyecto.nombre}</Text>
-            {/* más detalles del proyecto */}
-            <TouchableOpacity style={styles.optionsButton}>
+        {proyectos.map((proyecto) => (
+          <View key={proyecto._id} style={styles.proyectoCard}>
+            <Text>Proyecto {proyecto._id}: {proyecto.nombreProyecto}</Text>
+            {/* Aquí puedes agregar más detalles del proyecto */}
+            <TouchableOpacity
+              style={styles.optionsButton}
+              onPress={() => handleOptionsPress(proyecto._id)}
+            >
               <Text>Opciones</Text>
             </TouchableOpacity>
           </View>
@@ -57,7 +58,7 @@ const HomeScreen = () => {
         <Text style={styles.buttonText}>Crear Nuevo Proyecto</Text>
       </TouchableOpacity>
 
-      {/* Añadir el componente de navegación inferior */}
+      {/* Aquí iría el componente de navegación inferior si es necesario */}
     </View>
   );
 };
