@@ -8,12 +8,11 @@ import {
   ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-// Importar otros componentes necesarios
+import Ionicons from 'react-native-vector-icons/Ionicons'; // Actualmente no se está usando este componente
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [proyectos, setProyectos] = useState([]); // Suponiendo que tus proyectos son un array de objetos
+  const [proyectos, setProyectos] = useState([]); // Aquí se supone que el manejo de proyectos es un array de objetos
 
   useEffect(() => {
     // cargar los proyectos de la base de datos y establecerlos en el estado
@@ -22,7 +21,7 @@ const HomeScreen = () => {
 
   // Función dummy para simular la navegación al crear un nuevo proyecto
   const handleCreateProject = () => {
-    // Navegar a la pantalla de creación de nuevo proyecto
+    // Navegar a la pantalla de creación de nuevo proyecto, aquí se incluye la lógica pero por ahora solo está el log para depuración
     // navigation.navigate('CreateProject');
     console.log('Navegar a la pantalla de nuevo proyecto');
   };
@@ -44,9 +43,9 @@ const HomeScreen = () => {
       <ScrollView style={styles.proyectosContainer}>
         {proyectos.map((proyecto, index) => (
           <View key={index} style={styles.proyectoCard}>
-            {/* Aquí representarás la información del proyecto como prefieras */}
+            {/* aquí se representa la información del proyecto */}
             <Text>Proyecto {index + 1}: {proyecto.nombre}</Text>
-            {/* ... más detalles del proyecto */}
+            {/* más detalles del proyecto */}
             <TouchableOpacity style={styles.optionsButton}>
               <Text>Opciones</Text>
             </TouchableOpacity>
@@ -58,37 +57,37 @@ const HomeScreen = () => {
         <Text style={styles.buttonText}>Crear Nuevo Proyecto</Text>
       </TouchableOpacity>
 
-      {/* Añade aquí el componente de navegación inferior */}
+      {/* Añadir el componente de navegación inferior */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   footer: {
-    paddingVertical: 20, // Agrega padding vertical para separar del último elemento
-    borderTopWidth: 1, // Agrega un borde superior para simular un separador
-    borderColor: '#ccc', // El color del borde
-    backgroundColor: '#fff', // Fondo blanco para la barra inferior
+    paddingVertical: 20, 
+    borderTopWidth: 1, 
+    borderColor: '#ccc', 
+    backgroundColor: '#fff', 
   },
   nuevoProyectoButton: {
-    backgroundColor: '#4e9ec5', // Fondo celeste
-    paddingVertical: 10,       // Espaciado vertical interno
-    paddingHorizontal: 20,     // Espaciado horizontal interno
+    backgroundColor: '#4e9ec5', 
+    paddingVertical: 10,       
+    paddingHorizontal: 20,     
     borderRadius: 20,          // Bordes redondeados
-    justifyContent: 'center',  // Centra el contenido del botón verticalmente
-    alignItems: 'center',      // Centra el contenido del botón horizontalmente
-    alignSelf: 'center',       // Centra el botón en su contenedor
-    elevation: 2,              // Agrega sombra en Android
+    justifyContent: 'center',  
+    alignItems: 'center',      
+    alignSelf: 'center',       
+    elevation: 2,              
     shadowColor: '#000',       // Sombra color negro
     shadowOffset: { width: 0, height: 2 }, // Posición de la sombra
-    shadowOpacity: 0.25,       // Opacidad de la sombra
-    shadowRadius: 3.84,        // Radio de la sombra
-    marginTop: 20,             // Margen superior
+    shadowOpacity: 0.25,       
+    shadowRadius: 3.84,        
+    marginTop: 20,             
   },
   nuevoProyectoText: {
-    color: '#fff', // Texto blanco
-    fontWeight: 'bold', // Texto en negrita
-    textAlign: 'center', // Texto centrado
+    color: '#fff', 
+    fontWeight: 'bold', 
+    textAlign: 'center',
     fontsize: 16,
   },
   container: {
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
     paddingTop: 20, // Ajustar
   },
   logo: {
-    width: 100, // Ajustar el tamaño
+    width: 100, 
     height: 50, // Ajustar el tamaño 
     resizeMode: 'contain',
     alignSelf: 'center',
@@ -123,18 +122,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   proyectoCard: {
-    // Estilos para las tarjetas de cada proyecto
+    // para las tarjetas de cada proyecto
   },
   optionsButton: {
-    // Estilos para el botón de opciones
+    // para el botón de opciones
   },
   nuevoProyectoButton: {
-    // Estilos para el botón de crear nuevo proyecto
+    // para el botón de crear nuevo proyecto
   },
   nuevoProyectoText: {
-    // Estilos para el texto del botón de nuevo proyecto
+    // para el texto del botón de nuevo proyecto
   },
-  // Añadir aquí los estilos para el tab navigator
+  // Añadir los estilos para el tab navigator
 });
 
 export default HomeScreen;

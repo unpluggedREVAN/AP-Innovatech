@@ -13,7 +13,8 @@ const RegisterScreen = ({ navigation }) => {
       return;
     }
     console.log('Registro con:', fullName, password); // datos de registro para depuración
-    // Navegar a otra pantalla tras el registro exitoso
+
+    // Aquí es donde se incluye la lógica con la base de datos
   };
 
   return (

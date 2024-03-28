@@ -5,21 +5,20 @@ import { useNavigation } from '@react-navigation/native';
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigation = useNavigation(); // Usa el hook aquí, así que no lo recibas como prop
+  const navigation = useNavigation(); // Se usa el hook aquí, para no recibirlo como prop
 
   const handleLogin = () => {
-    // Aquí puedes añadir la lógica para manejar el inicio de sesión
-    console.log('Login con:', email, password);
-    // Navegación después del inicio de sesión exitoso puede ir aquí
+    // Aquì se incluye la lógica de conexión con la base de datos
+    console.log('Login con:', email, password); // Esto es solo para depuración en consola
 
-    // Validamos que el usuario y contraseña sean 'admin'
+    // Validación de prueba para entrar rápido
     if (email === 'admin' && password === 'admin') {
         // Si las credenciales son correctas, navegar a la pantalla Home
         navigation.navigate('Main');
       } else {
         // Si no, puedes mostrar un mensaje de error
         alert('Usuario o contraseña incorrectos');
-    }
+    } // Este caso es solo de prueba pero aquí se debe incluir el manejo de logiin con la base de datos
   };
 
   return (
@@ -65,6 +64,7 @@ const LoginScreen = () => {
   );
 };
 
+// manejo de estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
