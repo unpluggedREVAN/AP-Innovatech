@@ -42,13 +42,14 @@ const HomeScreen = () => {
       <ScrollView style={styles.proyectosContainer}>
         {proyectos.map((proyecto) => (
           <View key={proyecto._id} style={styles.proyectoCard}>
-            <Text>Proyecto {proyecto._id}: {proyecto.nombreProyecto}</Text>
+            <Text style={styles.proyectoTitle}>Proyecto {proyecto._id}: {proyecto.nombreProyecto}</Text>
+            <Text style={styles.proyectoContent}>{proyecto.descripcion}</Text>
             {/* Aquí puedes agregar más detalles del proyecto */}
             <TouchableOpacity
               style={styles.optionsButton}
               onPress={() => handleOptionsPress(proyecto._id)}
             >
-              <Text>Opciones</Text>
+              <Text style={styles.optionsButtonText}>Opciones</Text>
             </TouchableOpacity>
           </View>
         ))}
@@ -122,19 +123,52 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  proyectoCard: {
-    // para las tarjetas de cada proyecto
+  // Estilos para las tarjetas de proyecto
+proyectoCard: {
+  backgroundColor: '#ffffff', // Fondo blanco para las tarjetas
+  borderRadius: 10, // Bordes redondeados
+  padding: 20, // Padding para el contenido interno de la tarjeta
+  marginVertical: 8, // Margen vertical para separar las tarjetas
+  marginHorizontal: 16, // Margen horizontal para dar espacio a los lados
+  shadowColor: '#000', // Color de la sombra
+  shadowOffset: {
+    width: 0,
+    height: 2, // Posición vertical de la sombra
   },
-  optionsButton: {
-    // para el botón de opciones
-  },
-  nuevoProyectoButton: {
-    // para el botón de crear nuevo proyecto
-  },
-  nuevoProyectoText: {
-    // para el texto del botón de nuevo proyecto
-  },
-  // Añadir los estilos para el tab navigator
+  shadowOpacity: 0.23, // Opacidad de la sombra
+  shadowRadius: 2.62, // Radio de la sombra
+  elevation: 4, // Elevación en Android para la sombra
+},
+
+// Estilos para el texto de los títulos de los proyectos dentro de la tarjeta
+proyectoTitle: {
+  fontSize: 18,
+  fontWeight: 'bold',
+  marginBottom: 5, // Margen inferior para separar del resto del contenido
+},
+
+// Estilos para el contenido de la tarjeta (descripción, estado, etc.)
+proyectoContent: {
+  fontSize: 14,
+  color: '#666', // Color gris para el texto que no es el título
+  marginBottom: 5, // Margen inferior para separar los elementos del contenido
+},
+
+// Estilos para el botón de opciones
+optionsButton: {
+  backgroundColor: '#4e9ec5', // Color que coincida con tu esquema de diseño
+  padding: 10,
+  borderRadius: 5, // Bordes redondeados
+  marginTop: 10, // Margen superior para separar del contenido de la tarjeta
+  alignItems: 'center', // Alinear el texto del botón al centro
+},
+
+// Estilos para el texto del botón de opciones
+optionsButtonText: {
+  color: '#fff', // Texto blanco para contraste con el botón
+  fontWeight: 'bold',
+},
+
 });
 
 export default HomeScreen;
