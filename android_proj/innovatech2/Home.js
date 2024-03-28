@@ -16,7 +16,7 @@ const HomeScreen = () => {
   const [proyectos, setProyectos] = useState([]); // Suponiendo que tus proyectos son un array de objetos
 
   useEffect(() => {
-    // Aquí debes cargar los proyectos de la base de datos y establecerlos en el estado
+    // cargar los proyectos de la base de datos y establecerlos en el estado
     // fetchProjectsFromDatabase().then(setProyectos);
   }, []);
 
@@ -72,25 +72,33 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', // Fondo blanco para la barra inferior
   },
   nuevoProyectoButton: {
-    backgroundColor: '#4e9ec5', // Tu color de fondo para el botón
-    borderRadius: 20, // Bordes redondeados
-    paddingVertical: 10, // Padding vertical
-    paddingHorizontal: 20, // Padding horizontal
-    alignSelf: 'center', // Centrar el botón
-    marginBottom: 10, // Margen inferior
+    backgroundColor: '#4e9ec5', // Fondo celeste
+    paddingVertical: 10,       // Espaciado vertical interno
+    paddingHorizontal: 20,     // Espaciado horizontal interno
+    borderRadius: 20,          // Bordes redondeados
+    justifyContent: 'center',  // Centra el contenido del botón verticalmente
+    alignItems: 'center',      // Centra el contenido del botón horizontalmente
+    alignSelf: 'center',       // Centra el botón en su contenedor
+    elevation: 2,              // Agrega sombra en Android
+    shadowColor: '#000',       // Sombra color negro
+    shadowOffset: { width: 0, height: 2 }, // Posición de la sombra
+    shadowOpacity: 0.25,       // Opacidad de la sombra
+    shadowRadius: 3.84,        // Radio de la sombra
+    marginTop: 20,             // Margen superior
   },
   nuevoProyectoText: {
     color: '#fff', // Texto blanco
     fontWeight: 'bold', // Texto en negrita
     textAlign: 'center', // Texto centrado
+    fontsize: 16,
   },
   container: {
     flex: 1,
-    paddingTop: 20, // Ajusta según sea necesario para el logo
+    paddingTop: 20, // Ajustar
   },
   logo: {
-    width: 100, // Ajusta el tamaño según tus necesidades
-    height: 50, // Ajusta el tamaño según tus necesidades
+    width: 100, // Ajustar el tamaño
+    height: 50, // Ajustar el tamaño 
     resizeMode: 'contain',
     alignSelf: 'center',
   },
@@ -115,7 +123,7 @@ const styles = StyleSheet.create({
   nuevoProyectoText: {
     // Estilos para el texto del botón de nuevo proyecto
   },
-  // Añade aquí los estilos para el tab navigator
+  // Añadir aquí los estilos para el tab navigator
 });
 
 export default HomeScreen;
