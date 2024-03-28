@@ -12,6 +12,7 @@ import HomeScreen from './Home';
 import ColaboradoresScreen from './Colaboradores';
 import ProyectoScreen from './Proyecto';
 import EvaluacionScreen from './Evaluacion';
+import CuentaScreen from './Cuenta';
 
 // Importa aquí el resto de tus pantallas para el menú de navegación inferior
 
@@ -88,25 +89,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-// Todos los componentes y estilos de los componentes
-
-// CuentaScreen Component
-export const CuentaScreen = () => (
-  <View style={styles.screenContainer}>
-    <Text style={styles.screenText}>Cuenta</Text>
-  </View>
-);
-
-// Styles shared by all screen components
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  screenText: {
-    fontSize: 24,
-    fontWeight: 'bold'
-  }
-});
