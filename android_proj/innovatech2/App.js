@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { View, Text, StyleSheet } from 'react-native';
 
-// Importa tus pantallas aquí
+// cargar las pantallas principales
 import LoginScreen from './Login';
 import RegisterScreen from './Register';
 import HomeScreen from './Home';
@@ -14,12 +14,12 @@ import ProyectoScreen from './Proyecto';
 import EvaluacionScreen from './Evaluacion';
 import CuentaScreen from './Cuenta';
 
-// Importa aquí el resto de tus pantallas para el menú de navegación inferior
+// para más pantallas
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// Podrías crear una función para tu BottomTabNavigator para mantener tu código organizado
+// el corazón del bottom tab navigator
 function MainTabNavigator() {
   return (
     <Tab.Navigator
@@ -27,6 +27,7 @@ function MainTabNavigator() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
+          // ícono basado en la pantalla activa
           switch (route.name) {
             case 'Colab':
               iconName = focused ? 'people' : 'people-outline';
@@ -45,6 +46,7 @@ function MainTabNavigator() {
               break;
           }
 
+          // Para darle más vida a los íconos
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: 'blue',
@@ -52,7 +54,7 @@ function MainTabNavigator() {
         tabBarStyle: [{ display: 'flex' }, null],
       })}
     >
-      {/* Define los componentes para tus pantallas y los nombres de las rutas */}
+      {/* aquí van pantallas como tabs */}
       <Tab.Screen name="Colab" component={ColaboradoresScreen} />
       <Tab.Screen name="Proyecto" component={ProyectoScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
@@ -67,24 +69,25 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        {/* pantalla de login, sin header */}
         <Stack.Screen
           name="Login"
           component={LoginScreen}
           options={{ headerShown: false }}
         />
+        {/* lo mismo para registro */}
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
           options={{ headerShown: false }}
         />
-        {/* Una vez que el usuario inicia sesión, se navegará a esta pantalla, 
-            que es el BottomTabNavigator */}
+        {/* la entrada al mundo de tabs después del login */}
         <Stack.Screen
           name="Main"
           component={MainTabNavigator}
-          options={{ headerShown: false }} // Puedes decidir mostrar el header o no
+          options={{ headerShown: false }} // mostrar el header es opcional
         />
-        {/* Aquí puedes agregar más pantallas si es necesario */}
+        {/* aquí se ponen más pantallas */}
       </Stack.Navigator>
     </NavigationContainer>
   );
