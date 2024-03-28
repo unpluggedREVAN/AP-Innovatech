@@ -9,6 +9,8 @@ import { View, Text, StyleSheet } from 'react-native';
 import LoginScreen from './Login';
 import RegisterScreen from './Register';
 import HomeScreen from './Home';
+import ColaboradoresScreen from './Colaboradores';
+
 // Importa aquí el resto de tus pantallas para el menú de navegación inferior
 
 const Stack = createNativeStackNavigator();
@@ -86,13 +88,6 @@ export default function App() {
 }
 
 // Todos los componentes y estilos de los componentes
-
-// ColaboradoresScreen Component
-export const ColaboradoresScreen = () => (
-  <View style={styles.screenContainer}>
-    <Text style={styles.screenText}>Colaboradores</Text>
-  </View>
-);
 
 // ProyectoScreen Component
 export const ProyectoScreen = () => (
