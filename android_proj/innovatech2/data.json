@@ -1,0 +1,101 @@
+{
+    "proyectos": [
+        {
+            "id": 1,
+            "nombre": "Desarrollo de App React Native",
+            "recursos": [
+                "React Native",
+                "Expo",
+                "Node.js"
+            ],
+            "presupuesto": 20000,
+            "tareas": [
+                {
+                    "nombre": "Diseño de interfaz",
+                    "estado": "completado"
+                },
+                {
+                    "nombre": "Desarrollo de componentes",
+                    "estado": "en progreso"
+                },
+                {
+                    "nombre": "Integración backend",
+                    "estado": "pendiente"
+                }
+            ],
+            "estado": "en pausa",
+            "descripción": "Este proyecto consiste en el desarrollo de una aplicación móvil con React Native y Expo.",
+            "fecha de inicio": "2024-01-13",
+            "responsable": "Alex Williams"
+        },
+        {
+            "id": 2,
+            "nombre": "Proyecto 2",
+            "recursos": [
+                "Recurso 1",
+                "Recurso 2"
+            ],
+            "presupuesto": 16226,
+            "tareas": [
+                {
+                    "nombre": "Tarea 1",
+                    "estado": "completado"
+                },
+                {
+                    "nombre": "Tarea 2",
+                    "estado": "en progreso"
+                }
+            ],
+            "estado": "en pausa",
+            "descripción": "Descripción del Proyecto 2",
+            "fecha de inicio": "2023-12-14",
+            "responsable": "Jordan Smith"
+        },
+        {
+            "id": 3,
+            "nombre": "Proyecto 3",
+            "recursos": [
+                "Recurso 1",
+                "Recurso 2"
+            ],
+            "presupuesto": 21804,
+            "tareas": [
+                {
+                    "nombre": "Tarea 1",
+                    "estado": "completado"
+                },
+                {
+                    "nombre": "Tarea 2",
+                    "estado": "en progreso"
+                }
+            ],
+            "estado": "en progreso",
+            "descripción": "Descripción del Proyecto 3",
+            "fecha de inicio": "2024-03-11",
+            "responsable": "Alex Jones"
+        },
+        {
+            "id": 4,
+            "nombre": "Proyecto 4",
+            "recursos": [
+                "Recurso 1",
+                "Recurso 2"
+            ],
+            "presupuesto": 49366,
+            "tareas": [
+                {
+                    "nombre": "Tarea 1",
+                    "estado": "completado"
+                },
+                {
+                    "nombre": "Tarea 2",
+                    "estado": "en progreso"
+                }
+            ],
+            "estado": "completado",
+            "descripción": "Descripción del Proyecto 4",
+            "fecha de inicio": "2023-04-17",
+            "responsable": "Alex Jones"
+        }
+    ]
+}

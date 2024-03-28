@@ -48,7 +48,7 @@ const RegisterScreen = ({ navigation }) => {
       />
 
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Registrarse</Text> // Botón para enviar el formulario de registro
+        <Text style={styles.buttonText}>Registrarse</Text> 
       </TouchableOpacity>
 
       <StatusBar style="auto" />
