@@ -53,12 +53,11 @@ const HomeScreen = () => {
           </View>
         ))}
       </ScrollView>
-      <TouchableOpacity
-        style={styles.nuevoProyectoButton}
-        onPress={(handleCreateProject) => {/* Navegar a la pantalla de creación de nuevo proyecto */}}
-      >
-        <Text style={styles.nuevoProyectoText}>Crear Nuevo Proyecto</Text>
+      
+      <TouchableOpacity style={styles.button} onPress={handleCreateProject}>
+        <Text style={styles.buttonText}>Crear Nuevo Proyecto</Text>
       </TouchableOpacity>
+
       {/* Añade aquí el componente de navegación inferior */}
     </View>
   );
@@ -110,6 +109,18 @@ const styles = StyleSheet.create({
   },
   proyectosContainer: {
     flex: 1,
+  },
+  button: {
+    backgroundColor: '#4e9ec5',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    margin: 12,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: 'bold',
   },
   proyectoCard: {
     // Estilos para las tarjetas de cada proyecto
