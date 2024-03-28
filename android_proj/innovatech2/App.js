@@ -10,6 +10,7 @@ import LoginScreen from './Login';
 import RegisterScreen from './Register';
 import HomeScreen from './Home';
 import ColaboradoresScreen from './Colaboradores';
+import ColaboradoresScreen from './Proyecto';
 
 // Importa aquí el resto de tus pantallas para el menú de navegación inferior
 
@@ -88,13 +89,6 @@ export default function App() {
 }
 
 // Todos los componentes y estilos de los componentes
-
-// ProyectoScreen Component
-export const ProyectoScreen = () => (
-  <View style={styles.screenContainer}>
-    <Text style={styles.screenText}>Proyecto</Text>
-  </View>
-);
 
 // EvaluacionScreen Component
 export const EvaluacionScreen = () => (
