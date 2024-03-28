@@ -1,0 +1,147 @@
+[
+    { 
+      "_id": "6611a7eb234b078c3fd42ba1",
+      "nombreProyecto": "Desarrollo Web Innovador",
+      "recursosNecesarios": ["Servidor cloud", "Gestor de contenidos"],
+      "presupuesto": 15000,
+      "colaboradores": ["colabId10", "colabId20", "colabId30"],
+      "tareas": [
+        {
+          "nombreTarea": "Implementación de seguridad",
+          "storyPoints": 8,
+          "estado": "por hacer",
+          "responsable": "colabId20"
+        },
+        {
+          "nombreTarea": "Integración API de pagos",
+          "storyPoints": 13,
+          "estado": "en curso",
+          "responsable": "colabId30"
+        }
+      ],
+      "estadoProyecto": "En progreso",
+      "descripcion": "Proyecto enfocado en el desarrollo de una web innovadora con integración de servicios en la nube.",
+      "fechaInicio": "2023-03-15",
+      "historialCambios": [],
+      "responsable": "colabId10"
+    },
+    {
+      "_id": "6622b8fc345c189d4ee53cc2",
+      "nombreProyecto": "App Móvil Educativa",
+      "recursosNecesarios": ["Framework de desarrollo móvil", "Base de datos NoSQL"],
+      "presupuesto": 20000,
+      "colaboradores": ["colabId40", "colabId50"],
+      "tareas": [
+        {
+          "nombreTarea": "Diseño de lecciones interactivas",
+          "storyPoints": 20,
+          "estado": "por hacer",
+          "responsable": "colabId50"
+        }
+      ],
+      "estadoProyecto": "En diseño",
+      "descripcion": "Aplicación móvil destinada a mejorar el aprendizaje en niños mediante juegos y lecciones interactivas.",
+      "fechaInicio": "2023-02-01",
+      "historialCambios": [],
+      "responsable": "colabId40"
+    },
+    {
+      "_id": "6733c9gd456d29ae5ff64dd3",
+      "nombreProyecto": "Sistema de Gestión de Inventario",
+      "recursosNecesarios": ["Servidores", "Base de datos relacional"],
+      "presupuesto": 12000,
+      "colaboradores": ["colabId60", "colabId70", "colabId80"],
+      "tareas": [
+        {
+          "nombreTarea": "Desarrollo backend",
+          "storyPoints": 15,
+          "estado": "en curso",
+          "responsable": "colabId70"
+        },
+        {
+          "nombreTarea": "Interfaz de usuario",
+          "storyPoints": 10,
+          "estado": "por hacer",
+          "responsable": "colabId80"
+        }
+      ],
+      "estadoProyecto": "En desarrollo",
+      "descripcion": "Sistema diseñado para optimizar la gestión de inventario de pequeñas y medianas empresas.",
+      "fechaInicio": "2023-04-20",
+      "historialCambios": [],
+      "responsable": "colabId60"
+    },
+    {
+      "_id": "6844dahd567e3abf6gg75ee4",
+      "nombreProyecto": "Plataforma de E-commerce",
+      "recursosNecesarios": ["Plataforma de comercio electrónico", "Sistema de pago"],
+      "presupuesto": 25000,
+      "colaboradores": ["colabId90", "colabId100", "colabId110"],
+      "tareas": [
+        {
+          "nombreTarea": "Optimización SEO",
+          "storyPoints": 5,
+          "estado": "por hacer",
+          "responsable": "colabId100"
+        },
+        {
+          "nombreTarea": "Gestión de inventario",
+          "storyPoints": 8,
+          "estado": "en curso",
+          "responsable": "colabId110"
+        }
+      ],
+      "estadoProyecto": "En lanzamiento",
+      "descripcion": "Desarrollo de una plataforma de comercio electrónico con enfoque en la facilidad de uso y la seguridad.",
+      "fechaInicio": "2023-01-20",
+      "historialCambios": [],
+      "responsable": "colabId90"
+    },
+    {
+      "_id": "6955ebie678f4dch7hh86ff5",
+      "nombreProyecto": "Plataforma de Análisis de Datos",
+      "recursosNecesarios": ["Herramientas de Big Data", "Infraestructura cloud"],
+      "presupuesto": 30000,
+      "colaboradores": ["colabId120", "colabId130"],
+      "tareas": [
+        {
+          "nombreTarea": "Integración de fuentes de datos",
+          "storyPoints": 18,
+          "estado": "en curso",
+          "responsable": "colabId130"
+        }
+      ],
+      "estadoProyecto": "En análisis",
+      "descripcion": "Plataforma destinada al análisis de grandes volúmenes de datos para la toma de decisiones basada en información.",
+      "fechaInicio": "2023-05-10",
+      "historialCambios": [],
+      "responsable": "colabId120"
+    },
+    {
+      "_id": "7066fckf789g5dei8ii97gg6",
+      "nombreProyecto": "Renovación de Infraestructura IT",
+      "recursosNecesarios": ["Hardware de servidor", "Sistemas de almacenamiento"],
+      "presupuesto": 18000,
+      "colaboradores": ["colabId140", "colabId150", "colabId160"],
+      "tareas": [
+        {
+          "nombreTarea": "Actualización de sistemas",
+          "storyPoints": 12,
+          "estado": "por hacer",
+          "responsable": "colabId150"
+        },
+        {
+          "nombreTarea": "Migración de datos",
+          "storyPoints": 20,
+          "estado": "en curso",
+          "responsable": "colabId160"
+        }
+      ],
+      "estadoProyecto": "En planificación",
+      "descripcion": "Proyecto enfocado en la actualización y mejora de la infraestructura IT para aumentar la eficiencia operativa.",
+      "fechaInicio": "2023-06-01",
+      "historialCambios": [],
+      "responsable": "colabId140"
+    }
+  ]
+  
