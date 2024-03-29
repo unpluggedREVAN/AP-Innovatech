@@ -4,10 +4,12 @@ const dotenv = require('dotenv');
 const reunionesRoutes = require('./routes/reunionesRoutes');
 const colaboradoresRoutes = require('./routes/colaboradoresRoutes');
 const registroLogin = require('./routes/registroLogin');
+const cors = require('cors')
 
 dotenv.config();
 const app = express();
 
+app.use(cors());
 // Middleware para parsear el cuerpo de las peticiones en formato JSON
 app.use(express.json());
 
@@ -22,5 +24,5 @@ app.use('/colaboradores', colaboradoresRoutes);
 app.use('/', registroLogin);
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
