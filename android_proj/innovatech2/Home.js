@@ -28,8 +28,8 @@ const HomeScreen = () => {
     console.log('Navegar a la pantalla de nuevo proyecto');
   };
 
-  const handleOptionsPress = (id) => {
-    console.log('Navegar a las opciones del proyecto con ID:', id);
+  const handleOptionsPress = (proyectoId) => {
+    navigation.navigate('ProjectDetails', { proyectoId });
   };
 
   return (
@@ -49,7 +49,7 @@ const HomeScreen = () => {
               style={styles.optionsButton}
               onPress={() => handleOptionsPress(proyecto._id)}
             >
-              <Text style={styles.optionsButtonText}>Opciones</Text>
+              <Text style={styles.optionsButtonText}>Gestionar proyecto</Text>
             </TouchableOpacity>
           </View>
         ))}
