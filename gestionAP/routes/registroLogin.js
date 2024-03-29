@@ -2,9 +2,11 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const Colaborador = require('../models/Colaborador'); // Asegúrate de ajustar la ruta al modelo
 const router = express.Router();
+const validateModel = require('../middlewares/validator.middleware')
+const colabRegisterSchema = require('../schema/colab.schema')
 
 // Endpoint para el registro de un nuevo colaborador
-router.post('/register', async (req, res) => {
+router.post('/register', validateModel(colabRegisterSchema) ,validateModel(colabRegisterSchema) ,async (req, res) => {
     try {
         // Hash de la contraseña
         const hashedPassword = await bcrypt.hash(req.body.contrasena, 10);
