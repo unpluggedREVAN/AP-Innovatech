@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import colabData from './colab_data.json'; 
+import { Alert } from 'react-native';
 
 const CuentaScreen = () => {
   // Este usuario está anidado para fines de prueba
@@ -18,6 +19,15 @@ const CuentaScreen = () => {
   const handleSaveChanges = () => {
     console.log('Guardar cambios', colaborador);
     // Aquí se envían los cambios hechos a la base de datos
+
+    // Mostrar una alerta al usuario
+    Alert.alert(
+      "Cambio realizado", // Título de la alerta
+      "Cambio realizado correctamente", // Mensaje de la alerta
+      [
+        { text: "OK" } // Botón para cerrar la alerta
+      ]
+    );
   };
 
   return (

@@ -1,5 +1,3 @@
-// ProjectDetailsScreen.js
-
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Alert } from 'react-native';
@@ -8,6 +6,7 @@ import projectData from './data.json';
 const ProjectDetailsScreen = ({ route }) => {
   const { proyectoId } = route.params;
 
+  // Nota para Darío: Mae vea aquí está usando el id del proyecto para encontrar toda la info en el json local, use la misma técnica cuando ya lo pegue con Mongo
   // Buscar el proyecto específico usando el ID
   const proyecto = projectData.find(p => p._id === proyectoId);
 
@@ -21,14 +20,14 @@ const ProjectDetailsScreen = ({ route }) => {
       "¿Estás seguro de que deseas eliminar este proyecto?",
       [
         { text: "Cancelar", style: "cancel" },
-        { text: "Eliminar", onPress: () => console.log('Eliminar proyecto') }, // Aquí la lógica de eliminación
+        { text: "Eliminar", onPress: () => console.log('Eliminar proyecto') }, // Aquí la lógica de eliminación, agregarla cuando ya esté el API
       ]
     );
   };
 
   return (
     <ScrollView style={styles.container}>
-      {/* Asegúrate de que 'proyecto' no sea undefined antes de intentar acceder a sus propiedades */}
+      {/* Asegurarse de que el proyecto no sea undefined antes de intentar acceder a sus propiedades */}
       {proyecto ? (
         <>
           <Text style={styles.title}>{proyecto.nombreProyecto}</Text>
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  // ...otros estilos que necesites
+  // poner más estilos aquí
 });
 
 export default ProjectDetailsScreen;
