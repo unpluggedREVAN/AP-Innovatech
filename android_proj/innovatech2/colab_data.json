@@ -7,7 +7,8 @@
       "departamentoTrabajo": "Diseño Gráfico",
       "telefono": "2345678901",
       "estado": "ocupado",
-      "proyectoActual": "Desarrollo Web Innovador"
+      "proyectoActual": "Desarrollo Web Innovador",
+      "contrasena": ""
     },
     {
       "_id": "7812i7id321i176cg4e58i2",
@@ -17,7 +18,8 @@
       "departamentoTrabajo": "Marketing",
       "telefono": "3456789012",
       "estado": "libre",
-      "proyectoActual": null
+      "proyectoActual": null,
+      "contrasena": ""
     },
     {
       "_id": "7923j8je432j287dh5f69j3",
@@ -27,7 +29,8 @@
       "departamentoTrabajo": "Desarrollo",
       "telefono": "4567890123",
       "estado": "ocupado",
-      "proyectoActual": "App Móvil Educativa"
+      "proyectoActual": "App Móvil Educativa",
+      "contrasena": ""
     },
     {
       "_id": "71034k9kf543k398ei6g710k4",
@@ -37,7 +40,8 @@
       "departamentoTrabajo": "Recursos Humanos",
       "telefono": "5678901234",
       "estado": "libre",
-      "proyectoActual": null
+      "proyectoActual": null,
+      "contrasena": ""
     },
     {
       "_id": "71145l0lg654l409fj7h821l5",
@@ -47,7 +51,8 @@
       "departamentoTrabajo": "Soporte Técnico",
       "telefono": "6789012345",
       "estado": "ocupado",
-      "proyectoActual": "Sistema de Gestión de Inventario"
+      "proyectoActual": "Sistema de Gestión de Inventario",
+      "contrasena": ""
     },
     {
       "_id": "71256m1mh765m510gk8i932m6",
@@ -57,7 +62,8 @@
       "departamentoTrabajo": "Finanzas",
       "telefono": "7890123456",
       "estado": "libre",
-      "proyectoActual": null
+      "proyectoActual": null,
+      "contrasena": ""
     },
     {
       "_id": "71367n2ni876n621hl9j043n7",
@@ -67,7 +73,8 @@
       "departamentoTrabajo": "Operaciones",
       "telefono": "8901234567",
       "estado": "ocupado",
-      "proyectoActual": "Plataforma de E-commerce"
+      "proyectoActual": "Plataforma de E-commerce",
+      "contrasena": ""
     },
     {
       "_id": "71478o3oj987o732im0k154o8",
@@ -77,7 +84,8 @@
       "departamentoTrabajo": "Investigación y Desarrollo",
       "telefono": "9012345678",
       "estado": "libre",
-      "proyectoActual": null
+      "proyectoActual": null,
+      "contrasena": ""
     }
   ]
   
