@@ -17,6 +17,30 @@
           "storyPoints": 13,
           "estado": "en curso",
           "responsable": "colabId30"
+        },
+        {
+          "nombreTarea": "Tarea de ejemplo",
+          "storyPoints": 11,
+          "estado": "finalizada",
+          "responsable": "colabId30"
+        },
+        {
+          "nombreTarea": "Tarea de ejemplo2",
+          "storyPoints": 11,
+          "estado": "finalizada",
+          "responsable": "colabId30"
+        },
+        {
+          "nombreTarea": "Tarea de ejemplo2",
+          "storyPoints": 11,
+          "estado": "finalizada",
+          "responsable": "colabId30"
+        },
+        {
+          "nombreTarea": "Tarea de ejemplo2",
+          "storyPoints": 11,
+          "estado": "finalizada",
+          "responsable": "colabId30"
         }
       ],
       "estadoProyecto": "En progreso",

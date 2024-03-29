@@ -10,6 +10,11 @@ const ProjectDetailsScreen = ({ route }) => {
   // Buscar el proyecto específico usando el ID
   const proyecto = projectData.find(p => p._id === proyectoId);
 
+  // Organizar las tareas por estado
+  const tareasPorHacer = proyecto?.tareas.filter(t => t.estado === 'por hacer') || [];
+  const tareasEnCurso = proyecto?.tareas.filter(t => t.estado === 'en curso') || [];
+  const tareasFinalizadas = proyecto?.tareas.filter(t => t.estado === 'finalizada') || [];
+  
   const handleEditTasks = () => {
     // Navega a la pantalla de edición de tareas
   };
@@ -27,33 +32,55 @@ const ProjectDetailsScreen = ({ route }) => {
 
   return (
     <ScrollView style={styles.container}>
-      {/* Asegurarse de que el proyecto no sea undefined antes de intentar acceder a sus propiedades */}
-      {proyecto ? (
+    {/* Asegurarse de que el proyecto no sea undefined antes de intentar acceder a sus propiedades */}
+    {proyecto ? (
         <>
-          <Text style={styles.title}>{proyecto.nombreProyecto}</Text>
-          <Text style={styles.infoLabel}>Descripción:</Text>
-          <Text style={styles.info}>{proyecto.descripcion}</Text>
-          
-          {/* Repite la estructura para los demás campos */}
-          <Text style={styles.infoLabel}>Presupuesto:</Text>
-          <Text style={styles.info}>${proyecto.presupuesto}</Text>
+        <Text style={styles.title}>{proyecto.nombreProyecto}</Text>
+        <Text style={styles.infoLabel}>Descripción:</Text>
+        <Text style={styles.info}>{proyecto.descripcion}</Text>
+        
+        {/* Repite la estructura para los demás campos */}
+        <Text style={styles.infoLabel}>Presupuesto:</Text>
+        <Text style={styles.info}>${proyecto.presupuesto}</Text>
 
-          <Text style={styles.infoLabel}>Estado del Proyecto:</Text>
-          <Text style={styles.info}>{proyecto.estadoProyecto}</Text>
+        <Text style={styles.infoLabel}>Estado del Proyecto:</Text>
+        <Text style={styles.info}>{proyecto.estadoProyecto}</Text>
 
-          <Text style={styles.infoLabel}>Fecha de Inicio:</Text>
-          <Text style={styles.info}>{proyecto.fechaInicio}</Text>
+        <Text style={styles.infoLabel}>Fecha de Inicio:</Text>
+        <Text style={styles.info}>{proyecto.fechaInicio}</Text>
+
+        {/* Tareas por estado */}
+        <Text style={styles.sectionTitle}>Tareas por hacer</Text>
+        {tareasPorHacer.map((tarea, index) => (
+            <Text key={index} style={styles.tareaInfo}>
+            {tarea.nombreTarea} - {tarea.storyPoints} SP - {tarea.responsable}
+            </Text>
+        ))}
+
+        <Text style={styles.sectionTitle}>Tareas en curso</Text>
+        {tareasEnCurso.map((tarea, index) => (
+            <Text key={index} style={styles.tareaInfo}>
+            {tarea.nombreTarea} - {tarea.storyPoints} SP - {tarea.responsable}
+            </Text>
+        ))}
+
+        <Text style={styles.sectionTitle}>Tareas finalizadas</Text>
+        {tareasFinalizadas.map((tarea, index) => (
+            <Text key={index} style={styles.tareaInfo}>
+            {tarea.nombreTarea} - {tarea.storyPoints} SP - {tarea.responsable}
+            </Text>
+        ))}
         </>
-      ) : (
+    ) : (
         <Text style={styles.info}>Proyecto no encontrado.</Text>
-      )}
+    )}
 
-      <TouchableOpacity onPress={handleEditTasks} style={styles.button}>
+    <TouchableOpacity onPress={handleEditTasks} style={styles.button}>
         <Text style={styles.buttonText}>Modificar Tareas</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleDeleteProject} style={[styles.button, styles.deleteButton]}>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={handleDeleteProject} style={[styles.button, styles.deleteButton]}>
         <Text style={styles.buttonText}>Eliminar Proyecto</Text>
-      </TouchableOpacity>
+    </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -89,6 +116,17 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 5,
+  },
+  tareaInfo: {
+    fontSize: 16,
+    marginLeft: 10,
+    marginBottom: 5,
   },
   // poner más estilos aquí
 });
