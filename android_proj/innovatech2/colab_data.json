@@ -1,0 +1,91 @@
+[
+    {
+      "_id": "7701g6hc210h065bf3d47h1",
+      "nombreCompleto": "Ana Martínez",
+      "cedula": "V-23456789",
+      "correoElectronico": "ana.martinez@example.com",
+      "departamentoTrabajo": "Diseño Gráfico",
+      "telefono": "2345678901",
+      "estado": "ocupado",
+      "proyectoActual": "Desarrollo Web Innovador",
+      "contrasena": ""
+    },
+    {
+      "_id": "7812i7id321i176cg4e58i2",
+      "nombreCompleto": "Carlos Gómez",
+      "cedula": "V-34567890",
+      "correoElectronico": "carlos.gomez@example.com",
+      "departamentoTrabajo": "Marketing",
+      "telefono": "3456789012",
+      "estado": "libre",
+      "proyectoActual": null,
+      "contrasena": ""
+    },
+    {
+      "_id": "7923j8je432j287dh5f69j3",
+      "nombreCompleto": "Diana López",
+      "cedula": "V-45678901",
+      "correoElectronico": "diana.lopez@example.com",
+      "departamentoTrabajo": "Desarrollo",
+      "telefono": "4567890123",
+      "estado": "ocupado",
+      "proyectoActual": "App Móvil Educativa",
+      "contrasena": ""
+    },
+    {
+      "_id": "71034k9kf543k398ei6g710k4",
+      "nombreCompleto": "Eduardo Rodríguez",
+      "cedula": "V-56789012",
+      "correoElectronico": "eduardo.rodriguez@example.com",
+      "departamentoTrabajo": "Recursos Humanos",
+      "telefono": "5678901234",
+      "estado": "libre",
+      "proyectoActual": null,
+      "contrasena": ""
+    },
+    {
+      "_id": "71145l0lg654l409fj7h821l5",
+      "nombreCompleto": "Fernanda González",
+      "cedula": "V-67890123",
+      "correoElectronico": "fernanda.gonzalez@example.com",
+      "departamentoTrabajo": "Soporte Técnico",
+      "telefono": "6789012345",
+      "estado": "ocupado",
+      "proyectoActual": "Sistema de Gestión de Inventario",
+      "contrasena": ""
+    },
+    {
+      "_id": "71256m1mh765m510gk8i932m6",
+      "nombreCompleto": "Gustavo Álvarez",
+      "cedula": "V-78901234",
+      "correoElectronico": "gustavo.alvarez@example.com",
+      "departamentoTrabajo": "Finanzas",
+      "telefono": "7890123456",
+      "estado": "libre",
+      "proyectoActual": null,
+      "contrasena": ""
+    },
+    {
+      "_id": "71367n2ni876n621hl9j043n7",
+      "nombreCompleto": "Helena Ramírez",
+      "cedula": "V-89012345",
+      "correoElectronico": "helena.ramirez@example.com",
+      "departamentoTrabajo": "Operaciones",
+      "telefono": "8901234567",
+      "estado": "ocupado",
+      "proyectoActual": "Plataforma de E-commerce",
+      "contrasena": ""
+    },
+    {
+      "_id": "71478o3oj987o732im0k154o8",
+      "nombreCompleto": "Iván Sánchez",
+      "cedula": "V-90123456",
+      "correoElectronico": "ivan.sanchez@example.com",
+      "departamentoTrabajo": "Investigación y Desarrollo",
+      "telefono": "9012345678",
+      "estado": "libre",
+      "proyectoActual": null,
+      "contrasena": ""
+    }
+  ]
+  
