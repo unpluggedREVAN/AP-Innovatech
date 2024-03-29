@@ -9,7 +9,7 @@ const cors = require('cors')
 dotenv.config();
 const app = express();
 
-app.use(cors());
+app.use(cors({origin : "exp://192.168.0.14:8082"}));
 // Middleware para parsear el cuerpo de las peticiones en formato JSON
 app.use(express.json());
 
@@ -24,5 +24,5 @@ app.use('/colaboradores', colaboradoresRoutes);
 app.use('/', registroLogin);
 
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));

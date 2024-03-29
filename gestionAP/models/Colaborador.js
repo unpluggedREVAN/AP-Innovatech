@@ -8,7 +8,7 @@ const colaboradorSchema = new Schema({
   correoElectronico: { type: String, required: true, unique: true },
   departamentoTrabajo: { type: String, required: true },
   telefono: { type: String, required: true },
-  estado: { type: String, required: true, enum: ['libre', 'ocupado'] }, // Asumiendo posibles estados
+  estado: { type: String, default : 'libre',enum: ['libre', 'Ocupado'] }, // Asumiendo posibles estados
   proyectoActual: { type: Schema.Types.ObjectId, default: null },
   contrasena: { type: String, required: true }
 }, { collection: 'Colaboradores' });

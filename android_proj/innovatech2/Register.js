@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, StatusBar, ToastAndroid } from 'react-native';
 import axios from 'axios';
+import {registerRequest} from './api/auth.js'
 
 const RegisterScreen = ({ navigation }) => {
   const [fullName, setFullName] = useState('');
@@ -27,14 +28,10 @@ const RegisterScreen = ({ navigation }) => {
     }
     // Implementa aquí la lógica de registro
     console.log("Iniciar request")
-    try{
-      axios.post('http://10.0.2.2:3000/register', data)
-      .then(() => ToastAndroid.show('Record Inserted', ToastAndroid.LONG))
-      .catch(error => ToastAndroid.show(error.message, ToastAndroid.LONG))
-      console.log('Registro con:', fullName, email, password, cedula, departamentoTrabajo, telefono);
-    } catch (error){
-      console.log(error)
-    }
+    
+    const res = await registerRequest(data)
+    //Respuesta del request 
+    console.log("Respuesta de la peticion: ", res.data.message);
   };
   
   return (

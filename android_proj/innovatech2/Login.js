@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import {loginRequest} from './api/auth.js'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation(); // Se usa el hook aquí, para no recibirlo como prop
 
-  const handleLogin = () => {
+  const data = {
+    correoElectronico : email,
+    contrasena : password
+  }
+
+  const handleLogin = async () => {
     // Aquì se incluye la lógica de conexión con la base de datos
     console.log('Login con:', email, password); // Esto es solo para depuración en consola
+    
+    const res = await loginRequest(data);
 
+    alert(res.data.message);
+    navigation.navigate('Main');
+    
     // Validación de prueba para entrar rápido
+    /*
     if (email === 'admin' && password === 'admin') {
         // Si las credenciales son correctas, navegar a la pantalla Home
         navigation.navigate('Main');
@@ -19,6 +31,7 @@ const LoginScreen = () => {
         // Si no, puedes mostrar un mensaje de error
         alert('Usuario o contraseña incorrectos');
     } // Este caso es solo de prueba pero aquí se debe incluir el manejo de logiin con la base de datos
+    */
   };
 
   return (

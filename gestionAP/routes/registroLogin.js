@@ -8,6 +8,7 @@ const colabRegisterSchema = require('../schema/colab.schema')
 // Endpoint para el registro de un nuevo colaborador
 router.post('/register', validateModel(colabRegisterSchema) ,validateModel(colabRegisterSchema) ,async (req, res) => {
     try {
+        console.log("En el endpoint")
         // Hash de la contraseña
         const hashedPassword = await bcrypt.hash(req.body.contrasena, 10);
 
@@ -18,7 +19,7 @@ router.post('/register', validateModel(colabRegisterSchema) ,validateModel(colab
         });
 
         await colaborador.save();
-        res.status(201).send({ message: "Colaborador registrado exitosamente" });
+        return  res.status(201).send({ message: "Colaborador registrado exitosamente" });
     } catch (error) {
         console.error(error);
         res.status(400).send({
