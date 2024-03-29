@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Reunion = require('../models/Reunion'); // Corregido para adaptarse a la estructura sugerida
+const Reunion = require('../models/Reunion'); 
 
 // Definición de los endpoints
 

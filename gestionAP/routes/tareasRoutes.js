@@ -1,67 +1,87 @@
 const express = require('express');
 const router = express.Router();
-const Reunion = require('../models/Reunion'); // Corregido para adaptarse a la estructura sugerida
+const Tarea = require('../models/Tarea'); // Asegúrate de ajustar la ruta al modelo correctamente
 
-// Definición de los endpoints
-
-// Endpoint para crear una nueva reunión
-router.post('/reuniones', async (req, res) => {
+// Endpoint para crear una nueva tarea
+router.post('/tareas', async (req, res) => {
     try {
-        const reunion = new Reunion(req.body);
-        await reunion.save();
-        res.status(201).send(reunion);
+        const tarea = new Tarea(req.body);
+        await tarea.save();
+        res.status(201).send(tarea);
     } catch (error) {
         console.error(error); // Para ver el error en la consola del servidor
         res.status(400).send({
-            message: "Error al crear la reunión",
+            message: "Error al crear la tarea",
             error: error.message // Proporciona el mensaje de error
         });
     }
 });
 
-
-// Endpoint para obtener todas las reuniones
-router.get('/reuniones', async (req, res) => {
+// Endpoint para obtener todas las tareas
+router.get('/tareas', async (req, res) => {
     try {
-        const reuniones = await Reunion.find({});
-        res.send(reuniones);
+        const tareas = await Tarea.find({});
+        res.send(tareas);
     } catch (error) {
         res.status(500).send(error);
     }
 });
 
-
-// Editar reunión
-router.patch('/reuniones/:id', async (req, res) => {
+// Endpoint para obtener una tarea por ID
+router.get('/tareas/:id', async (req, res) => {
     try {
-        const reunion = await Reunion.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
-        if (!reunion) {
-            return res.status(404).send({ message: "Reunión no encontrada" });
+        const tarea = await Tarea.findById(req.params.id);
+        if (!tarea) {
+            return res.status(404).send({ message: "Tarea no encontrada" });
         }
-        res.send(reunion);
+        res.send(tarea);
     } catch (error) {
-        res.status(400).send({
-            message: "Error al actualizar la reunión",
+        res.status(500).send({
+            message: "Error al obtener la tarea",
             error: error.message
         });
     }
 });
 
+// Endpoint para actualizar una tarea por ID
+router.patch('/tareas/:id', async (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ['nombreTarea', 'descripcion', 'estado', 'fechaInicio', 'fechaFin', 'responsable']; // Ajusta esto según tu modelo
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
 
-router.delete('/reuniones/:id', async (req, res) => {
+    if (!isValidOperation) {
+        return res.status(400).send({ message: "Actualizaciones no válidas!" });
+    }
+
     try {
-        const reunion = await Reunion.findByIdAndDelete(req.params.id);
-        if (!reunion) {
-            return res.status(404).send({ message: "Reunión no encontrada" });
+        const tarea = await Tarea.findById(req.params.id);
+        if (!tarea) {
+            return res.status(404).send();
         }
-        res.send({ message: "Reunión eliminada exitosamente" });
+
+        updates.forEach((update) => tarea[update] = req.body[update]);
+        await tarea.save();
+
+        res.send(tarea);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
+// Endpoint para eliminar una tarea por ID
+router.delete('/tareas/:id', async (req, res) => {
+    try {
+        const tarea = await Tarea.findByIdAndDelete(req.params.id);
+        if (!tarea) {
+            return res.status(404).send({ message: "Tarea no encontrada" });
+        }
+        res.send({ message: "Tarea eliminada exitosamente" });
     } catch (error) {
         res.status(500).send({
-            message: "Error al eliminar la reunión",
+            message: "Error al eliminar la tarea",
             error: error.message
         });
     }
 });
 
 module.exports = router;
-
