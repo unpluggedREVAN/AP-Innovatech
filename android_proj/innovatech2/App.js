@@ -14,7 +14,8 @@ import ProyectoScreen from './Proyecto';
 import EvaluacionScreen from './Evaluacion';
 import CuentaScreen from './Cuenta';
 
-// para más pantallas
+// Carga de pantallas secundarias
+import ProjectDetailsScreen from './ProjectDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -67,7 +68,7 @@ function MainTabNavigator() {
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer initialRouteName="Main">
       <Stack.Navigator>
         {/* pantalla de login, sin header */}
         <Stack.Screen
@@ -86,6 +87,11 @@ export default function App() {
           name="Main"
           component={MainTabNavigator}
           options={{ headerShown: false }} // mostrar el header es opcional
+        />
+        <Stack.Screen
+          name="ProjectDetails"
+          component={ProjectDetailsScreen}
+          options={{ headerTitle: 'Detalles del Proyecto' }}
         />
         {/* aquí se ponen más pantallas */}
       </Stack.Navigator>

@@ -2,53 +2,38 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native';
 
 const RegisterScreen = ({ navigation }) => {
-  const [fullName, setFullName] = useState(''); // Almacena el nombre completo del usuario
-  const [password, setPassword] = useState(''); // Almacena la contraseña
-  const [confirmPassword, setConfirmPassword] = useState(''); // Almacena la confirmación de la contraseña
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState(''); 
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [cedula, setCedula] = useState(''); 
+  const [departamentoTrabajo, setDepartamentoTrabajo] = useState(''); 
+  const [telefono, setTelefono] = useState(''); 
 
   const handleRegister = () => {
-    // Verifica si las contraseñas coinciden
     if (password !== confirmPassword) {
       alert('Las contraseñas no coinciden.');
       return;
     }
-    console.log('Registro con:', fullName, password); // datos de registro para depuración
-
-    // Aquí es donde se incluye la lógica con la base de datos
+    // Implementa aquí la lógica de registro
+    console.log('Registro con:', fullName, email, password, cedula, departamentoTrabajo, telefono);
   };
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('./assets/logo_letra_nofondo.png')} 
-        style={styles.logo}
-      />
+      <Image source={require('./assets/logo_letra_nofondo.png')} style={styles.logo} />
       <Text style={styles.header}>Registrarse</Text>
 
-      <TextInput
-        style={styles.input}
-        onChangeText={setFullName}
-        value={fullName}
-        placeholder="Nombre Completo:" 
-        autoCapitalize="words"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={setPassword}
-        value={password}
-        placeholder="Contraseña:" 
-        secureTextEntry // Oculta la contraseña
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={setConfirmPassword}
-        value={confirmPassword}
-        placeholder="Reescribir Contraseña:" // Input para confirmar la contraseña
-        secureTextEntry // Oculta la confirmación de la contraseña
-      />
+      <TextInput style={styles.input} onChangeText={setFullName} value={fullName} placeholder="Nombre Completo:" autoCapitalize="words" />
+      <TextInput style={styles.input} onChangeText={setEmail} value={email} placeholder="Correo Electrónico:" keyboardType="email-address" />
+      <TextInput style={styles.input} onChangeText={setCedula} value={cedula} placeholder="Cédula:" />
+      <TextInput style={styles.input} onChangeText={setDepartamentoTrabajo} value={departamentoTrabajo} placeholder="Departamento de Trabajo:" />
+      <TextInput style={styles.input} onChangeText={setTelefono} value={telefono} placeholder="Teléfono:" keyboardType="phone-pad" />
+      <TextInput style={styles.input} onChangeText={setPassword} value={password} placeholder="Contraseña:" secureTextEntry />
+      <TextInput style={styles.input} onChangeText={setConfirmPassword} value={confirmPassword} placeholder="Reescribir Contraseña:" secureTextEntry />
 
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Registrarse</Text> 
+        <Text style={styles.buttonText}>Registrarse</Text>
       </TouchableOpacity>
 
       <StatusBar style="auto" />
@@ -63,18 +48,18 @@ const styles = StyleSheet.create({
     padding: 20, // Estilo del contenedor principal
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     resizeMode: 'contain',
     alignSelf: 'center',
-    marginTop: 30, // Estilo del logo
+    marginTop: 0, // Estilo del logo
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#333',
     alignSelf: 'center',
-    marginBottom: 30, // Estilo del encabezado de registro
+    marginBottom: 10, // Estilo del encabezado de registro
   },
   input: {
     height: 40,

@@ -1,14 +1,13 @@
-// Cuenta.js
-
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import colabData from './colab_data.json'; // Asegúrate de que la ruta sea correcta
+import colabData from './colab_data.json'; 
+import { Alert } from 'react-native';
 
 const CuentaScreen = () => {
-  // Encuentra a Ana Martínez en los datos importados
+  // Este usuario está anidado para fines de prueba
   const anaMartinez = colabData.find(colab => colab.nombreCompleto === "Ana Martínez");
 
-  // Estado para el formulario de edición
+  // Hay que cambiarlo por los datos de la bd mongo
   const [colaborador, setColaborador] = useState(anaMartinez);
 
   // Actualiza el estado con los cambios en los campos del formulario
@@ -16,10 +15,19 @@ const CuentaScreen = () => {
     setColaborador(prevState => ({ ...prevState, [name]: value }));
   };
 
-  // Función para manejar la "edición" del colaborador
+  // edición del colaborador
   const handleSaveChanges = () => {
     console.log('Guardar cambios', colaborador);
-    // Aquí se enviarían los cambios a la base de datos o backend
+    // Aquí se envían los cambios hechos a la base de datos
+
+    // Mostrar una alerta al usuario
+    Alert.alert(
+      "Cambio realizado", // Título de la alerta
+      "Cambio realizado correctamente", // Mensaje de la alerta
+      [
+        { text: "OK" } // Botón para cerrar la alerta
+      ]
+    );
   };
 
   return (
@@ -69,8 +77,6 @@ const CuentaScreen = () => {
       {/* Campos no editables */}
       <Text style={styles.label}>Estado:</Text>
       <Text style={styles.nonEditableInput}>{colaborador.estado}</Text>
-      <Text style={styles.label}>Proyecto Actual:</Text>
-      <Text style={styles.nonEditableInput}>{colaborador.proyectoActual || "Ninguno"}</Text>
 
       <TouchableOpacity style={styles.button} onPress={handleSaveChanges}>
         <Text style={styles.buttonText}>Guardar Cambios</Text>
@@ -123,7 +129,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  // Puedes agregar más estilos para otros elementos si es necesario
 });
 
 export default CuentaScreen;
