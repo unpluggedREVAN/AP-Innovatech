@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const reunionSchema = new mongoose.Schema({
-    fecha: String,
-    tema: String,
-    medio: String,
-    colaboradores: [String],
-    proyecto: String
-}, { collection: 'Reuniones' }); // Asegúrate de especificar el nombre correcto de la colección
+const colaboradorSchema = new Schema({
+  _id: Schema.Types.ObjectId,
+  nombreCompleto: { type: String, required: true },
+  cedula: { type: String, required: true, unique: true },
+  correoElectronico: { type: String, required: true, unique: true },
+  departamentoTrabajo: { type: String, required: true },
+  telefono: { type: String, required: true },
+  estado: { type: String, required: true, enum: ['libre', 'ocupado'] }, // Asumiendo posibles estados
+  proyectoActual: { type: Schema.Types.ObjectId, default: null },
+  contrasena: { type: String, required: true }
+}, { collection: 'Colaboradores' });
 
-const Reunion = mongoose.model('Reunion', reunionSchema);
+const Colaborador = mongoose.model('Colaboradores', colaboradorSchema);
 
-module.exports = Reunion;
+module.exports = Colaborador;

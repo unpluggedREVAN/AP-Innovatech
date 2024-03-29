@@ -1,13 +1,20 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const reunionSchema = new mongoose.Schema({
-    fecha: String,
-    tema: String,
-    medio: String,
-    colaboradores: [String],
-    proyecto: String
-}, { collection: 'Reuniones' }); // Asegúrate de especificar el nombre correcto de la colección
+const mensajeSchema = new Schema({
+  autor: { type: Schema.Types.ObjectId, required: true },
+  mensaje: { type: String, required: true },
+  fecha: { type: Date, required: true }
+});
 
-const Reunion = mongoose.model('Reunion', reunionSchema);
+const foroSchema = new Schema({
+  _id: Schema.Types.ObjectId,
+  tipo: { type: String, required: true, enum: ['general', 'específico'] }, // Asumiendo posibles tipos
+  titulo: { type: String, required: true },
+  mensajes: [mensajeSchema],
+  proyecto: { type: Schema.Types.ObjectId, required: true }
+});
 
-module.exports = Reunion;
+const Foro = mongoose.model('Foro', foroSchema);
+
+module.exports = Foro;
