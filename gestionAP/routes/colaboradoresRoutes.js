@@ -1,67 +1,65 @@
 const express = require('express');
 const router = express.Router();
-const Reunion = require('../models/Reunion'); // Corregido para adaptarse a la estructura sugerida
+const Colaborador = require('../models/Colaborador'); // Asegúrate de que la ruta sea correcta
 
-// Definición de los endpoints
-
-// Endpoint para crear una nueva reunión
-router.post('/reuniones', async (req, res) => {
+// Endpoint para crear un nuevo colaborador
+router.post('/postcolaboradores', async (req, res) => {
     try {
-        const reunion = new Reunion(req.body);
-        await reunion.save();
-        res.status(201).send(reunion);
+        const colaborador = new Colaborador(req.body);
+        await colaborador.save();
+        res.status(201).send(colaborador);
     } catch (error) {
         console.error(error); // Para ver el error en la consola del servidor
         res.status(400).send({
-            message: "Error al crear la reunión",
+            message: "Error al crear el colaborador",
             error: error.message // Proporciona el mensaje de error
         });
     }
 });
 
-
-// Endpoint para obtener todas las reuniones
-router.get('/reuniones', async (req, res) => {
+// Endpoint para obtener todos los colaboradores
+router.get('/getcolaboradores', async (req, res) => {
+    console.log("Finding Colaboradores")
     try {
-        const reuniones = await Reunion.find({});
-        res.send(reuniones);
+        const colaboradores = await Colaborador.find({});
+        console.log("Colaboradores" + colaboradores)
+        res.send(colaboradores);
     } catch (error) {
-        res.status(500).send(error);
+        console.log(error)
+        res.status(500).send({ message: error.message });
     }
 });
 
-
-// Editar reunión
-router.patch('/reuniones/:id', async (req, res) => {
+// Endpoint para actualizar un colaborador por ID
+router.patch('/patchcolaboradores/:id', async (req, res) => {
     try {
-        const reunion = await Reunion.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
-        if (!reunion) {
-            return res.status(404).send({ message: "Reunión no encontrada" });
+        const colaborador = await Colaborador.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        if (!colaborador) {
+            return res.status(404).send({ message: "Colaborador no encontrado" });
         }
-        res.send(reunion);
+        res.send(colaborador);
     } catch (error) {
         res.status(400).send({
-            message: "Error al actualizar la reunión",
+            message: "Error al actualizar el colaborador",
             error: error.message
         });
     }
 });
 
-
-router.delete('/reuniones/:id', async (req, res) => {
+// Endpoint para eliminar un colaborador por ID
+router.delete('/deletecolaboradores/:id', async (req, res) => {
     try {
-        const reunion = await Reunion.findByIdAndDelete(req.params.id);
-        if (!reunion) {
-            return res.status(404).send({ message: "Reunión no encontrada" });
+        const colaborador = await Colaborador.findByIdAndDelete(req.params.id);
+        if (!colaborador) {
+            return res.status(404).send({ message: "Colaborador no encontrado" });
         }
-        res.send({ message: "Reunión eliminada exitosamente" });
+        res.send({ message: "Colaborador eliminado exitosamente" });
     } catch (error) {
         res.status(500).send({
-            message: "Error al eliminar la reunión",
+            message: "Error al eliminar el colaborador",
             error: error.message
         });
     }
 });
 
 module.exports = router;
-

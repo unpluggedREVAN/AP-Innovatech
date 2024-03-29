@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const reunionesRoutes = require('./routes/reunionesRoutes');
+const colaboradoresRoutes = require('./routes/colaboradoresRoutes');
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Uso de las rutas de "Reuniones"
 app.use('/reuniones', reunionesRoutes);
+app.use('/colaboradores', colaboradoresRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
