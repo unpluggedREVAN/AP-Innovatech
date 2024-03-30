@@ -33,6 +33,7 @@ const RegisterScreen = ({ navigation }) => {
       .catch(error => ToastAndroid.show(error.message, ToastAndroid.LONG))
       console.log('Respuesta a la petición:', res)
       console.log('Registro con:', fullName, email, password, cedula, departamentoTrabajo, telefono);
+      alert('El registro se hizo satisfactoriamente');
     } catch (error){
       console.log(error)
     }
