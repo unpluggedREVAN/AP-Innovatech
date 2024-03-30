@@ -28,7 +28,6 @@ const RegisterScreen = ({ navigation }) => {
     }
     // Implementa aquí la lógica de registro
     console.log("Iniciar request")
-    
     const res = await registerRequest(data)
     //Respuesta del request 
     console.log("Respuesta de la peticion: ", res.data.message);
