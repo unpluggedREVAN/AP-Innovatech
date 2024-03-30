@@ -6,6 +6,7 @@ const reunionesRoutes = require('./routes/reunionesRoutes');
 const colaboradoresRoutes = require('./routes/colaboradoresRoutes');
 const registroLogin = require('./routes/registroLogin');
 const proyectosRoutes = require('./routes/proyectosRoutes');
+const tareasRoutes = require('./routes/tareasRoutes');
 const cors = require('cors')
 
 dotenv.config();
@@ -26,7 +27,7 @@ app.use('/reuniones', reunionesRoutes);
 app.use('/colaboradores', colaboradoresRoutes);
 app.use('/', registroLogin);
 app.use('/proyectos', proyectosRoutes);
-
+app.use('/tareas', tareasRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
