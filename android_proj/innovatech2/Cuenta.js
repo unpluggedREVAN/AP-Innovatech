@@ -15,6 +15,21 @@ const CuentaScreen = () => {
     setColaborador(prevState => ({ ...prevState, [name]: value }));
   };
 
+  const handleLogOut = async () => {
+    try {
+      // Nota para Darío: Aquí va la lógica del backend para finalizar ahí el cookie
+      // Por ejemplo: await logOutFromBackend();
+
+      // Ya vi cómo se navega al usuario a la pantalla de login
+      // navigation.navigate('Login');
+
+      Alert.alert('Sesión cerrada', 'Has cerrado sesión correctamente.');
+    } catch (error) {
+      // Aquí para manejo de errores
+      Alert.alert('Error', 'Ocurrió un error al cerrar sesión. Por favor, intenta nuevamente.');
+    }
+  };
+
   // edición del colaborador
   const handleSaveChanges = () => {
     console.log('Guardar cambios', colaborador);
@@ -81,6 +96,10 @@ const CuentaScreen = () => {
       <TouchableOpacity style={styles.button} onPress={handleSaveChanges}>
         <Text style={styles.buttonText}>Guardar Cambios</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={handleLogOut}>
+        <Text style={styles.buttonText}>Cerrar sesión</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -124,6 +143,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
+    marginBottom: 10,
   },
   buttonText: {
     color: '#fff',
