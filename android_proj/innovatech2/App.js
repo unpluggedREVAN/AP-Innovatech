@@ -19,6 +19,7 @@ import ProjectDetailsScreen from './ProjectDetailsScreen';
 import ColaboradoresDetailsScreen from './ColaboradoresDetailsScreen';
 import CrearProyectoScreen from './CrearProyectoScreen';
 import GestionarColaboradoresScreen from './GestionarColaboradoresScreen';
+import ModificarTareasScreen from './ModificarTareasScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -103,6 +104,12 @@ export default function App() {
           name="GestionarColaboradores"
           component={GestionarColaboradoresScreen}
           options={{ title: 'Gestionar Colaboradores' }}
+        />
+
+        <Stack.Screen
+          name="ModificarTareas"
+          component={ModificarTareasScreen}
+          options={{ title: 'Modificar Tareas' }}
         />
 
         <Stack.Screen name="Home" component={HomeScreen} />
