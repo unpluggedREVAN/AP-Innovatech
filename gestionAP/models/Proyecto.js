@@ -10,7 +10,8 @@ const proyectoSchema = new Schema({
     descripcion: { type: String, required: true },
     fechaInicio: { type: Date, required: true },
     historialCambios: [{ type: String }], // Esto podría ser más complejo dependiendo de lo que quieras registrar
-    responsable: { type: String } // También podría ser un ObjectId
+    responsable: { type: String }, // También podría ser un ObjectId
+    tareas : [{type : mongoose.Schema.ObjectId, ref : 'Tarea', default : []}]
   });
 
 const Proyecto = mongoose.model('Proyecto', proyectoSchema, 'Proyectos');

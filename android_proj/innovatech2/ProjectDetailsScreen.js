@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Alert } from 'react-native';
 import projectData from './data.json';
@@ -9,7 +9,17 @@ const ProjectDetailsScreen = ({ route }) => {
 
   // Nota para Darío: Mae vea aquí está usando el id del proyecto para encontrar toda la info en el json local, use la misma técnica cuando ya lo pegue con Mongo
   // Buscar el proyecto específico usando el ID
-  const proyecto = projectData.find(p => p._id === proyectoId);
+  const [proyecto, setProyecto] = useState({tareas : []});
+
+  useEffect(() => {
+    fetchProyectData()
+  }, []);
+
+  const fetchProyectData = async () => {
+    const response = await getProyectRequest(proyectoId);
+    console.log(response);
+    setProyecto(response)
+  };
 
   // Organizar las tareas por estado
   const tareasPorHacer = proyecto?.tareas.filter(t => t.estado === 'por hacer') || [];

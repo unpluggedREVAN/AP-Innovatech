@@ -56,7 +56,7 @@ export const getProyectosRequest = async () =>{
 //Peticion de proyecto - GET
 export const getProyectRequest = async (id) => {
     try{
-        const getProyecto = await axios.patch(`${API}/proyectos/getproyectosid/${id}`)
+        const getProyecto = await axios.get(`${API}/proyectos/getproyectosid/${id}`)
         return getProyecto.data;
     }catch(error){
         return error.response
