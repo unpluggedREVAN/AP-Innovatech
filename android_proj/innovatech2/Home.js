@@ -8,9 +8,10 @@ import {
   ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+//import { View, Button } from 'react-native';
 
 // Importa los datos de los proyectos desde el archivo JSON
-import projectData from './data.json'; // Asegúrate de que la ruta sea correcta
+import projectData from './data.json';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -23,9 +24,8 @@ const HomeScreen = () => {
     setProyectos(projectData);
   }, []);
 
-  // Funciones de ejemplo para navegación y manejo de opciones
   const handleCreateProject = () => {
-    console.log('Navegar a la pantalla de nuevo proyecto');
+    navigation.navigate('CrearProyecto'); // Utiliza el nombre de la ruta asignado a CrearProyectoScreen
   };
 
   const handleOptionsPress = (proyectoId) => {
