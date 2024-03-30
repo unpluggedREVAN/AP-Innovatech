@@ -5,7 +5,7 @@ const Reunion = require('../models/Reunion');
 // Definición de los endpoints
 
 // Endpoint para crear una nueva reunión
-router.post('/reuniones', async (req, res) => {
+router.post('/postreuniones', async (req, res) => {
     try {
         const reunion = new Reunion(req.body);
         await reunion.save();
@@ -21,7 +21,7 @@ router.post('/reuniones', async (req, res) => {
 
 
 // Endpoint para obtener todas las reuniones
-router.get('/reuniones', async (req, res) => {
+router.get('/getreuniones', async (req, res) => {
     try {
         const reuniones = await Reunion.find({});
         res.send(reuniones);
@@ -32,7 +32,7 @@ router.get('/reuniones', async (req, res) => {
 
 
 // Editar reunión
-router.patch('/reuniones/:id', async (req, res) => {
+router.patch('/patchreuniones/:id', async (req, res) => {
     try {
         const reunion = await Reunion.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!reunion) {
@@ -48,7 +48,7 @@ router.patch('/reuniones/:id', async (req, res) => {
 });
 
 
-router.delete('/reuniones/:id', async (req, res) => {
+router.delete('/deletereuniones/:id', async (req, res) => {
     try {
         const reunion = await Reunion.findByIdAndDelete(req.params.id);
         if (!reunion) {

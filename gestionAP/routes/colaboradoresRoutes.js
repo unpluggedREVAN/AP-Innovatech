@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Colaborador = require('../models/Colaborador'); // Asegúrate de que la ruta sea correcta
-
+const Colaborador = require('../models/Colaborador');
 // Endpoint para crear un nuevo colaborador
 router.post('/postcolaboradores', async (req, res) => {
     try {
