@@ -10,6 +10,7 @@ const ColaboradoresScreen = () => {
 
   const [colaboradores, setColaboradores] = useState([]);
 
+
   useEffect(() => {
     useFetchData();
   }, [])

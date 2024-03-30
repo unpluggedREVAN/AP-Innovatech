@@ -21,6 +21,15 @@ export const colaboradoresRequest = async () => {
     }
 }
 
+export const colaboradoresFreeRequest = async () => {
+    try{
+        const response = await axios.get(`${API}/colaboradores/getcolaboradoresfree`);
+        return response.data;
+    } catch(error){
+        return error.response;
+    }
+}
+
 //Peticion de solicitar datos del usuario - GET
 export const colabRequest = async () => {
     try {
@@ -31,11 +40,11 @@ export const colabRequest = async () => {
     }
 }
 
-//Peticion para editar datos de usuario
+//Peticion para editar datos de usuario - PAATCH
 export const patchColabRequest = async (id, data) => {
     try{
         const patchRequest = await axios.patch(`${API}/colaboradores/patchcolaboradores/${id}`,data)
-        console.log("Respuesta del cambio: ", response.data)
+        console.log("Respuesta del cambio: ", patchRequest.data)
     }catch(error){
         return error.response
     }
@@ -59,6 +68,16 @@ export const getProyectRequest = async (id) => {
     try{
         const getProyecto = await axios.get(`${API}/proyectos/getproyectosid/${id}`)
         return getProyecto.data;
+    }catch(error){
+        return error.response
+    }
+}
+
+//Peticion de actualizar proyecto - PATCH
+export const patchProjectRequest = async (id, data) => {
+    try{
+        const patchRequest = await axios.patch(`${API}/proyectos/patchproyectos/${id}`,data)
+        console.log("Respuesta del cambio: ", patchRequest.data)
     }catch(error){
         return error.response
     }

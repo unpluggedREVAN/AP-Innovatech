@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import colaboradoresData from './colab_data.json'; // Asegúrate de que la ruta al archivo JSON sea correcta
-import {postProyectoRequest, colaboradoresRequest} from './api/auth.js'
+import {postProyectoRequest, colaboradoresFreeRequest, patchColabRequest} from './api/auth.js'
 
 const CrearProyectoScreen = () => {
   //Colaboradores disponibles
@@ -12,7 +12,7 @@ const CrearProyectoScreen = () => {
   }, []);
 
   const colabFetchData = async () => {
-    const response = await colaboradoresRequest();
+    const response = await colaboradoresFreeRequest();
     setColaboradores(response);
   }
 
@@ -35,6 +35,10 @@ const CrearProyectoScreen = () => {
     }
     console.log('Crear proyecto con los siguientes datos:', { nombreProyecto, recursosNecesarios,presupuestoParse, descripcion, fechaInicio, colaboradoresSeleccionados });
     const response = await postProyectoRequest(data);
+    colaboradoresSeleccionados.forEach(async function(id) {
+      await patchColabRequest(id, {estado : "Ocupado"})
+      console.log("Cambio el estado de:", id);
+    })
     console.log("Respuesta a peticion:", response.data.message)
   };
 

@@ -20,7 +20,7 @@ const HomeScreen = () => {
 
   // Efecto para cargar los proyectos de la base de datos simulada (archivo JSON)
   useEffect(() => {
-    useFetchData();
+    useFetchData()
   }, []);
 
   const useFetchData = async () => {

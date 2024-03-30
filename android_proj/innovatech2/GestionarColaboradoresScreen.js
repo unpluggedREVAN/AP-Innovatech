@@ -1,28 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import colaboradoresData from './colab_data.json'; // Datos de colaboradores
 import projectData from './data.json'; // Datos de proyectos
+import {colaboradoresFreeRequest,getProyectRequest,patchProjectRequest,patchColabRequest} from './api/auth.js'
+
 
 const GestionarColaboradoresScreen = ({ route }) => {
   const { proyectoId } = route.params;
-  const proyecto = projectData.find((p) => p._id === proyectoId); // Encuentra el proyecto por ID
+
+  //Lista de los colaboradores disponibles
+  const [colaboradoresLibres, setColaboradores] = useState([]);
+  const [colaboradoresActuales, setColabActuales] = useState([])
+  const [proyecto, setProyecto] = useState({});
+
+
+  useEffect(() =>{
+    colabFecthData();
+  }, []);
+
+  const colabFecthData = async () => {
+    const responseColab = await colaboradoresFreeRequest();
+    const responseProject = await getProyectRequest(proyectoId)
+    setColaboradores(responseColab);
+    setColabActuales(responseProject.colaboradores);
+    setProyecto(responseProject);
+    console.log("ColabActuales:", responseProject.colaboradores);
+  }
 
   // Estado para manejar los colaboradores seleccionados
   // Inicialmente se marcan los colaboradores que ya están asignados al proyecto
-  const [colaboradoresSeleccionados, setColaboradoresSeleccionados] = useState(proyecto ? proyecto.colaboradores : []);
+ 
 
   // Función para manejar la selección/deselección de colaboradores
   const toggleColaborador = (id) => {
-    const esSeleccionado = colaboradoresSeleccionados.includes(id);
-    setColaboradoresSeleccionados(prev => 
+    const esSeleccionado = colaboradoresActuales.includes(id);
+    setColabActuales(prev => 
       esSeleccionado ? prev.filter(colabId => colabId !== id) : [...prev, id]
     );
   };
 
   // Función para manejar el guardado de cambios
-  const handleGuardarCambios = () => {
-    console.log('Colaboradores seleccionados para el proyecto:', colaboradoresSeleccionados);
+  const handleGuardarCambios = async () => {
+    await patchProjectRequest(proyectoId, {colaboradores : colaboradoresActuales});
+    console.log('Colaboradores seleccionados para el proyecto:', colaboradoresActuales);
     // Aquí se implementaría la lógica para actualizar la asignación de colaboradores en el backend
+    colaboradoresActuales.forEach(async function(id) {
+      await patchColabRequest(id, {estado : "Ocupado"})
+      console.log("Cambio el estado de:", id);
+    })
   };
 
   if (!proyecto) {
@@ -34,12 +59,12 @@ const GestionarColaboradoresScreen = ({ route }) => {
       <Text style={styles.titulo}>Editar Colaboradores:</Text>
       <Text style={styles.nota}>Nota: Debes seleccionar de nuevo los colaboradores que quieres asignar al proyecto.</Text>
 
-      {colaboradoresData.map((colaborador) => (
+      {colaboradoresLibres.map((colaborador) => (
         <TouchableOpacity
           key={colaborador._id}
           style={[
             styles.colaboradorContainer,
-            colaboradoresSeleccionados.includes(colaborador._id) && styles.colaboradorSeleccionado,
+            colaboradoresActuales.includes(colaborador._id) && styles.colaboradorSeleccionado,
           ]}
           onPress={() => toggleColaborador(colaborador._id)}
         >

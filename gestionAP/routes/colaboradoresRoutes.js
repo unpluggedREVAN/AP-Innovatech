@@ -32,6 +32,20 @@ router.get('/getcolaboradores', authRequired ,async (req, res) => {
     }
 });
 
+//Endpoint para obtener colaboradores libres
+router.get('/getcolaboradoresfree', authRequired ,async (req, res) => {
+    console.log("Finding Colaboradores")
+    try {
+        const colaboradores = await Colaborador.find({});
+        const colabFilter = colaboradores.filter(item => item._id != req.user.id && item.estado != 'Ocupado')
+        console.log("Colaboradores" + colabFilter)
+        res.send(colabFilter);
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: error.message });
+    }
+});
+
 // Endpoint para obtener la información de un colaborador
 router.get('/colab', authRequired, async (req, res) => {
     const userFound = await Colaborador.findById(req.user.id)
