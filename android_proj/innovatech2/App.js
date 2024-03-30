@@ -16,6 +16,7 @@ import CuentaScreen from './Cuenta';
 
 // Carga de pantallas secundarias
 import ProjectDetailsScreen from './ProjectDetailsScreen';
+import ColaboradoresDetailsScreen from './ColaboradoresDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -93,6 +94,8 @@ export default function App() {
           component={ProjectDetailsScreen}
           options={{ headerTitle: 'Detalles del Proyecto' }}
         />
+        <Stack.Screen name="Colaboradores" component={ColaboradoresScreen} />
+        <Stack.Screen name="ColaboradorDetails" component={ColaboradoresDetailsScreen} />
         {/* aquí se ponen más pantallas */}
       </Stack.Navigator>
     </NavigationContainer>
