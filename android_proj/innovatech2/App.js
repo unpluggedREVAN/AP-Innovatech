@@ -18,6 +18,7 @@ import CuentaScreen from './Cuenta';
 import ProjectDetailsScreen from './ProjectDetailsScreen';
 import ColaboradoresDetailsScreen from './ColaboradoresDetailsScreen';
 import CrearProyectoScreen from './CrearProyectoScreen';
+import GestionarColaboradoresScreen from './GestionarColaboradoresScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -97,6 +98,12 @@ export default function App() {
         />
         <Stack.Screen name="Colaboradores" component={ColaboradoresScreen} />
         <Stack.Screen name="ColaboradorDetails" component={ColaboradoresDetailsScreen} />
+
+        <Stack.Screen
+          name="GestionarColaboradores"
+          component={GestionarColaboradoresScreen}
+          options={{ title: 'Gestionar Colaboradores' }}
+        />
 
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="CrearProyecto" component={CrearProyectoScreen} options={{ headerTitle: 'Crear Proyecto' }} />

@@ -2,9 +2,12 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Alert } from 'react-native';
 import projectData from './data.json';
+import { useNavigation } from '@react-navigation/native';
 
 const ProjectDetailsScreen = ({ route }) => {
   const { proyectoId } = route.params;
+
+  const navigation = useNavigation();
 
   // Nota para Darío: Mae vea aquí está usando el id del proyecto para encontrar toda la info en el json local, use la misma técnica cuando ya lo pegue con Mongo
   // Buscar el proyecto específico usando el ID
@@ -17,6 +20,11 @@ const ProjectDetailsScreen = ({ route }) => {
   
   const handleEditTasks = () => {
     // Navega a la pantalla de edición de tareas
+  };
+
+  const handleManageCollaborators = () => {
+    // Navegar a la pantalla de gestión de colaboradores, pasando el ID del proyecto
+    navigation.navigate('GestionarColaboradores', { proyectoId: proyecto._id });
   };
 
   const handleDeleteProject = () => {
@@ -90,6 +98,9 @@ const ProjectDetailsScreen = ({ route }) => {
     <TouchableOpacity onPress={handleEditTasks} style={styles.button}>
         <Text style={styles.buttonText}>Modificar Tareas</Text>
     </TouchableOpacity>
+    <TouchableOpacity onPress={handleManageCollaborators} style={styles.button}>
+        <Text style={styles.buttonText}>Gestionar Colaboradores</Text>
+      </TouchableOpacity>
     <TouchableOpacity onPress={handleDeleteProject} style={[styles.button, styles.deleteButton]}>
         <Text style={styles.buttonText}>Eliminar Proyecto</Text>
     </TouchableOpacity>
