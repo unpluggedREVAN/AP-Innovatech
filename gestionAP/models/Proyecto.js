@@ -14,6 +14,6 @@ const proyectoSchema = new Schema({
     responsable: { type: String } // También podría ser un ObjectId
   });
 
-const Proyecto = mongoose.model('Proyecto', proyectoSchema);
+const Proyecto = mongoose.model('Proyecto', proyectoSchema, 'Proyectos');
 
 module.exports = Proyecto;

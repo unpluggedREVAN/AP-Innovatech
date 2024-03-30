@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Tarea = require('../models/Tarea'); // Asegúrate de ajustar la ruta al modelo correctamente
+const Tarea = require('../models/Tarea');
 
 // Endpoint para crear una nueva tarea
-router.post('/tareas', async (req, res) => {
+router.post('/posttareas', async (req, res) => {
     try {
         const tarea = new Tarea(req.body);
         await tarea.save();
@@ -18,7 +18,7 @@ router.post('/tareas', async (req, res) => {
 });
 
 // Endpoint para obtener todas las tareas
-router.get('/tareas', async (req, res) => {
+router.get('/gettareas', async (req, res) => {
     try {
         const tareas = await Tarea.find({});
         res.send(tareas);
@@ -44,7 +44,7 @@ router.get('/tareas/:id', async (req, res) => {
 });
 
 // Endpoint para actualizar una tarea por ID
-router.patch('/tareas/:id', async (req, res) => {
+router.patch('/patchtareas/:id', async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ['nombreTarea', 'descripcion', 'estado', 'fechaInicio', 'fechaFin', 'responsable']; // Ajusta esto según tu modelo
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
@@ -69,7 +69,7 @@ router.patch('/tareas/:id', async (req, res) => {
 });
 
 // Endpoint para eliminar una tarea por ID
-router.delete('/tareas/:id', async (req, res) => {
+router.delete('/deletetareas/:id', async (req, res) => {
     try {
         const tarea = await Tarea.findByIdAndDelete(req.params.id);
         if (!tarea) {
