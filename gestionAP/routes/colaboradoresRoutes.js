@@ -36,6 +36,7 @@ router.get('/colab', authRequired, async (req, res) => {
     const userFound = await Colaborador.findById(req.user.id)
     if(!userFound) return res.status(400).json({ message : "Colaborador no encotrado" });
     return res.json({
+        idUser : userFound._id,
         nombreCompleto : userFound.nombreCompleto,
         cedula : userFound.cedula,
         correoElectronico : userFound.correoElectronico,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import colabData from './colab_data.json'; 
 import { Alert } from 'react-native';
-import { colabRequest,logoutResquest } from './api/auth.js'
+import { colabRequest,logoutResquest,patchColabRequest } from './api/auth.js'
 
 const CuentaScreen = () => {
 
@@ -42,10 +42,10 @@ const CuentaScreen = () => {
   };
 
   // edición del colaborador
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async () => {
     console.log('Guardar cambios', colaborador);
     // Aquí se envían los cambios hechos a la base de datos
-
+    await patchColabRequest(colaborador.idUser, colaborador);
     // Mostrar una alerta al usuario
     Alert.alert(
       "Cambio realizado", // Título de la alerta

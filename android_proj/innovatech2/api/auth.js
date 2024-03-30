@@ -17,9 +17,18 @@ export const logoutResquest = async () => await axios.post(`${API}/logout`)
 export const colabRequest = async () => {
     try {
         const response = await axios.get(`${API}/colaboradores/colab`);
-        console.log("Respuesta:", response.data)
         return response.data;
     } catch (error){
+        return error.response
+    }
+}
+
+//Peticion para editar datos de usuario
+export const patchColabRequest = async (id, data) => {
+    try{
+        const patchRequest = axios.patch(`${API}/colaboradores/patchcolaboradores/${id}`,data)
+        console.log("Respuesta del cambio: ", response.data)
+    }catch(error){
         return error.response
     }
 }
