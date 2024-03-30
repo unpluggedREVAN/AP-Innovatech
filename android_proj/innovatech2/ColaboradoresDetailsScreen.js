@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
-const ColaboradorDetailsScreen = ({ route }) => {
+const ColaboradorDetailsScreen = ({ route }) => { // Los datos vienen como parámetros
   const { colaborador } = route.params;
 
   return (
