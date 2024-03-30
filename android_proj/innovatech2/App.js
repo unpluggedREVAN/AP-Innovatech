@@ -99,7 +99,7 @@ export default function App() {
         <Stack.Screen name="ColaboradorDetails" component={ColaboradoresDetailsScreen} />
 
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="CrearProyecto" component={CrearProyectoScreen} />
+        <Stack.Screen name="CrearProyecto" component={CrearProyectoScreen} options={{ headerTitle: 'Crear Proyecto' }} />
         {/* aquí se ponen más pantallas */}
       </Stack.Navigator>
     </NavigationContainer>

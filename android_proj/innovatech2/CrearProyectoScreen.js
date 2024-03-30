@@ -14,10 +14,10 @@ const CrearProyectoScreen = () => {
     console.log('Crear proyecto con los siguientes datos:', { nombreProyecto, recursosNecesarios, presupuesto, descripcion, fechaInicio, colaboradoresSeleccionados });
   };
 
-  const toggleColaborador = (id) => {
+  const toggleColaborador = (id) => { // Nota para Darío: Aquí es donde se hace lo del listado de colaboradores para seleccionar
     setColaboradoresSeleccionados((prevSeleccionados) =>
       prevSeleccionados.includes(id)
-        ? prevSeleccionados.filter((colaboradorId) => colaboradorId !== id)
+        ? prevSeleccionados.filter((colaboradorId) => colaboradorId !== id) // Ve aquí lo que paso es el id de los colaboradores seleccionados
         : [...prevSeleccionados, id]
     );
   };
@@ -38,6 +38,8 @@ const CrearProyectoScreen = () => {
 
       <Text style={styles.label}>Fecha de Inicio:</Text>
       <TextInput style={styles.input} value={fechaInicio} onChangeText={setFechaInicio} placeholder="YYYY-MM-DD" />
+
+      <Text style={styles.labelTareas}>Tareas: Las tareas se asignan desde las opciones de gestión de proyecto</Text>
 
       <Text style={styles.label}>Colaboradores:</Text>
       {colaboradoresData.map((colaborador) => (
@@ -99,6 +101,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 18,
+  },
+  labelTareas: {
+    fontSize: 16,
+    fontWeight: 'bold', // Negrita
+    marginBottom: 15, 
+    marginTop: 5, 
   },
   // Agrega más estilos según sea necesario
 });
