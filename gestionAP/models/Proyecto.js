@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const proyectoSchema = new Schema({
-  _id: Schema.Types.ObjectId,
   nombreProyecto: { type: String, required: true },
   recursosNecesarios: [{ type: String, required: true }],
   presupuesto: { type: Number, required: true },
