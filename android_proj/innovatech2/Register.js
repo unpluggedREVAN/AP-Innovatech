@@ -28,9 +28,10 @@ const RegisterScreen = ({ navigation }) => {
     // Implementa aquí la lógica de registro
     console.log("Iniciar request")
     try{
-      axios.post('http://10.0.2.2:3000/register', data)
+      const res = await axios.post('http://10.0.2.2:3000/register', data)
       .then(() => ToastAndroid.show('Record Inserted', ToastAndroid.LONG))
       .catch(error => ToastAndroid.show(error.message, ToastAndroid.LONG))
+      console.log('Respuesta a la petición:', res)
       console.log('Registro con:', fullName, email, password, cedula, departamentoTrabajo, telefono);
     } catch (error){
       console.log(error)
