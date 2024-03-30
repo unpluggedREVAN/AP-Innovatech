@@ -1,32 +1,38 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
-import colaboradoresData from './colab_data.json'; // Asegúrate de que la ruta sea correcta
+import colaboradoresData from './colab_data.json'; // Datos de colaboradores
+import projectData from './data.json'; // Datos de proyectos
 
 const GestionarColaboradoresScreen = ({ route }) => {
   const { proyectoId } = route.params;
-  const proyecto = colaboradoresData.find((p) => p._id === proyectoId); // Encuentra el proyecto por ID
-  const [colaboradoresSeleccionados, setColaboradoresSeleccionados] = useState(proyecto.colaboradores);
+  const proyecto = projectData.find((p) => p._id === proyectoId); // Encuentra el proyecto por ID
+
+  // Estado para manejar los colaboradores seleccionados
+  // Inicialmente se marcan los colaboradores que ya están asignados al proyecto
+  const [colaboradoresSeleccionados, setColaboradoresSeleccionados] = useState(proyecto ? proyecto.colaboradores : []);
+
+  // Función para manejar la selección/deselección de colaboradores
+  const toggleColaborador = (id) => {
+    const esSeleccionado = colaboradoresSeleccionados.includes(id);
+    setColaboradoresSeleccionados(prev => 
+      esSeleccionado ? prev.filter(colabId => colabId !== id) : [...prev, id]
+    );
+  };
+
+  // Función para manejar el guardado de cambios
+  const handleGuardarCambios = () => {
+    console.log('Colaboradores seleccionados para el proyecto:', colaboradoresSeleccionados);
+    // Aquí se implementaría la lógica para actualizar la asignación de colaboradores en el backend
+  };
 
   if (!proyecto) {
-    // Manejo del caso en que el proyecto no se encuentre
     return <Text>Proyecto no encontrado.</Text>;
   }
-
-  const toggleColaborador = (id) => {
-    setColaboradoresSeleccionados((prevSeleccionados) =>
-      prevSeleccionados.includes(id) ? prevSeleccionados.filter((colaboradorId) => colaboradorId !== id) : [...prevSeleccionados, id]
-    );
-  }; 
-
-  const handleGuardarCambios = () => {
-    // Aquí iría la lógica para guardar los cambios en el backend
-    console.log('Guardar cambios de colaboradores:', colaboradoresSeleccionados);
-    // Por ahora, solo mostramos un log
-  };
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.titulo}>Editar Colaboradores:</Text>
+      <Text style={styles.nota}>Nota: Debes seleccionar de nuevo los colaboradores que quieres asignar al proyecto.</Text>
 
       {colaboradoresData.map((colaborador) => (
         <TouchableOpacity
@@ -48,6 +54,7 @@ const GestionarColaboradoresScreen = ({ route }) => {
   );
 };
 
+// Aquí puedes definir o ajustar tus estilos según sea necesario
 const styles = StyleSheet.create({
   container: {
     padding: 20,
@@ -55,7 +62,12 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  nota: {
+    fontSize: 16,
     marginBottom: 20,
+    fontStyle: 'italic',
   },
   colaboradorContainer: {
     padding: 10,
@@ -82,7 +94,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
   },
-  // Agrega más estilos según sea necesario
 });
 
 export default GestionarColaboradoresScreen;

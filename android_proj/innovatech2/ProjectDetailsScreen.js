@@ -100,6 +100,10 @@ const ProjectDetailsScreen = ({ route }) => {
             {tarea.nombreTarea} - {tarea.storyPoints} SP - {tarea.responsable}
             </Text>
         ))}
+
+        <Text> {'\n'}----------------------------------------------------------------------------------------</Text>
+        <Text style={styles.nota}>Nota: Al entrar en la opción Gestionar Colaboradores se van a resetear todos los colaboradores actuales y deberás reasignarlos todos a como lo prefieras</Text>
+
         </>
     ) : (
         <Text style={styles.info}>Proyecto no encontrado.</Text>
