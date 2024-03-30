@@ -4,6 +4,7 @@ const Colaborador = require('../models/Colaborador'); // Asegúrate de ajustar l
 const router = express.Router();
 const validateModel = require('../middlewares/validator.middleware')
 const colabRegisterSchema = require('../schema/colab.schema')
+const createAccessToken = require('../libs/jwt')
 
 // Endpoint para el registro de un nuevo colaborador
 router.post('/register', validateModel(colabRegisterSchema) ,validateModel(colabRegisterSchema) ,async (req, res) => {
@@ -36,6 +37,8 @@ router.post('/login', async (req, res) => {
         const colaborador = await Colaborador.findOne({ correoElectronico: req.body.correoElectronico });
 
         if (colaborador && await bcrypt.compare(req.body.contrasena, colaborador.contrasena)) {
+            const token = await createAccessToken({id : colaborador._id})
+            res.cookie('token', token)
             // La comparación de contraseñas fue exitosa
             res.send({ message: "Inicio de sesión exitoso" });
         } else {

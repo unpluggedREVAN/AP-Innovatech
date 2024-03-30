@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Colaborador = require('../models/Colaborador'); // Asegúrate de que la ruta sea correcta
+const authRequired = require('../middlewares/validateToken')
 
 // Endpoint para crear un nuevo colaborador
 router.post('/postcolaboradores', async (req, res) => {
@@ -29,6 +30,20 @@ router.get('/getcolaboradores', async (req, res) => {
         res.status(500).send({ message: error.message });
     }
 });
+
+// Endpoint para obtener la información de un colaborador
+router.get('/colab', authRequired, async (req, res) => {
+    console.log("Obtener un colaborador")
+    const userFound = await Colaborador.findById(req.user.id)
+    if(!userFound) return res.status(400).json({ message : "Colaborador no encotrado" });
+    return res.json({
+        nombreCompleto : userFound.nombreCompleto,
+        cedula : userFound.cedula,
+        correoElectronico : userFound.correoElectronico,
+        departamentoTrabajo : userFound.departamentoTrabajo,
+        telefono : userFound.telefono
+    })
+})
 
 // Endpoint para actualizar un colaborador por ID
 router.patch('/patchcolaboradores/:id', async (req, res) => {

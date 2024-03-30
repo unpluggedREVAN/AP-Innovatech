@@ -1,0 +1,2 @@
+const TOKEN_SECRET = "SOME SECRET KEY"
+module.exports = TOKEN_SECRET

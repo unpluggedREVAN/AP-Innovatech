@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import colabData from './colab_data.json'; 
 import { Alert } from 'react-native';
+import { colabRequest } from './api/auth.js'
 
 const CuentaScreen = () => {
+
   // Este usuario está anidado para fines de prueba
-  const anaMartinez = colabData.find(colab => colab.nombreCompleto === "Ana Martínez");
+  //const anaMartinez = colabData.find(colab => colab.nombreCompleto === "Ana Martínez");
 
   // Hay que cambiarlo por los datos de la bd mongo
-  const [colaborador, setColaborador] = useState(anaMartinez);
+  const [colaborador, setColaborador] = useState({});
 
+  useEffect(() => {
+    console.log("Hola");
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = async () => {
+    console.log("Request")
+    const response = await colabRequest();
+    console.log("Respuesta 2:", response)
+    setColaborador(response);
+  }
   // Actualiza el estado con los cambios en los campos del formulario
   const handleInputChange = (name, value) => {
     setColaborador(prevState => ({ ...prevState, [name]: value }));

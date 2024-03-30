@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cookieParse = require('cookie-parser')
 const reunionesRoutes = require('./routes/reunionesRoutes');
 const colaboradoresRoutes = require('./routes/colaboradoresRoutes');
 const registroLogin = require('./routes/registroLogin');
@@ -9,7 +10,8 @@ const cors = require('cors')
 dotenv.config();
 const app = express();
 
-app.use(cors({origin : "exp://192.168.0.14:8082"}));
+app.use(cors());
+app.use(cookieParse());
 // Middleware para parsear el cuerpo de las peticiones en formato JSON
 app.use(express.json());
 
