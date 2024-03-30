@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { getProyectosRequest } from './api/auth.js'
 //import { View, Button } from 'react-native';
 
 // Importa los datos de los proyectos desde el archivo JSON
@@ -19,10 +20,13 @@ const HomeScreen = () => {
 
   // Efecto para cargar los proyectos de la base de datos simulada (archivo JSON)
   useEffect(() => {
-    // Simula la carga de proyectos desde una base de datos estableciendo el estado
-    // En un escenario real, aquí se haría una llamada a la API
-    setProyectos(projectData);
+    useFetchData();
   }, []);
+
+  const useFetchData = async () => {
+    const response = await getProyectosRequest(); 
+    setProyectos(response);
+  }
 
   const handleCreateProject = () => {
     navigation.navigate('CrearProyecto'); // Utiliza el nombre de la ruta asignado a CrearProyectoScreen

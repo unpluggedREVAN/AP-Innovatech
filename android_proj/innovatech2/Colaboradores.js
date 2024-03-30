@@ -15,12 +15,8 @@ const ColaboradoresScreen = () => {
   }, [])
 
   const useFetchData = async () => {
-    console.log("ColabData:", colaboradoresData)
-    console.log("Request colaboradores")
     const response = await colaboradoresRequest();
-    console.log("Response:",response);
     setColaboradores(response);
-    console.log("Colaboradore: ", colaboradores);
   }
 
   // Define un handler para el botón Más información

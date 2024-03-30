@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Alert } from 'react-native';
 import projectData from './data.json';
+import {getProyectRequest} from './api/auth.js'
 
 const ProjectDetailsScreen = ({ route }) => {
   const { proyectoId } = route.params;
