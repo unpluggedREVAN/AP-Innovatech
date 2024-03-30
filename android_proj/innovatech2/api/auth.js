@@ -10,6 +10,9 @@ export const registerRequest = user => axios.post(`${API}/register`,user).catch(
 //Peticion de login - POST
 export const loginRequest = user => axios.post(`${API}/login`, user)
 
+//Peticion de logout - POST
+export const logoutResquest = async () => await axios.post(`${API}/logout`)
+
 //Peticion de solicitar datos del usuario - GET
 export const colabRequest = async () => {
     try {

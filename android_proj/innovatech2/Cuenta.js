@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import colabData from './colab_data.json'; 
 import { Alert } from 'react-native';
-import { colabRequest } from './api/auth.js'
+import { colabRequest,logoutResquest } from './api/auth.js'
 
 const CuentaScreen = () => {
 
@@ -30,11 +30,9 @@ const CuentaScreen = () => {
 
   const handleLogOut = async () => {
     try {
-      // Nota para Darío: Aquí va la lógica del backend para finalizar ahí el cookie
-      // Por ejemplo: await logOutFromBackend();
+      await logoutResquest();
 
-      // Ya vi cómo se navega al usuario a la pantalla de login
-      // navigation.navigate('Login');
+      //navigation.navigate('Login');
 
       Alert.alert('Sesión cerrada', 'Has cerrado sesión correctamente.');
     } catch (error) {

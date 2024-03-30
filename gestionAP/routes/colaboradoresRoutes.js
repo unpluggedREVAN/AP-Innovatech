@@ -33,7 +33,6 @@ router.get('/getcolaboradores', async (req, res) => {
 
 // Endpoint para obtener la información de un colaborador
 router.get('/colab', authRequired, async (req, res) => {
-    console.log("Obtener un colaborador")
     const userFound = await Colaborador.findById(req.user.id)
     if(!userFound) return res.status(400).json({ message : "Colaborador no encotrado" });
     return res.json({

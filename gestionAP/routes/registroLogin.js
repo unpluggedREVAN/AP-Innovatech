@@ -9,7 +9,6 @@ const createAccessToken = require('../libs/jwt')
 // Endpoint para el registro de un nuevo colaborador
 router.post('/register', validateModel(colabRegisterSchema) ,validateModel(colabRegisterSchema) ,async (req, res) => {
     try {
-        console.log("En el endpoint")
         // Hash de la contraseña
         const hashedPassword = await bcrypt.hash(req.body.contrasena, 10);
 
@@ -53,5 +52,11 @@ router.post('/login', async (req, res) => {
         });
     }
 });
+
+router.post('/logout', async (req, res) => {
+    res.cookie('token', "", { expires : new Date(0)});
+    console.log("Logout")
+    return res.send(200);
+})
 
 module.exports = router;
