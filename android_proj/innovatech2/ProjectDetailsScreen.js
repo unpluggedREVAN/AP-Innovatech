@@ -3,9 +3,12 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-nati
 import { Alert } from 'react-native';
 import projectData from './data.json';
 import {getProyectRequest} from './api/auth.js'
+import { useNavigation } from '@react-navigation/native';
 
 const ProjectDetailsScreen = ({ route }) => {
   const { proyectoId } = route.params;
+
+  const navigation = useNavigation();
 
   // Nota para Darío: Mae vea aquí está usando el id del proyecto para encontrar toda la info en el json local, use la misma técnica cuando ya lo pegue con Mongo
   // Buscar el proyecto específico usando el ID
@@ -30,6 +33,11 @@ const ProjectDetailsScreen = ({ route }) => {
     // Navega a la pantalla de edición de tareas
   };
 
+  const handleManageCollaborators = () => {
+    // Navegar a la pantalla de gestión de colaboradores, pasando el ID del proyecto
+    navigation.navigate('GestionarColaboradores', { proyectoId: proyecto._id });
+  };
+
   const handleDeleteProject = () => {
     Alert.alert(
       "Eliminar Proyecto",
@@ -43,12 +51,24 @@ const ProjectDetailsScreen = ({ route }) => {
 
   return (
     <ScrollView style={styles.container}>
-    {/* Asegurarse de que el proyecto no sea undefined antes de intentar acceder a sus propiedades */}
+    {/* Se verifica que el proyecto no sea undefined */}
     {proyecto ? (
         <>
         <Text style={styles.title}>{proyecto.nombreProyecto}</Text>
         <Text style={styles.infoLabel}>Descripción:</Text>
         <Text style={styles.info}>{proyecto.descripcion}</Text>
+
+        <Text style={styles.infoLabel}>Recursos Necesarios:</Text>
+        {/* Se convierte la lista de recursos en una cadena de texto, así es como se guarda en la creación de proyectos */}
+        <Text style={styles.info}>{proyecto.recursosNecesarios.join(', ')}</Text>
+
+        <Text style={styles.infoLabel}>Colaboradores:</Text>
+        {/* Aquí uso el id del colaborador porque lo estoy haciendo con el json, pero debe ser con el nombre */}
+        <Text style={styles.info}>{proyecto.colaboradores.join(', ')}</Text>
+
+        <Text style={styles.infoLabel}>Responsable:</Text>
+        {/* Igual aquí, muestro el id pero debe ser el nombre */}
+        <Text style={styles.info}>{proyecto.responsable}</Text>
         
         {/* Repite la estructura para los demás campos */}
         <Text style={styles.infoLabel}>Presupuesto:</Text>
@@ -89,6 +109,9 @@ const ProjectDetailsScreen = ({ route }) => {
     <TouchableOpacity onPress={handleEditTasks} style={styles.button}>
         <Text style={styles.buttonText}>Modificar Tareas</Text>
     </TouchableOpacity>
+    <TouchableOpacity onPress={handleManageCollaborators} style={styles.button}>
+        <Text style={styles.buttonText}>Gestionar Colaboradores</Text>
+      </TouchableOpacity>
     <TouchableOpacity onPress={handleDeleteProject} style={[styles.button, styles.deleteButton]}>
         <Text style={styles.buttonText}>Eliminar Proyecto</Text>
     </TouchableOpacity>

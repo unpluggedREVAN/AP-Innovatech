@@ -101,7 +101,12 @@ const CuentaScreen = () => {
       
       {/* Campos no editables */}
       <Text style={styles.label}>Estado:</Text>
-      <Text style={styles.nonEditableInput}>{colaborador.estado}</Text>
+      <TextInput
+        style={styles.input}
+        value={colaborador.estado}
+        onChangeText={(text) => handleInputChange('estado', text)}
+        placeholder="Estado"
+      />
 
       <TouchableOpacity style={styles.button} onPress={handleSaveChanges}>
         <Text style={styles.buttonText}>Guardar Cambios</Text>
