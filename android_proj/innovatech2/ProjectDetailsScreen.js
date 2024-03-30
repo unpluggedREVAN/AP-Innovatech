@@ -32,12 +32,24 @@ const ProjectDetailsScreen = ({ route }) => {
 
   return (
     <ScrollView style={styles.container}>
-    {/* Asegurarse de que el proyecto no sea undefined antes de intentar acceder a sus propiedades */}
+    {/* Se verifica que el proyecto no sea undefined */}
     {proyecto ? (
         <>
         <Text style={styles.title}>{proyecto.nombreProyecto}</Text>
         <Text style={styles.infoLabel}>Descripción:</Text>
         <Text style={styles.info}>{proyecto.descripcion}</Text>
+
+        <Text style={styles.infoLabel}>Recursos Necesarios:</Text>
+        {/* Se convierte la lista de recursos en una cadena de texto, así es como se guarda en la creación de proyectos */}
+        <Text style={styles.info}>{proyecto.recursosNecesarios.join(', ')}</Text>
+
+        <Text style={styles.infoLabel}>Colaboradores:</Text>
+        {/* Aquí uso el id del colaborador porque lo estoy haciendo con el json, pero debe ser con el nombre */}
+        <Text style={styles.info}>{proyecto.colaboradores.join(', ')}</Text>
+
+        <Text style={styles.infoLabel}>Responsable:</Text>
+        {/* Igual aquí, muestro el id pero debe ser el nombre */}
+        <Text style={styles.info}>{proyecto.responsable}</Text>
         
         {/* Repite la estructura para los demás campos */}
         <Text style={styles.infoLabel}>Presupuesto:</Text>
