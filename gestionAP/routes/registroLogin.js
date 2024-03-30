@@ -22,8 +22,7 @@ router.post('/register', validateModel(colabRegisterSchema) ,validateModel(colab
         return  res.status(201).send({ message: "Colaborador registrado exitosamente" });
     } catch (error) {
         console.error(error);
-        res.status(400).send({
-            message: "Error al registrar el colaborador",
+        return res.status(400).send({
             error: error.message
         });
     }

@@ -30,7 +30,7 @@ const RegisterScreen = ({ navigation }) => {
     console.log("Iniciar request")
     const res = await registerRequest(data)
     //Respuesta del request 
-    console.log("Respuesta de la peticion: ", res.data.message);
+    console.log("Respuesta de la peticion: ", res.data);
   };
   
   return (
