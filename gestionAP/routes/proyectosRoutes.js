@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Proyecto = require('../models/Proyecto');
 const authRequired = require('../middlewares/validateToken')
+const Tarea = require('../models/Tarea'); // Modelo de tarea
 
 // Endpoint para crear un nuevo proyecto
 router.post('/postproyectos', authRequired, async (req, res) => {
@@ -109,4 +110,26 @@ router.patch('/:proyectoId/asignarColaborador', async (req, res) => {
         });
     }
 });
+
+
+// Endpoint para obtener todas las tareas de un proyecto específico
+router.get('/:idProyecto/tareas', async (req, res) => {
+    try {
+        const idProyecto = req.params.idProyecto;
+        // Primero, encuentra el proyecto por su ID para asegurarse de que exista
+        const proyecto = await Proyecto.findById(idProyecto);
+        if (!proyecto) {
+            return res.status(404).send({ message: "Proyecto no encontrado." });
+        }
+
+        // Luego, utiliza los IDs de las tareas almacenados en el proyecto para obtener las tareas
+        const tareas = await Tarea.find({ '_id': { $in: proyecto.tareas } });
+
+        res.status(200).send(tareas);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Error al obtener las tareas del proyecto", error: error.message });
+    }
+});
+
 module.exports = router;
