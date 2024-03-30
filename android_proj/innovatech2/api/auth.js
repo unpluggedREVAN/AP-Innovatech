@@ -43,6 +43,9 @@ export const patchColabRequest = async (id, data) => {
     }
 }
 
+//Peticion para crear Proyecto  - POST
+export const postProyectoRequest = project => axios.post(`${API}/proyectos/postproyectos`, project);
+
 //Peticion de proyectos - GET
 export const getProyectosRequest = async () =>{
     try{

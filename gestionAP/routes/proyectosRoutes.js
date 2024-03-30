@@ -1,11 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const Proyecto = require('../models/Proyecto');
+const authRequired = require('../middlewares/validateToken')
 
 // Endpoint para crear un nuevo proyecto
-router.post('/postproyectos', async (req, res) => {
+router.post('/postproyectos', authRequired, async (req, res) => {
     try {
-        const proyecto = new Proyecto(req.body);
+        const dataResponsable = {responsable : req.user.id};
+        const bodyRequest = req.body
+        const dataProject = {...bodyRequest, ...dataResponsable};
+        console.log(dataProject);
+        const proyecto = new Proyecto(dataProject);
         await proyecto.save();
         res.status(201).send(proyecto);
     } catch (error) {

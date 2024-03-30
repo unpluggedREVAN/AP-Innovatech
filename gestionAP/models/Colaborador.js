@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const colaboradorSchema = new Schema({
-
   nombreCompleto: { type: String, required: true },
   cedula: { type: String, required: true, unique: true },
   correoElectronico: { type: String, required: true, unique: true },

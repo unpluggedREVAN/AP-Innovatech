@@ -18,7 +18,6 @@ const CuentaScreen = () => {
 
   const fetchUserData = async () => {
     const response = await colabRequest();
-    console.log("Respuesta 2:", response)
     setColaborador(response);
   }
 

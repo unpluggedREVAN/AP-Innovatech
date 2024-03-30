@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import colaboradoresData from './colab_data.json'; // Asegúrate de que la ruta al archivo JSON sea correcta
+import {postProyectoRequest, colaboradoresRequest} from './api/auth.js'
 
 const CrearProyectoScreen = () => {
+  //Colaboradores disponibles
+  const [colaboradoreDisponibles, setColaboradores] = useState([]);
+
+  useEffect(() => {
+    colabFetchData();
+  }, []);
+
+  const colabFetchData = async () => {
+    const response = await colaboradoresRequest();
+    setColaboradores(response);
+  }
+
   const [nombreProyecto, setNombreProyecto] = useState('');
   const [recursosNecesarios, setRecursosNecesarios] = useState('');
   const [presupuesto, setPresupuesto] = useState('');
@@ -10,8 +23,19 @@ const CrearProyectoScreen = () => {
   const [fechaInicio, setFechaInicio] = useState('');
   const [colaboradoresSeleccionados, setColaboradoresSeleccionados] = useState([]);
 
-  const handleCrearProyecto = () => {
-    console.log('Crear proyecto con los siguientes datos:', { nombreProyecto, recursosNecesarios, presupuesto, descripcion, fechaInicio, colaboradoresSeleccionados });
+  const handleCrearProyecto = async () => {
+    const presupuestoParse = parseInt(presupuesto);
+    const data = {
+        nombreProyecto : nombreProyecto,
+        recursosNecesarios : recursosNecesarios,
+        presupuesto : presupuestoParse,
+        descripcion : descripcion,
+        fechaInicio : fechaInicio,
+        colaboradores : colaboradoresSeleccionados
+    }
+    console.log('Crear proyecto con los siguientes datos:', { nombreProyecto, recursosNecesarios,presupuestoParse, descripcion, fechaInicio, colaboradoresSeleccionados });
+    const response = await postProyectoRequest(data);
+    console.log("Respuesta a peticion:", response.data.message)
   };
 
   const toggleColaborador = (id) => { // Nota para Darío: Aquí es donde se hace lo del listado de colaboradores para seleccionar
@@ -42,7 +66,7 @@ const CrearProyectoScreen = () => {
       <Text style={styles.labelTareas}>Tareas: Las tareas se asignan desde las opciones de gestión de proyecto</Text>
 
       <Text style={styles.label}>Colaboradores:</Text>
-      {colaboradoresData.map((colaborador) => (
+      {colaboradoreDisponibles.map((colaborador) => (
         <TouchableOpacity
           key={colaborador._id}
           style={[

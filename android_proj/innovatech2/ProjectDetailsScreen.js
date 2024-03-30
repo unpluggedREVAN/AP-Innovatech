@@ -12,7 +12,7 @@ const ProjectDetailsScreen = ({ route }) => {
 
   // Nota para Darío: Mae vea aquí está usando el id del proyecto para encontrar toda la info en el json local, use la misma técnica cuando ya lo pegue con Mongo
   // Buscar el proyecto específico usando el ID
-  const [proyecto, setProyecto] = useState({tareas : []});
+  const [proyecto, setProyecto] = useState({tareas : [], recursosNecesarios : [], colaboradores : []});
 
   useEffect(() => {
     fetchProyectData()
@@ -20,7 +20,6 @@ const ProjectDetailsScreen = ({ route }) => {
 
   const fetchProyectData = async () => {
     const response = await getProyectRequest(proyectoId);
-    console.log(response);
     setProyecto(response)
   };
 
