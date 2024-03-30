@@ -90,6 +90,11 @@ export default function App() {
           options={{ headerShown: false }} // mostrar el header es opcional
         />
         <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ headerShown: false }} // mostrar el header es opcional
+        />
+        <Stack.Screen
           name="ProjectDetails"
           component={ProjectDetailsScreen}
           options={{ headerTitle: 'Detalles del Proyecto' }}

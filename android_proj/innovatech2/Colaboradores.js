@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import colaboradoresData from './colab_data.json'; // Asegúrate de que la ruta al archivo JSON sea correcta
 import { useNavigation } from '@react-navigation/native';
-
+import { colaboradoresRequest } from './api/auth.js'
 
 const ColaboradoresScreen = () => {
 
   const navigation = useNavigation(); 
+
+  const [colaboradores, setColaboradores] = useState([]);
+
+  useEffect(() => {
+    useFetchData();
+  }, [])
+
+  const useFetchData = async () => {
+    console.log("ColabData:", colaboradoresData)
+    console.log("Request colaboradores")
+    const response = await colaboradoresRequest();
+    console.log("Response:",response);
+    setColaboradores(response);
+    console.log("Colaboradore: ", colaboradores);
+  }
 
   // Define un handler para el botón Más información
   const handleMoreInfoPress = (colaborador) => {
@@ -17,7 +32,7 @@ const ColaboradoresScreen = () => {
     <View style={styles.container}>
       <Text style={styles.header}>Colaboradores</Text>
       <ScrollView style={styles.scrollView}>
-        {colaboradoresData.map((colaborador, index) => (
+        {colaboradores.map((colaborador, index) => (
           <View key={colaborador._id} style={styles.colaboradorCard}>
             <Text style={styles.colaboradorInfo}>Nombre: {colaborador.nombreCompleto}</Text>
             <Text style={styles.colaboradorInfo}>Cédula: {colaborador.cedula}</Text>

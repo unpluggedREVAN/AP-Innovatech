@@ -13,16 +13,15 @@ const CuentaScreen = () => {
   const [colaborador, setColaborador] = useState({});
 
   useEffect(() => {
-    console.log("Hola");
     fetchUserData();
   }, []);
 
   const fetchUserData = async () => {
-    console.log("Request")
     const response = await colabRequest();
     console.log("Respuesta 2:", response)
     setColaborador(response);
   }
+
   // Actualiza el estado con los cambios en los campos del formulario
   const handleInputChange = (name, value) => {
     setColaborador(prevState => ({ ...prevState, [name]: value }));

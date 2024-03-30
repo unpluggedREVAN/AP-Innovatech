@@ -13,6 +13,16 @@ export const loginRequest = user => axios.post(`${API}/login`, user)
 //Peticion de logout - POST
 export const logoutResquest = async () => await axios.post(`${API}/logout`)
 
+//Petecio para los colaboradores
+export const colaboradoresRequest = async () => {
+    try{
+        const response = await axios.get(`${API}/colaboradores/getcolaboradores`)
+        return response.data
+    }catch(error){
+        return error.response
+    }
+}
+
 //Peticion de solicitar datos del usuario - GET
 export const colabRequest = async () => {
     try {
@@ -26,7 +36,7 @@ export const colabRequest = async () => {
 //Peticion para editar datos de usuario
 export const patchColabRequest = async (id, data) => {
     try{
-        const patchRequest = axios.patch(`${API}/colaboradores/patchcolaboradores/${id}`,data)
+        const patchRequest = await axios.patch(`${API}/colaboradores/patchcolaboradores/${id}`,data)
         console.log("Respuesta del cambio: ", response.data)
     }catch(error){
         return error.response
