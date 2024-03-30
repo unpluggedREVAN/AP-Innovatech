@@ -19,12 +19,13 @@ router.post('/postcolaboradores', async (req, res) => {
 });
 
 // Endpoint para obtener todos los colaboradores
-router.get('/getcolaboradores', async (req, res) => {
+router.get('/getcolaboradores', authRequired ,async (req, res) => {
     console.log("Finding Colaboradores")
     try {
         const colaboradores = await Colaborador.find({});
-        console.log("Colaboradores" + colaboradores)
-        res.send(colaboradores);
+        const colabFilter = colaboradores.filter(item => item._id != req.user.id)
+        console.log("Colaboradores" + colabFilter)
+        res.send(colabFilter);
     } catch (error) {
         console.log(error)
         res.status(500).send({ message: error.message });
