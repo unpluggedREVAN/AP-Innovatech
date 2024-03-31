@@ -10,7 +10,8 @@ const proyectoSchema = new Schema({
   descripcion: { type: String, required: true },
   fechaInicio: { type: Date, required: true },
   historialCambios: [{ type: String }],
-  responsable: { type: Schema.Types.ObjectId, ref: 'Colaborador', required: true }
+  responsable: { type: Schema.Types.ObjectId, ref: 'Colaborador', required: true },
+  tareas: [{ type: Schema.Types.ObjectId, ref: 'Tarea' }]
 });
 
 const Proyecto = mongoose.model('Proyecto', proyectoSchema, 'Proyectos');

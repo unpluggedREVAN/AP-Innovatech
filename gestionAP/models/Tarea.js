@@ -3,14 +3,13 @@ const { Schema } = mongoose;
 
 
 const TareaSchema = new Schema({
-  _id: Schema.Types.ObjectId,
-  idProyecto: { type: Schema.Types.ObjectId, required: true },
+  nombreTarea: { type: String, required: true },
   idColaborador: { type: Schema.Types.ObjectId, required: true },
   estado: { type: String, required: true, enum: ['En progreso', 'Completado', 'Pendiente'] },
   fecha: { type: Date, required: true },
   points: { type: Number, required: true }
-});
+}, { collection: 'Tareas' });
 
-const Tarea = mongoose.model('Tarea', TareaSchema);
+const Tarea = mongoose.model('Tareas', TareaSchema);
 
 module.exports = Tarea;
