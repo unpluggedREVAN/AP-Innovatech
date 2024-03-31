@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Alert } from 'react-native';
 import projectData from './data.json';
-import {getProyectRequest} from './api/auth.js'
+import {getProyectRequest,getTareasProjectRequest} from './api/auth.js'
 import { useNavigation } from '@react-navigation/native';
 
 const ProjectDetailsScreen = ({ route }) => {
@@ -12,21 +12,27 @@ const ProjectDetailsScreen = ({ route }) => {
 
   // Nota para Darío: Mae vea aquí está usando el id del proyecto para encontrar toda la info en el json local, use la misma técnica cuando ya lo pegue con Mongo
   // Buscar el proyecto específico usando el ID
-  const [proyecto, setProyecto] = useState({tareas : [], recursosNecesarios : [], colaboradores : []});
+  const [proyecto, setProyecto] = useState({recursosNecesarios : [], colaboradores : []});
+  const [tareasProject, setTareas] = useState([]);
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     fetchProyectData()
+    setTimeout(() => setShowContent(true), 1000);
   }, []);
 
   const fetchProyectData = async () => {
     const response = await getProyectRequest(proyectoId);
+    const responseTasks = await getTareasProjectRequest(proyectoId);
     setProyecto(response)
+    setTareas(responseTasks);
+    console.log(responseTasks);
   };
 
   // Organizar las tareas por estado
-  const tareasPorHacer = proyecto?.tareas.filter(t => t.estado === 'por hacer') || [];
-  const tareasEnCurso = proyecto?.tareas.filter(t => t.estado === 'en curso') || [];
-  const tareasFinalizadas = proyecto?.tareas.filter(t => t.estado === 'finalizada') || [];
+  //const tareasPorHacer = tareasProject.filter(t => t.estado == 'por hacer') || [];
+  //const tareasEnCurso = tareasProject.filter(t => t.estado == 'en curso') || [];
+  //const tareasFinalizadas = tareasProject.filter(t => t.estado == 'finalizada') || [];
   
   const handleEditTasks = () => {
     // Navega a la pantalla de edición de tareas
@@ -52,7 +58,7 @@ const ProjectDetailsScreen = ({ route }) => {
   return (
     <ScrollView style={styles.container}>
     {/* Se verifica que el proyecto no sea undefined */}
-    {proyecto ? (
+    {showContent && proyecto ? (
         <>
         <Text style={styles.title}>{proyecto.nombreProyecto}</Text>
         <Text style={styles.infoLabel}>Descripción:</Text>
@@ -81,24 +87,10 @@ const ProjectDetailsScreen = ({ route }) => {
         <Text style={styles.info}>{proyecto.fechaInicio}</Text>
 
         {/* Tareas por estado */}
-        <Text style={styles.sectionTitle}>Tareas por hacer</Text>
-        {tareasPorHacer.map((tarea, index) => (
+        <Text style={styles.sectionTitle}>Tareas del proyecto</Text>
+        {tareasProject.map((tarea, index) => (
             <Text key={index} style={styles.tareaInfo}>
-            {tarea.nombreTarea} - {tarea.storyPoints} SP - {tarea.responsable}
-            </Text>
-        ))}
-
-        <Text style={styles.sectionTitle}>Tareas en curso</Text>
-        {tareasEnCurso.map((tarea, index) => (
-            <Text key={index} style={styles.tareaInfo}>
-            {tarea.nombreTarea} - {tarea.storyPoints} SP - {tarea.responsable}
-            </Text>
-        ))}
-
-        <Text style={styles.sectionTitle}>Tareas finalizadas</Text>
-        {tareasFinalizadas.map((tarea, index) => (
-            <Text key={index} style={styles.tareaInfo}>
-            {tarea.nombreTarea} - {tarea.storyPoints} SP - {tarea.responsable}
+            Estado : {tarea.estado} - Titulo: {tarea.nombreTarea} - {tarea.points} Points - {tarea.idColaborador}
             </Text>
         ))}
 

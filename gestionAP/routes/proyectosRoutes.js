@@ -3,6 +3,7 @@ const router = express.Router();
 const Proyecto = require('../models/Proyecto');
 const authRequired = require('../middlewares/validateToken')
 const Tarea = require('../models/Tarea'); // Modelo de tarea
+const { populate } = require('mongoose');
 
 // Endpoint para crear un nuevo proyecto
 router.post('/postproyectos', authRequired, async (req, res) => {
@@ -26,10 +27,10 @@ router.post('/postproyectos', authRequired, async (req, res) => {
 // Endpoint para obtener todos los proyectos
 router.get('/getproyectos', async (req, res) => {
     try {
-        const proyectos = await Proyecto.find({});
-        res.send(proyectos);
+        const proyectos = await Proyecto.find({}).populate('tareas');
+        res.json(proyectos);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).JSON({message : error.message});
     }
 });
 

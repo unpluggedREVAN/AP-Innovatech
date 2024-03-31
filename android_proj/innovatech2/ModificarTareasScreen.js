@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput } from 'react-native';
 import projectData from './data.json';
+import {getTareasProjectRequest} from './api/auth.js'
 
 // Componente para el formulario de modificación de una tarea específica
 const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
   const [nombreTarea, setNombreTarea] = useState(tarea.nombreTarea);
-  const [storyPoints, setStoryPoints] = useState(tarea.storyPoints.toString());
+  const [storyPoints, setStoryPoints] = useState(tarea.points.toString());
   const [estado, setEstado] = useState(tarea.estado);
-  const [responsable, setResponsable] = useState(tarea.responsable);
+  const [responsable, setResponsable] = useState(tarea.idColaborador.toString()); //Hay un error aqui
 
   return (
     <View style={styles.formContainer}>
@@ -100,10 +101,18 @@ const CrearTareaForm = ({ onGuardar, onCancelar }) => {
 
 const ModificarTareasScreen = ({ route }) => {
   const { proyectoId } = route.params;
-  const proyecto = projectData.find(p => p._id === proyectoId);
-  const [tareas, setTareas] = useState(proyecto ? proyecto.tareas : []);
+  const [tareas, setTareas] = useState([]);
   const [tareaAEditar, setTareaAEditar] = useState(null);
   const [mostrarFormCrear, setMostrarFormCrear] = useState(false);
+
+  useEffect(() => {
+    fetchDataTasks();
+  }, []);
+
+  const fetchDataTasks = async () => {
+    const responseTasks = await getTareasProjectRequest(proyectoId);
+    setTareas(responseTasks);
+  }
 
   const handleEliminarTarea = (index) => {
     const nuevasTareas = [...tareas];

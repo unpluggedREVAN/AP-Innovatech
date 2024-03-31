@@ -82,3 +82,14 @@ export const patchProjectRequest = async (id, data) => {
         return error.response
     }
 }
+
+//Peticion para traer las tareas de un proyecto
+
+export const getTareasProjectRequest = async (idProject) => {
+    try{
+        const getTPRequest = await axios.get(`${API}/proyectos/${idProject}/tareas`)
+        return getTPRequest.data;
+    } catch{
+        return error.message
+    }
+}
