@@ -20,6 +20,7 @@ const ProjectDetailsScreen = ({ route }) => {
   
   const handleEditTasks = () => {
     // Navega a la pantalla de edición de tareas
+    navigation.navigate('ModificarTareas', { proyectoId });
   };
 
   const handleManageCollaborators = () => {
