@@ -18,8 +18,12 @@ const ProyectoScreen = () => {
   }, []);
 
   const handleDetallesReunion = (reunionId) => {
-    console.log('Ir a los detalles de la reunión:', reunionId);
-    // Aquí puedes agregar la lógica para navegar a los detalles de la reunión
+    const reunion = dataReuniones.find(r => r._id === reunionId); // Encuentra la reunión por ID
+    if (reunion) {
+      console.log('Ir a los detalles de la reunión:', reunionId);
+      // Navegar a los detalles de la reunión, pasando los datos de la reunión como parámetros
+      navigation.navigate('ReunionDetails', { reunion });
+    }
   };
 
   return (
