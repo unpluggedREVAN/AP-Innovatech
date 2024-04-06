@@ -1,0 +1,50 @@
+[
+    {
+      "_id": "8159p4pq098q073ti1d59p1",
+      "fecha": "2023-04-05",
+      "tema": "Revisión de avances",
+      "medio": "Teams",
+      "colaboradores": ["colabId10", "colabId20", "colabId30"],
+      "proyecto": "6611a7eb234b078c3fd42ba1"
+    },
+    {
+      "_id": "8260q5qr109r184uj2e60q2",
+      "fecha": "2023-03-15",
+      "tema": "Definición de objetivos Q2",
+      "medio": "Google Meet",
+      "colaboradores": ["colabId40", "colabId50"],
+      "proyecto": "6622b8fc345c189d4ee53cc2"
+    },
+    {
+      "_id": "8371r6rs210s295vk3f71r3",
+      "fecha": "2023-05-22",
+      "tema": "Estrategias de optimización de recursos",
+      "medio": "Skype",
+      "colaboradores": ["colabId60", "colabId70", "colabId80"],
+      "proyecto": "6733c9gd456d29ae5ff64dd3"
+    },
+    {
+      "_id": "8482s7st311t306wl4g82s4",
+      "fecha": "2023-06-10",
+      "tema": "Lanzamiento de la campaña de marketing",
+      "medio": "Zoom",
+      "colaboradores": ["colabId90", "colabId100", "colabId110"],
+      "proyecto": "6844dahd567e3abf6gg75ee4"
+    },
+    {
+      "_id": "8593t8tu412u417xm5h93t5",
+      "fecha": "2023-07-05",
+      "tema": "Análisis de feedback de usuarios",
+      "medio": "Facetime",
+      "colaboradores": ["colabId120", "colabId130"],
+      "proyecto": "6955ebie678f4dch7hh86ff5"
+    },
+    {
+      "_id": "8704u9uv513v528yn6i04u6",
+      "fecha": "2023-08-16",
+      "tema": "Estrategias de mantenimiento IT",
+      "medio": "Discord",
+      "colaboradores": ["colabId140", "colabId150", "colabId160"],
+      "proyecto": "7066fckf789g5dei8ii97gg6"
+    }
+  ]

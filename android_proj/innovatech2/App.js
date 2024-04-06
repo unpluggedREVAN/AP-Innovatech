@@ -37,7 +37,7 @@ function MainTabNavigator() {
             case 'Colab':
               iconName = focused ? 'people' : 'people-outline';
               break;
-            case 'Proyecto':
+            case 'Reuniones':
               iconName = focused ? 'briefcase' : 'briefcase-outline';
               break;
             case 'Home':
@@ -61,7 +61,7 @@ function MainTabNavigator() {
     >
       {/* aquí van pantallas como tabs */}
       <Tab.Screen name="Colab" component={ColaboradoresScreen} />
-      <Tab.Screen name="Proyecto" component={ProyectoScreen} />
+      <Tab.Screen name="Reuniones" component={ProyectoScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Evaluación" component={EvaluacionScreen} />
       <Tab.Screen name="Cuenta" component={CuentaScreen} />
