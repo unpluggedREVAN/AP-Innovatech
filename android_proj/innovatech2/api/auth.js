@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API = 'http://192.168.0.14:3000'
+const API = 'http://172.18.103.18:3000'
 
 //Peticion de register - POST
 export const registerRequest = user => axios.post(`${API}/register`,user)
