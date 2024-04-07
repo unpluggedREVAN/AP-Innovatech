@@ -10,14 +10,12 @@ const ForosScreen = ({ navigation }) => {
     setPublicaciones(forosData);
   }, []);
 
-  const handleAbrirPublicacion = (publicacionId) => {
-    console.log('Abrir publicación:', publicacionId);
-    // Aquí puedes agregar la lógica para navegar a los detalles de la publicación
+  const handleAbrirPublicacion = (publicacion) => {
+    navigation.navigate('PublicacionDetailsScreen', { publicacion });
   };
 
   const handleCrearPublicacion = () => {
-    console.log('Navegar a la pantalla de crear nueva publicación');
-    // Aquí puedes agregar la lógica para navegar a la pantalla de creación de publicación
+    navigation.navigate('CrearPublicacion');
   };
 
   return (
@@ -30,7 +28,7 @@ const ForosScreen = ({ navigation }) => {
             <Text style={styles.publicacionTipo}>Tipo: {publicacion.tipo}</Text>
             <TouchableOpacity
               style={styles.abrirButton}
-              onPress={() => handleAbrirPublicacion(publicacion._id)}
+              onPress={() => handleAbrirPublicacion(publicacion)}
             >
               <Text style={styles.buttonText}>Abrir publicación</Text>
             </TouchableOpacity>
