@@ -18,8 +18,20 @@ const ProyectoScreen = () => {
   }, []);
 
   const handleDetallesReunion = (reunionId) => {
-    console.log('Ir a los detalles de la reunión:', reunionId);
-    // Aquí puedes agregar la lógica para navegar a los detalles de la reunión
+    const reunion = dataReuniones.find(r => r._id === reunionId); // Encuentra la reunión por ID
+    if (reunion) {
+      console.log('Ir a los detalles de la reunión:', reunionId);
+      // Navegar a los detalles de la reunión, pasando los datos de la reunión como parámetros
+      navigation.navigate('ReunionDetails', { reunion });
+    }
+  };
+
+  const handleCrearNuevaReunion = () => {
+    navigation.navigate('CrearReunionScreen');
+  };  
+
+  const handleIrForos = () => {
+    navigation.navigate('ForosScreen'); 
   };
 
   return (
@@ -41,11 +53,13 @@ const ProyectoScreen = () => {
         ))}
       </ScrollView>
 
-      <TouchableOpacity style={styles.button} onPress={() => console.log('Crear nueva reunión')}>
+      <TouchableOpacity 
+        style={styles.button} 
+        onPress={handleCrearNuevaReunion}>
         <Text style={styles.buttonText}>Crear nueva reunión</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => console.log('Ir al foro')}>
+      <TouchableOpacity style={styles.button} onPress={handleIrForos}>
         <Text style={styles.buttonText}>Ir al foro</Text>
       </TouchableOpacity>
     </View>

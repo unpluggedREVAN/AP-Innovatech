@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput } from 'react-native';
-import projectData from './data.json';
 import {getTareasProjectRequest, patchTareaRequest} from './api/auth.js'
+import colaboradoresData from './colab_data.json'; // Asegúrate de que la ruta al archivo JSON de colaboradores sea correcta
 
 // Componente para el formulario de modificación de una tarea específica
 const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
@@ -37,6 +37,7 @@ const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
         value={responsable}
         onChangeText={setResponsable}
         placeholder="Responsable"
+        editable={false}
       />
       <TouchableOpacity
         style={[styles.boton, styles.botonGuardar]}
@@ -57,7 +58,7 @@ const CrearTareaForm = ({ onGuardar, onCancelar }) => {
     const [storyPoints, setStoryPoints] = useState('');
     const [estado, setEstado] = useState('');
     const [responsable, setResponsable] = useState('');
-  
+
     return (
       <View style={styles.formContainer}>
         <Text style={styles.formTitulo}>Agregar Nueva Tarea</Text>
@@ -80,12 +81,23 @@ const CrearTareaForm = ({ onGuardar, onCancelar }) => {
           onChangeText={setEstado}
           placeholder="Estado"
         />
-        <TextInput
-          style={styles.input}
-          value={responsable}
-          onChangeText={setResponsable}
-          placeholder="Responsable"
-        />
+        
+        <Text style={styles.label}>Responsable:</Text>
+        <View style={styles.colaboradoresContainer}>
+          {colaboradoresData.map((colaborador) => (
+            <TouchableOpacity
+              key={colaborador._id}
+              style={[
+                styles.colaboradorButton,
+                { backgroundColor: responsable === colaborador._id ? '#4e9ec5' : '#f0f0f0' },
+              ]}
+              onPress={() => setResponsable(colaborador._id)}
+            >
+              <Text style={styles.colaboradorButtonText}>{colaborador.nombreCompleto}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
         <TouchableOpacity
           style={[styles.boton, styles.botonGuardar]}
           onPress={() => onGuardar({ nombreTarea, storyPoints, estado, responsable })}
@@ -183,7 +195,6 @@ const ModificarTareasScreen = ({ route }) => {
   );
 };
 
-// Agrega estilos para el formulario y los botones
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -252,7 +263,25 @@ const styles = StyleSheet.create({
   botonCancelar: {
     backgroundColor: '#f44336', // Rojo para cancelar
   },
-  // Más estilos para botones...
+  colaboradoresContainer: {
+    marginBottom: 15,
+  },
+  colaboradorButton: {
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+    marginBottom: 5,
+    borderRadius: 5,
+  },
+  colaboradorButtonText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 15,
+    marginBottom: 5,
+  },
 });
 
 export default ModificarTareasScreen;
