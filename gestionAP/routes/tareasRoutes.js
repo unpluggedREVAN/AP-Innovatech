@@ -45,26 +45,27 @@ router.get('/tareas/:id', async (req, res) => {
 
 // Endpoint para actualizar una tarea por ID
 router.patch('/patchtareas/:id', async (req, res) => {
+    /*
     const updates = Object.keys(req.body);
     const allowedUpdates = ['nombreTarea', 'descripcion', 'estado', 'fechaInicio', 'fechaFin', 'responsable']; // Ajusta esto según tu modelo
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
 
     if (!isValidOperation) {
-        return res.status(400).send({ message: "Actualizaciones no válidas!" });
+        return res.status(400).json({ message: "Actualizaciones no válidas!" });
     }
-
+    */
     try {
-        const tarea = await Tarea.findById(req.params.id);
+        const tarea = await Tarea.findByIdAndUpdate(req.params.id, req.body, { new : true, runValidators : true });
         if (!tarea) {
-            return res.status(404).send();
+            return res.status(404).send({message : "Tarea no encontrada"});
         }
-
-        updates.forEach((update) => tarea[update] = req.body[update]);
-        await tarea.save();
-
         res.send(tarea);
     } catch (error) {
-        res.status(400).send(error);
+        console.log("Backend error:" + error);
+        res.status(400).send({
+            message : "Error al actualizar la tarea",
+            error : error.message
+        });
     }
 });
 

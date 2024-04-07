@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput } from 'react-native';
 import projectData from './data.json';
-import {getTareasProjectRequest} from './api/auth.js'
+import {getTareasProjectRequest, patchTareaRequest} from './api/auth.js'
 
 // Componente para el formulario de modificación de una tarea específica
 const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
@@ -40,7 +40,7 @@ const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
       />
       <TouchableOpacity
         style={[styles.boton, styles.botonGuardar]}
-        onPress={() => onGuardar({ nombreTarea, storyPoints, estado, responsable })}
+        onPress={() => onGuardar({ nombreTarea, storyPoints, estado, responsable,tarea })}
       >
         <Text style={styles.botonTexto}>Guardar</Text>
       </TouchableOpacity>
@@ -120,11 +120,21 @@ const ModificarTareasScreen = ({ route }) => {
     setTareas(nuevasTareas);
   };
 
-  const handleGuardarModificacion = (modificaciones) => {
+  //Guardar las modificaciones de una tarea
+  const handleGuardarModificacion = async (modificaciones) => {
     const nuevasTareas = tareas.map((t) =>
       t.nombreTarea === tareaAEditar.nombreTarea ? { ...t, ...modificaciones } : t
     );
     setTareas(nuevasTareas);
+    //Hacer el request y guardar en la base de datos
+    const dataTask = {
+      nombreTarea : modificaciones.nombreTarea,
+      points : modificaciones.storyPoints,
+      estado : modificaciones.estado,
+      idColaborador : modificaciones.responsable
+    }
+    await patchTareaRequest(modificaciones.tarea._id, dataTask);
+
     setTareaAEditar(null); // Cerrar el formulario de edición
   };
 

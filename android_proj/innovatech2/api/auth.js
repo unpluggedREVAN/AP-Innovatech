@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const API = 'http://172.18.103.18:3000'
 
+// ------------------- Peticiones para autenticación ------------------------
 //Peticion de register - POST
 export const registerRequest = user => axios.post(`${API}/register`,user)
 
@@ -11,7 +12,8 @@ export const loginRequest = user => axios.post(`${API}/login`, user)
 //Peticion de logout - POST
 export const logoutResquest = async () => await axios.post(`${API}/logout`)
 
-//Petecio para los colaboradores - GET
+// ------------------- Peticiones para colaboradores ------------------------
+//Petecion para los colaboradores - GET
 export const colaboradoresRequest = async () => {
     try{
         const response = await axios.get(`${API}/colaboradores/getcolaboradores`)
@@ -21,6 +23,7 @@ export const colaboradoresRequest = async () => {
     }
 }
 
+//Petición de colaboradores libres - GET
 export const colaboradoresFreeRequest = async () => {
     try{
         const response = await axios.get(`${API}/colaboradores/getcolaboradoresfree`);
@@ -44,12 +47,13 @@ export const colabRequest = async () => {
 export const patchColabRequest = async (id, data) => {
     try{
         const patchRequest = await axios.patch(`${API}/colaboradores/patchcolaboradores/${id}`,data)
-        console.log("Respuesta del cambio: ", patchRequest.data)
     }catch(error){
         return error.response
     }
 }
 
+
+//------------------------------- Peticiones para proyectos -------------------------------
 //Peticion para crear Proyecto  - POST
 export const postProyectoRequest = project => axios.post(`${API}/proyectos/postproyectos`, project);
 
@@ -83,13 +87,26 @@ export const patchProjectRequest = async (id, data) => {
     }
 }
 
-//Peticion para traer las tareas de un proyecto
-
+//---------------------------- Peticiones para tareas ------------------------------------------
+//Peticion para traer las tareas de un proyecto - GET
 export const getTareasProjectRequest = async (idProject) => {
     try{
         const getTPRequest = await axios.get(`${API}/proyectos/${idProject}/tareas`)
         return getTPRequest.data;
     } catch{
         return error.message
+    }
+}
+
+//Peticion para crear tarea - POST
+
+//Petición para modificar tarea - PATCH
+export const patchTareaRequest = async (id, data) => {
+    try{
+        const patchTaskRequest = await axios.patch(`${API}/tareas/patchtareas/${id}`, data);
+        console.log(patchTaskRequest)
+    }catch(error) {
+        console.log(error);
+        return error;
     }
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import colaboradoresData from './colab_data.json'; // Asegúrate de que la ruta al archivo JSON sea correcta
 import { useNavigation } from '@react-navigation/native';
 import { colaboradoresRequest } from './api/auth.js'
 

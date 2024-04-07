@@ -24,7 +24,6 @@ router.get('/getcolaboradores', authRequired ,async (req, res) => {
     try {
         const colaboradores = await Colaborador.find({});
         const colabFilter = colaboradores.filter(item => item._id != req.user.id)
-        console.log("Colaboradores" + colabFilter)
         res.send(colabFilter);
     } catch (error) {
         console.log(error)
@@ -38,7 +37,6 @@ router.get('/getcolaboradoresfree', authRequired ,async (req, res) => {
     try {
         const colaboradores = await Colaborador.find({});
         const colabFilter = colaboradores.filter(item => item._id != req.user.id && item.estado != 'Ocupado')
-        console.log("Colaboradores" + colabFilter)
         res.send(colabFilter);
     } catch (error) {
         console.log(error)
