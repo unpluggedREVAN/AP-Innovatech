@@ -26,6 +26,10 @@ const ProyectoScreen = () => {
     }
   };
 
+  const handleCrearNuevaReunion = () => {
+    navigation.navigate('CrearReunionScreen');
+  };  
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Reuniones disponibles</Text>
@@ -45,7 +49,9 @@ const ProyectoScreen = () => {
         ))}
       </ScrollView>
 
-      <TouchableOpacity style={styles.button} onPress={() => console.log('Crear nueva reunión')}>
+      <TouchableOpacity 
+        style={styles.button} 
+        onPress={handleCrearNuevaReunion}>
         <Text style={styles.buttonText}>Crear nueva reunión</Text>
       </TouchableOpacity>
 

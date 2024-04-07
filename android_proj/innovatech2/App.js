@@ -21,6 +21,7 @@ import CrearProyectoScreen from './CrearProyectoScreen';
 import GestionarColaboradoresScreen from './GestionarColaboradoresScreen';
 import ModificarTareasScreen from './ModificarTareasScreen';
 import ReunionDetailsScreen from './ReunionDetailsScreen';
+import CrearReunionScreen from './CrearReunionScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -116,6 +117,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="CrearProyecto" component={CrearProyectoScreen} options={{ headerTitle: 'Crear Proyecto' }} />
         <Stack.Screen name="ReunionDetails" component={ReunionDetailsScreen} />
+        <Stack.Screen name="CrearReunionScreen" component={CrearReunionScreen} />
         {/* aquí se ponen más pantallas */}
       </Stack.Navigator>
     </NavigationContainer>
