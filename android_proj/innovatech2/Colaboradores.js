@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import colaboradoresData from './colab_data.json'; // Asegúrate de que la ruta al archivo JSON sea correcta
+import colaboradoresData from './colab_data.json'; 
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -8,7 +8,6 @@ const ColaboradoresScreen = () => {
 
   const navigation = useNavigation(); 
 
-  // Define un handler para el botón Más información
   const handleMoreInfoPress = (colaborador) => {
     navigation.navigate('ColaboradorDetails', { colaborador });
   };
@@ -67,7 +66,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  // Agrega más estilos según sea necesario
 });
 
 export default ColaboradoresScreen;

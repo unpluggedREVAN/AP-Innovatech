@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import { BarChart } from 'react-native-chart-kit';
-import projectData from './data.json'; // Asegúrate de que la ruta al archivo JSON sea correcta
+import { Picker } from '@react-native-picker/picker'; // Elemento para la lista dsplegable
+import { BarChart } from 'react-native-chart-kit'; // Para la gráfica de barras
+import projectData from './data.json'; 
 
 const screenWidth = Dimensions.get('window').width;
 

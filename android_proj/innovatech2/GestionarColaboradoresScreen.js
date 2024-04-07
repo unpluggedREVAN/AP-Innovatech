@@ -22,7 +22,7 @@ const GestionarColaboradoresScreen = ({ route }) => {
   // Función para manejar el guardado de cambios
   const handleGuardarCambios = () => {
     console.log('Colaboradores seleccionados para el proyecto:', colaboradoresSeleccionados);
-    // Aquí se implementaría la lógica para actualizar la asignación de colaboradores en el backend
+    // Nota para Darío: Aquí va el backend
   };
 
   if (!proyecto) {
@@ -54,7 +54,6 @@ const GestionarColaboradoresScreen = ({ route }) => {
   );
 };
 
-// Aquí puedes definir o ajustar tus estilos según sea necesario
 const styles = StyleSheet.create({
   container: {
     padding: 20,

@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
   },
-  // Agrega más estilos según sea necesario
 });
 
 export default ColaboradorDetailsScreen;

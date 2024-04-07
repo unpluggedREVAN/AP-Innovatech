@@ -4,13 +4,13 @@ import colabData from './colab_data.json';
 import { Alert } from 'react-native';
 
 const CuentaScreen = () => {
-  // Este usuario está anidado para fines de prueba
+  // Usuario anidado para prueba
   const anaMartinez = colabData.find(colab => colab.nombreCompleto === "Ana Martínez");
 
   // Hay que cambiarlo por los datos de la bd mongo
   const [colaborador, setColaborador] = useState(anaMartinez);
 
-  // Actualiza el estado con los cambios en los campos del formulario
+  // Actualizar con cambios del formulario
   const handleInputChange = (name, value) => {
     setColaborador(prevState => ({ ...prevState, [name]: value }));
   };

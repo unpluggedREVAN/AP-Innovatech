@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
-import colaboradoresData from './colab_data.json'; // Asegúrate de que la ruta al archivo JSON sea correcta
+import colaboradoresData from './colab_data.json'; 
 
 const CrearProyectoScreen = () => {
   const [nombreProyecto, setNombreProyecto] = useState('');
@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
     marginBottom: 15, 
     marginTop: 5, 
   },
-  // Agrega más estilos según sea necesario
 });
 
 export default CrearProyectoScreen;

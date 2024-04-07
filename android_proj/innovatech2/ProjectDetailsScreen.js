@@ -19,7 +19,6 @@ const ProjectDetailsScreen = ({ route }) => {
   const tareasFinalizadas = proyecto?.tareas.filter(t => t.estado === 'finalizada') || [];
   
   const handleEditTasks = () => {
-    // Navega a la pantalla de edición de tareas
     navigation.navigate('ModificarTareas', { proyectoId });
   };
 
@@ -139,7 +138,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   deleteButton: {
-    backgroundColor: '#ff6347', // Color rojo para el botón de eliminar
+    backgroundColor: '#ff6347', 
   },
   buttonText: {
     color: '#fff',
@@ -156,7 +155,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginBottom: 5,
   },
-  // poner más estilos aquí
 });
 
 export default ProjectDetailsScreen;

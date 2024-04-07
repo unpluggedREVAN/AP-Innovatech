@@ -9,7 +9,7 @@ const PublicacionDetailsScreen = ({ route }) => {
       <Text style={styles.title}>Tema: {publicacion.titulo}</Text>
       <Text style={styles.detail}>Tipo: {publicacion.tipo}</Text>
       <Text style={styles.detail}>Mensajes:</Text>
-      {/* Comprobamos que publicacion.mensajes es un array antes de mapearlo */}
+      {/* Se comprueba que publicacion.mensajes es un array antes de mapearlo */}
       {Array.isArray(publicacion.mensajes) && publicacion.mensajes.map((mensaje, index) => (
         <Text key={index} style={styles.mensaje}>
           {mensaje.contenido} - {mensaje.autor}

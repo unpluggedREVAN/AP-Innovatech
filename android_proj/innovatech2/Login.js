@@ -16,7 +16,6 @@ const LoginScreen = () => {
         // Si las credenciales son correctas, navegar a la pantalla Home
         navigation.navigate('Main');
       } else {
-        // Si no, puedes mostrar un mensaje de error
         alert('Usuario o contraseña incorrectos');
     } // Este caso es solo de prueba pero aquí se debe incluir el manejo de logiin con la base de datos
   };
@@ -51,7 +50,7 @@ const LoginScreen = () => {
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => {/* Aquí manejas el olvido de contraseña */}}>
+      <TouchableOpacity onPress={() => {/* Manejar olvido de contraseña */}}>
         <Text style={styles.linkText}>¿Olvidé mi contraseña?</Text>
       </TouchableOpacity>
 
@@ -64,7 +63,6 @@ const LoginScreen = () => {
   );
 };
 
-// manejo de estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,

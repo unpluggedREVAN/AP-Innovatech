@@ -9,23 +9,21 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 //import { View, Button } from 'react-native';
-
-// Importa los datos de los proyectos desde el archivo JSON
 import projectData from './data.json';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const [proyectos, setProyectos] = useState([]); // Estado para manejar los proyectos
 
-  // Efecto para cargar los proyectos de la base de datos simulada (archivo JSON)
+  // cargar los proyectos de la base de datos simulada (archivo JSON)
   useEffect(() => {
     // Simula la carga de proyectos desde una base de datos estableciendo el estado
-    // En un escenario real, aquí se haría una llamada a la API
+    // aquí se haría una llamada a la API
     setProyectos(projectData);
   }, []);
 
   const handleCreateProject = () => {
-    navigation.navigate('CrearProyecto'); // Utiliza el nombre de la ruta asignado a CrearProyectoScreen
+    navigation.navigate('CrearProyecto');
   };
 
   const handleOptionsPress = (proyectoId) => {
@@ -44,7 +42,7 @@ const HomeScreen = () => {
           <View key={proyecto._id} style={styles.proyectoCard}>
             <Text style={styles.proyectoTitle}>Proyecto {proyecto._id}: {proyecto.nombreProyecto}</Text>
             <Text style={styles.proyectoContent}>{proyecto.descripcion}</Text>
-            {/* Aquí puedes agregar más detalles del proyecto */}
+            {/* Más detalles del proyecto */}
             <TouchableOpacity
               style={styles.optionsButton}
               onPress={() => handleOptionsPress(proyecto._id)}
@@ -59,7 +57,7 @@ const HomeScreen = () => {
         <Text style={styles.buttonText}>Crear Nuevo Proyecto</Text>
       </TouchableOpacity>
 
-      {/* Aquí iría el componente de navegación inferior si es necesario */}
+      {/* Aquí iría el componente de navegación inferior, pero solo si se ocupa */}
     </View>
   );
 };
@@ -81,7 +79,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',       
     elevation: 2,              
     shadowColor: '#000',       // Sombra color negro
-    shadowOffset: { width: 0, height: 2 }, // Posición de la sombra
+    shadowOffset: { width: 0, height: 2 }, // Posición sombra
     shadowOpacity: 0.25,       
     shadowRadius: 3.84,        
     marginTop: 20,             
@@ -123,49 +121,45 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  // Estilos para las tarjetas de proyecto
 proyectoCard: {
-  backgroundColor: '#ffffff', // Fondo blanco para las tarjetas
-  borderRadius: 10, // Bordes redondeados
-  padding: 20, // Padding para el contenido interno de la tarjeta
-  marginVertical: 8, // Margen vertical para separar las tarjetas
-  marginHorizontal: 16, // Margen horizontal para dar espacio a los lados
-  shadowColor: '#000', // Color de la sombra
+  backgroundColor: '#ffffff', 
+  borderRadius: 10,
+  padding: 20, 
+  marginVertical: 8, 
+  marginHorizontal: 16, 
+  shadowColor: '#000', 
   shadowOffset: {
     width: 0,
-    height: 2, // Posición vertical de la sombra
+    height: 2, 
   },
-  shadowOpacity: 0.23, // Opacidad de la sombra
-  shadowRadius: 2.62, // Radio de la sombra
-  elevation: 4, // Elevación en Android para la sombra
+  shadowOpacity: 0.23, 
+  shadowRadius: 2.62, 
+  elevation: 4, 
 },
 
-// Estilos para el texto de los títulos de los proyectos dentro de la tarjeta
 proyectoTitle: {
   fontSize: 18,
   fontWeight: 'bold',
-  marginBottom: 5, // Margen inferior para separar del resto del contenido
+  marginBottom: 5, 
 },
 
 // Estilos para el contenido de la tarjeta (descripción, estado, etc.)
 proyectoContent: {
   fontSize: 14,
   color: '#666', // Color gris para el texto que no es el título
-  marginBottom: 5, // Margen inferior para separar los elementos del contenido
+  marginBottom: 5, 
 },
 
-// Estilos para el botón de opciones
 optionsButton: {
-  backgroundColor: '#4e9ec5', // Color que coincida con tu esquema de diseño
+  backgroundColor: '#4e9ec5', 
   padding: 10,
-  borderRadius: 5, // Bordes redondeados
-  marginTop: 10, // Margen superior para separar del contenido de la tarjeta
-  alignItems: 'center', // Alinear el texto del botón al centro
+  borderRadius: 5, 
+  marginTop: 10, 
+  alignItems: 'center', 
 },
 
-// Estilos para el texto del botón de opciones
 optionsButtonText: {
-  color: '#fff', // Texto blanco para contraste con el botón
+  color: '#fff', 
   fontWeight: 'bold',
 },
 
