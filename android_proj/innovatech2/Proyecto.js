@@ -30,6 +30,10 @@ const ProyectoScreen = () => {
     navigation.navigate('CrearReunionScreen');
   };  
 
+  const handleIrForos = () => {
+    navigation.navigate('ForosScreen'); 
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Reuniones disponibles</Text>
@@ -55,7 +59,7 @@ const ProyectoScreen = () => {
         <Text style={styles.buttonText}>Crear nueva reunión</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => console.log('Ir al foro')}>
+      <TouchableOpacity style={styles.button} onPress={handleIrForos}>
         <Text style={styles.buttonText}>Ir al foro</Text>
       </TouchableOpacity>
     </View>
