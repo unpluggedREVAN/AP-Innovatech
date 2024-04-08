@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {getReunionesRequest} from './api/auth'
 import {
   StyleSheet,
   View,
@@ -14,13 +15,20 @@ const ProyectoScreen = () => {
   const [reuniones, setReuniones] = useState([]);
 
   useEffect(() => {
-    setReuniones(dataReuniones);
+    fetchReuData();
   }, []);
 
-  const handleDetallesReunion = (reunionId) => {
-    const reunion = dataReuniones.find(r => r._id === reunionId); // Encuentra la reunión por ID
+
+  const fetchReuData = async () => {
+    const response = await getReunionesRequest();
+    setReuniones(response);
+  }
+
+
+  const handleDetallesReunion = (reunion) => {
+    //const reunion = dataReuniones.find(r => r._id === reunionId); // Encuentra la reunión por ID
     if (reunion) {
-      console.log('Ir a los detalles de la reunión:', reunionId);
+      console.log('Ir a los detalles de la reunión:', reunion);
       // Navegar a los detalles de la reunión, pasando los datos de la reunión como parámetros
       navigation.navigate('ReunionDetails', { reunion });
     }
@@ -45,7 +53,7 @@ const ProyectoScreen = () => {
             <Text style={styles.reunionContent}>Medio: {reunion.medio}</Text>
             <TouchableOpacity
               style={styles.optionsButton}
-              onPress={() => handleDetallesReunion(reunion._id)}
+              onPress={() => handleDetallesReunion(reunion)}
             >
               <Text style={styles.optionsButtonText}>Detalles de la reunión</Text>
             </TouchableOpacity>

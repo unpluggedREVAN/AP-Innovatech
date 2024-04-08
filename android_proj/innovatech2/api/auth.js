@@ -139,3 +139,13 @@ export const patchTareaRequest = async (id, data) => {
         return error;
     }
 }
+
+//---------------------------- Peticiones para reuniones ------------------------------------------
+export const getReunionesRequest = async () => {
+    try{
+        const response = await axios.get(`${API}/reuniones/getreuniones`)
+        return response.data
+    } catch(error) {
+        console.log(error)
+    }
+}
