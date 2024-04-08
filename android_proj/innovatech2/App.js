@@ -25,6 +25,8 @@ import CrearReunionScreen from './CrearReunionScreen';
 import ForosScreen from './ForosScreen';
 import PublicacionDetailsScreen from './PublicacionDetailsScreen';
 import CrearPublicacionScreen from './CrearPublicacionScreen';
+import CrearMensajePublicacionScreen from './CrearMensajePublicacionScreen';
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -128,6 +130,11 @@ export default function App() {
           options={{ title: 'Foro' }} 
         />
         <Stack.Screen name="CrearPublicacion" component={CrearPublicacionScreen} />
+        <Stack.Screen
+          name="CrearMensajePublicacion"
+          component={CrearMensajePublicacionScreen}
+          options={{ title: 'Crear Mensaje' }} 
+        />
         {/* aquí vamos agregando pantallas */}
       </Stack.Navigator>
     </NavigationContainer>
