@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   deleteButton: {
-    backgroundColor: '#ff6347', // Color rojo para el botón de eliminar
+    backgroundColor: '#ff6347', 
   },
   buttonText: {
     color: '#fff',
@@ -157,7 +157,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginBottom: 5,
   },
-  // poner más estilos aquí
 });
 
 export default ProjectDetailsScreen;

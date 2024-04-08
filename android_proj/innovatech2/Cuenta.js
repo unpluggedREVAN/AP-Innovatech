@@ -21,7 +21,7 @@ const CuentaScreen = () => {
     setColaborador(response);
   }
 
-  // Actualiza el estado con los cambios en los campos del formulario
+  // Actualizar con cambios del formulario
   const handleInputChange = (name, value) => {
     setColaborador(prevState => ({ ...prevState, [name]: value }));
   };

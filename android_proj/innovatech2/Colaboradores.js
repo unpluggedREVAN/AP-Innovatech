@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  // Agrega más estilos según sea necesario
 });
 
 export default ColaboradoresScreen;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput } from 'react-native';
 import {getTareasProjectRequest, patchTareaRequest, colabIdRequest, postTareaRequest, patchTaskProjectRequest} from './api/auth.js'
-import colaboradoresData from './colab_data.json'; // Asegúrate de que la ruta al archivo JSON de colaboradores sea correcta
+
 
 // Componente para el formulario de modificación de una tarea específica
 const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
@@ -242,10 +242,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   botonModificar: {
-    backgroundColor: '#4e9ec5', // Un color azul para el botón de modificar
+    backgroundColor: '#4e9ec5', 
   },
   botonEliminar: {
-    backgroundColor: '#ff6347', // Un color rojo para el botón de eliminar
+    backgroundColor: '#ff6347', 
   },
   botonAgregar: {
     backgroundColor: '#4e9ec5',

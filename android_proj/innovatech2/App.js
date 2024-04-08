@@ -95,7 +95,7 @@ export default function App() {
         <Stack.Screen
           name="Main"
           component={MainTabNavigator}
-          options={{ headerShown: false }} // mostrar el header es opcional
+          options={{ headerShown: false }} 
         />
         <Stack.Screen
           name="ProjectDetails"
@@ -128,7 +128,7 @@ export default function App() {
           options={{ title: 'Foro' }} 
         />
         <Stack.Screen name="CrearPublicacion" component={CrearPublicacionScreen} />
-        {/* aquí se ponen más pantallas */}
+        {/* aquí vamos agregando pantallas */}
       </Stack.Navigator>
     </NavigationContainer>
   );

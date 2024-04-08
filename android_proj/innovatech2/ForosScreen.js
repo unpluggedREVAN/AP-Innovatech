@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
-import forosData from './data_foros.json'; // Asegúrate de que la ruta al archivo JSON sea correcta
+import forosData from './data_foros.json'; 
 
 const ForosScreen = ({ navigation }) => {
   const [publicaciones, setPublicaciones] = useState([]);
 
-  // Simula la carga de publicaciones desde una base de datos o API al montar el componente
+  // Simula la carga de publicaciones, este useEffect es importante para el backend
   useEffect(() => {
     setPublicaciones(forosData);
   }, []);

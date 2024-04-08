@@ -26,7 +26,7 @@ const RegisterScreen = ({ navigation }) => {
       alert('Las contraseñas no coinciden.');
       return;
     }
-    // Implementa aquí la lógica de registro
+    // Lógica del registro aquí
     console.log("Iniciar request")
     const res = await registerRequest(data)
     //Respuesta del request 
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
     alignSelf: 'center',
-    marginBottom: 10, // Estilo del encabezado de registro
+    marginBottom: 10, 
   },
   input: {
     height: 40,
@@ -81,19 +81,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 5,
-    borderColor: '#ccc', // Estilo de los campos de texto
+    borderColor: '#ccc', 
   },
   button: {
     backgroundColor: '#4e9ec5',
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
-    margin: 12, // Estilo del botón de registro
+    margin: 12, 
   },
   buttonText: {
     fontSize: 18,
     color: '#fff',
-    fontWeight: 'bold', // Estilo del texto en el botón de registro
+    fontWeight: 'bold', 
   },
 });
 

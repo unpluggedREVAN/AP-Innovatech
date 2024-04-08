@@ -16,7 +16,7 @@ const CrearPublicacionScreen = ({ navigation }) => {
         [
           {
             text: "OK",
-            onPress: () => navigation.goBack(), // Navega de vuelta solo después de que el usuario toque "OK"
+            onPress: () => navigation.goBack(), // Vuelve atrás después de que el usuario toque "OK"
           }
         ]
       );

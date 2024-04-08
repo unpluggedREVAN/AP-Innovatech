@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, ScrollView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import projectData from './data.json'; // Importa los datos del proyecto
+import projectData from './data.json'; // Importa los datos de prueba del proyecto
 
 const CrearReunionScreen = () => {
   const [tema, setTema] = useState('');
@@ -11,7 +11,7 @@ const CrearReunionScreen = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const handleGuardarReunion = () => {
-    // Aquí implementarías la lógica para guardar la reunión, probablemente enviando los datos a un backend o almacenándolos localmente
+    // Nota para Darío: Aquí guarda los datos de la reunión
     Alert.alert('Reunión Guardada', `Tema: ${tema}, Medio: ${medio}, Fecha: ${fecha}, Proyecto: ${proyectoSeleccionado}`);
   };
 
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  // Más estilos según sea necesario...
+  // Agregar más estilos
 });
 
 export default CrearReunionScreen;

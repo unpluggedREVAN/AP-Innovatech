@@ -79,7 +79,6 @@ const GestionarColaboradoresScreen = ({ route }) => {
   );
 };
 
-// Aquí puedes definir o ajustar tus estilos según sea necesario
 const styles = StyleSheet.create({
   container: {
     padding: 20,
