@@ -1,0 +1,184 @@
+import axios from 'axios'
+
+const API = 'http://10.0.0.76:3000'
+
+// ------------------- Peticiones para autenticación ------------------------
+//Peticion de register - POST
+export const registerRequest = user => axios.post(`${API}/register`,user)
+
+//Peticion de login - POST
+export const loginRequest = user => axios.post(`${API}/login`, user)
+
+//Peticion de logout - POST
+export const logoutResquest = async () => await axios.post(`${API}/logout`)
+
+// ------------------- Peticiones para colaboradores ------------------------
+//Petecion para los colaboradores - GET
+export const colaboradoresRequest = async () => {
+    try{
+        const response = await axios.get(`${API}/colaboradores/getcolaboradores`)
+        return response.data
+    }catch(error){
+        return error.response
+    }
+}
+
+//Petición de colaboradores libres - GET
+export const colaboradoresFreeRequest = async () => {
+    try{
+        const response = await axios.get(`${API}/colaboradores/getcolaboradoresfree`);
+        return response.data;
+    } catch(error){
+        return error.response;
+    }
+}
+
+//Peticion de solicitar datos del usuario - GET
+export const colabRequest = async () => {
+    try {
+        const response = await axios.get(`${API}/colaboradores/colab`);
+        return response.data;
+    } catch (error){
+        return error.response
+    }
+}
+
+//Peticion para obtener la información de un colaborador - GET
+export const colabIdRequest = async (id) => {
+    try{
+        const response = await axios.get(`${API}/colaboradores/colab/${id}`)
+        return response.data
+    } catch (error){
+        return error.response;
+    }
+}
+
+//Peticion para editar datos de usuario - PAATCH
+export const patchColabRequest = async (id, data) => {
+    try{
+        const patchRequest = await axios.patch(`${API}/colaboradores/patchcolaboradores/${id}`,data)
+    }catch(error){
+        return error.response
+    }
+}
+
+
+//------------------------------- Peticiones para proyectos -------------------------------
+//Peticion para crear Proyecto  - POST
+export const postProyectoRequest = project => axios.post(`${API}/proyectos/postproyectos`, project);
+
+//Peticion de proyectos - GET
+export const getProyectosRequest = async () =>{
+    try{
+        const response = await axios.get(`${API}/proyectos/getproyectos`)
+        return response.data;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+//Peticion de proyecto - GET
+export const getProyectRequest = async (id) => {
+    try{
+        const getProyecto = await axios.get(`${API}/proyectos/getproyectosid/${id}`)
+        return getProyecto.data;
+    }catch(error){
+        return error.response
+    }
+}
+
+//Peticion de actualizar proyecto - PATCH
+export const patchProjectRequest = async (id, data) => {
+    try{
+        const patchRequest = await axios.patch(`${API}/proyectos/patchproyectos/${id}`,data)
+        console.log("Respuesta del cambio: ", patchRequest.data)
+    }catch(error){
+        return error.response
+    }
+}
+
+//Peticion actualizar las tareas - PATCH
+export const patchTaskProjectRequest = async (idProject, idTask) => {
+    try{
+        const response = await axios.patch(`${API}/proyectos/patchTaskProyecto/${idProject}/${idTask}`,{});
+        console.log(response);
+    } catch(error) {
+        console.log(error)
+        return error
+    }
+}
+
+//Peticion para eliminar proyectos - DELETE
+export const deleteProjectRequest = async (idProject) => {
+    const response = await axios.delete(`${API}/proyectos/deleteproyectos/${idProject}`);
+    console.log(response);
+}
+
+//---------------------------- Peticiones para tareas ------------------------------------------
+//Peticion para traer las tareas de un proyecto - GET
+export const getTareasProjectRequest = async (idProject) => {
+    try{
+        const getTPRequest = await axios.get(`${API}/proyectos/${idProject}/tareas`)
+        return getTPRequest.data;
+    } catch{
+        return error.message
+    }
+}
+
+//Peticion para crear tarea - POST
+export const postTareaRequest = async (data) => {
+    try{
+        const response = await axios.post(`${API}/tareas/posttareas`, data);
+        return response.data._id
+    } catch (error) {
+        return error.message;
+    }
+}
+
+//Petición para modificar tarea - PATCH
+export const patchTareaRequest = async (id, data) => {
+    try{
+        const patchTaskRequest = await axios.patch(`${API}/tareas/patchtareas/${id}`, data);
+        console.log(patchTaskRequest)
+    }catch(error) {
+        console.log(error);
+        return error;
+    }
+}
+
+//Petición para eliminar una tarea - DELETE
+export const deleteTareaRequest = async (idTask) => {
+    const response = await axios.delete(`${API}/tareas/deletetareas/${idTask}`);
+    console.log(response);
+}
+
+//---------------------------- Peticiones para reuniones ------------------------------------------
+//Endpoint para obtener la información de las reuniones - GET
+export const getReunionesRequest = async () => {
+    try{
+        const response = await axios.get(`${API}/reuniones/getreuniones`)
+        return response.data
+    } catch(error) {
+        console.log("Error en el getReuniones: " + error)
+    }
+}
+
+//Endpoint para crear una reunión - POST
+export const postReunionesRequest = async (data) => {
+    const response = await axios.post(`${API}/reuniones/postreuniones`, data)
+    console.log(response);
+}
+
+//---------------------------- Peticiones para foro ------------------------------------------
+//Endpoint para obtener la información de los foros - GET
+export const getForoRequest = async () => {
+    const response = await axios.get(`${API}/foro/getforos`)
+    console.log(response);
+    return response.data;
+}
+
+//Endpoint para crear una publicación del foro - POST
+export const postForoRequest = async (data) => {
+    const response = await axios.post(`${API}/foro/postforos`, data);
+    return response
+}

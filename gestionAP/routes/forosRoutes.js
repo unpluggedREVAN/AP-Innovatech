@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const Foro = require('../models/Foro'); // Asegúrate de que la ruta al modelo es correcta
+const Foro = require('../models/Foro');
 
 // Endpoint para crear un nuevo foro
-router.post('/foros', async (req, res) => {
+router.post('/postforos', async (req, res) => {
     try {
         const foro = new Foro(req.body);
         await foro.save();
-        res.status(201).send(foro);
+        res.status(201).send({message : "Foro creado exitosamente"});
     } catch (error) {
         console.error(error); // Para ver el error en la consola del servidor
         res.status(400).send({
@@ -18,17 +18,19 @@ router.post('/foros', async (req, res) => {
 });
 
 // Endpoint para obtener todos los foros
-router.get('/foros', async (req, res) => {
+router.get('/getforos', async (req, res) => {
     try {
         const foros = await Foro.find({});
-        res.send(foros);
+        console.log(foros);
+        console.log("Busca foro");
+        res.json(foros);
     } catch (error) {
         res.status(500).send(error);
     }
 });
 
 // Endpoint para actualizar un foro por ID
-router.patch('/foros/:id', async (req, res) => {
+router.patch('/patchforos/:id', async (req, res) => {
     try {
         const foro = await Foro.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!foro) {
@@ -43,8 +45,10 @@ router.patch('/foros/:id', async (req, res) => {
     }
 });
 
+
+
 // Endpoint para eliminar un foro por ID
-router.delete('/foros/:id', async (req, res) => {
+router.delete('/deleteforos/:id', async (req, res) => {
     try {
         const foro = await Foro.findByIdAndDelete(req.params.id);
         if (!foro) {

@@ -2,9 +2,12 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const Colaborador = require('../models/Colaborador'); // Asegúrate de ajustar la ruta al modelo
 const router = express.Router();
+const validateModel = require('../middlewares/validator.middleware')
+const colabRegisterSchema = require('../schema/colab.schema')
+const createAccessToken = require('../libs/jwt')
 
 // Endpoint para el registro de un nuevo colaborador
-router.post('/register', async (req, res) => {
+router.post('/register', validateModel(colabRegisterSchema) ,validateModel(colabRegisterSchema) ,async (req, res) => {
     try {
         // Hash de la contraseña
         const hashedPassword = await bcrypt.hash(req.body.contrasena, 10);
@@ -16,11 +19,10 @@ router.post('/register', async (req, res) => {
         });
 
         await colaborador.save();
-        res.status(201).send({ message: "Colaborador registrado exitosamente" });
+        return  res.status(201).send({ message: "Colaborador registrado exitosamente" });
     } catch (error) {
         console.error(error);
-        res.status(400).send({
-            message: "Error al registrar el colaborador",
+        return res.status(400).send({
             error: error.message
         });
     }
@@ -33,6 +35,8 @@ router.post('/login', async (req, res) => {
         const colaborador = await Colaborador.findOne({ correoElectronico: req.body.correoElectronico });
 
         if (colaborador && await bcrypt.compare(req.body.contrasena, colaborador.contrasena)) {
+            const token = await createAccessToken({id : colaborador._id})
+            res.cookie('token', token)
             // La comparación de contraseñas fue exitosa
             res.send({ message: "Inicio de sesión exitoso" });
         } else {
@@ -47,5 +51,11 @@ router.post('/login', async (req, res) => {
         });
     }
 });
+
+router.post('/logout', async (req, res) => {
+    res.cookie('token', "", { expires : new Date(0)});
+    console.log("Logout")
+    return res.send(200);
+})
 
 module.exports = router;
