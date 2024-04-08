@@ -146,6 +146,12 @@ export const patchTareaRequest = async (id, data) => {
     }
 }
 
+//Petición para eliminar una tarea - DELETE
+export const deleteTareaRequest = async (idTask) => {
+    const response = await axios.delete(`${API}/tareas/deletetareas/${idTask}`);
+    console.log(response);
+}
+
 //---------------------------- Peticiones para reuniones ------------------------------------------
 //Endpoint para obtener la información de las reuniones - GET
 export const getReunionesRequest = async () => {

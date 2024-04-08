@@ -94,7 +94,6 @@ router.delete('/deleteproyectos/:id', async (req, res) => {
     }
 });
 
-
 // Endpoint para asignar un colaborador a un proyecto
 router.patch('/:proyectoId/asignarColaborador', async (req, res) => {
     try {

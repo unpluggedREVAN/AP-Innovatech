@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput } from 'react-native';
-import {getTareasProjectRequest, patchTareaRequest, colabIdRequest, postTareaRequest, patchTaskProjectRequest} from './api/auth.js'
+import {getTareasProjectRequest, patchTareaRequest, colabIdRequest, postTareaRequest, patchTaskProjectRequest, deleteTareaRequest, patchProjectRequest} from './api/auth.js'
 
 
 // Componente para el formulario de modificación de una tarea específica
@@ -117,7 +117,6 @@ const ModificarTareasScreen = ({ route }) => {
   const [tareaAEditar, setTareaAEditar] = useState(null);
   const [mostrarFormCrear, setMostrarFormCrear] = useState(false);
   const [infoColabs, setInfoColabs] = useState([]);
-  const [idTareas, setIdTareas] = useState([]);
 
   useEffect(() => {
     fetchDataTasks();
@@ -132,10 +131,12 @@ const ModificarTareasScreen = ({ route }) => {
     })
   }
 
-  const handleEliminarTarea = (index) => {
+  const handleEliminarTarea = async (idTask,index) => {
+    const response = await deleteTareaRequest(idTask);
     const nuevasTareas = [...tareas];
     nuevasTareas.splice(index, 1);
     setTareas(nuevasTareas);
+    await patchProjectRequest(proyectoId, {tareas : nuevasTareas});
   };
 
   //Guardar las modificaciones de una tarea
@@ -184,7 +185,7 @@ const ModificarTareasScreen = ({ route }) => {
             <TouchableOpacity style={[styles.boton, styles.botonModificar]} onPress={() => setTareaAEditar(tarea)}>
               <Text style={styles.botonTexto}>Modificar</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.boton, styles.botonEliminar]} onPress={() => handleEliminarTarea(index)}>
+            <TouchableOpacity style={[styles.boton, styles.botonEliminar]} onPress={() => handleEliminarTarea(tarea._id,index)}>
               <Text style={styles.botonTexto}>Eliminar</Text>
             </TouchableOpacity>
           </View>
