@@ -1,108 +1,135 @@
-import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { View, Text, StyleSheet } from 'react-native';
 
-export default function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+// cargar las pantallas principales
+import LoginScreen from './Login';
+import RegisterScreen from './Register';
+import HomeScreen from './Home';
+import ColaboradoresScreen from './Colaboradores';
+import ProyectoScreen from './Proyecto';
+import EvaluacionScreen from './Evaluacion';
+import CuentaScreen from './Cuenta';
 
-  const handleLogin = () => {
-    // Aquí puedes añadir la lógica para manejar el inicio de sesión
-    console.log('Login con:', email, password);
-  };
+// Carga de pantallas secundarias
+import ProjectDetailsScreen from './ProjectDetailsScreen';
+import ColaboradoresDetailsScreen from './ColaboradoresDetailsScreen';
+import CrearProyectoScreen from './CrearProyectoScreen';
+import GestionarColaboradoresScreen from './GestionarColaboradoresScreen';
+import ModificarTareasScreen from './ModificarTareasScreen';
+import ReunionDetailsScreen from './ReunionDetailsScreen';
+import CrearReunionScreen from './CrearReunionScreen';
+import ForosScreen from './ForosScreen';
+import PublicacionDetailsScreen from './PublicacionDetailsScreen';
+import CrearPublicacionScreen from './CrearPublicacionScreen';
 
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+// el corazón del bottom tab navigator
+function MainTabNavigator() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>InnovaTech</Text>
-      <Text style={styles.header}>Plataforma de Gestión de Proyectos</Text>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
 
-      <Image
-        source={require('./assets/logo_nofondo.png')} //
-        style={styles.logo}
-      />
+          // ícono basado en la pantalla activa
+          switch (route.name) {
+            case 'Colab':
+              iconName = focused ? 'people' : 'people-outline';
+              break;
+            case 'Reuniones':
+              iconName = focused ? 'briefcase' : 'briefcase-outline';
+              break;
+            case 'Home':
+              iconName = focused ? 'home' : 'home-outline';
+              break;
+            case 'Evaluación':
+              iconName = focused ? 'stats-chart' : 'stats-chart-outline';
+              break;
+            case 'Cuenta':
+              iconName = focused ? 'person-circle' : 'person-circle-outline';
+              break;
+          }
 
-      <TextInput
-        style={styles.input}
-        onChangeText={setEmail}
-        value={email}
-        placeholder="Correo:"
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={setPassword}
-        value={password}
-        placeholder="Contraseña:"
-        secureTextEntry
-      />
-
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Iniciar Sesión</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity>
-        <Text style={styles.linkText}>¿Olvidé mi contraseña?</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity>
-        <Text style={styles.linkText}>¿No tenés cuenta? Registrate aquí</Text>
-      </TouchableOpacity>
-
-      <StatusBar style="auto" />
-    </View>
+          // Para darle más vida a los íconos
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: 'blue',
+        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: [{ display: 'flex' }, null],
+      })}
+    >
+      {/* aquí van pantallas como tabs */}
+      <Tab.Screen name="Colab" component={ColaboradoresScreen} />
+      <Tab.Screen name="Reuniones" component={ProyectoScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Evaluación" component={EvaluacionScreen} />
+      <Tab.Screen name="Cuenta" component={CuentaScreen} />
+    </Tab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#4e9ec5',
-    alignSelf: 'center',
-    margin: 10,
-  },
-  header: {
-    fontSize: 18,
-    color: '#333',
-    alignSelf: 'center',
-    marginBottom: 20,
-  },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 5,
-    borderColor: '#ccc',
-  },
-  button: {
-    backgroundColor: '#4e9ec5',
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
-    margin: 12,
-  },
-  logo: {
-    width: 200, 
-    height: 200, 
-    resizeMode: 'contain', 
-    alignSelf: 'center', 
-    marginTop: 30, 
-  },
-  buttonText: {
-    fontSize: 18,
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  linkText: {
-    color: '#4e9ec5',
-    alignSelf: 'center',
-    marginTop: 15,
-  },
-});
+
+export default function App() {
+  return (
+    <NavigationContainer initialRouteName="Main">
+      <Stack.Navigator>
+        {/* pantalla de login, sin header */}
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+        {/* lo mismo para registro */}
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={{ headerShown: false }}
+        />
+        {/* la entrada al mundo de tabs después del login */}
+        <Stack.Screen
+          name="Main"
+          component={MainTabNavigator}
+          options={{ headerShown: false }} // mostrar el header es opcional
+        />
+        <Stack.Screen
+          name="ProjectDetails"
+          component={ProjectDetailsScreen}
+          options={{ headerTitle: 'Detalles del Proyecto' }}
+        />
+        <Stack.Screen name="Colaboradores" component={ColaboradoresScreen} />
+        <Stack.Screen name="ColaboradorDetails" component={ColaboradoresDetailsScreen} />
+
+        <Stack.Screen
+          name="GestionarColaboradores"
+          component={GestionarColaboradoresScreen}
+          options={{ title: 'Gestionar Colaboradores' }}
+        />
+
+        <Stack.Screen
+          name="ModificarTareas"
+          component={ModificarTareasScreen}
+          options={{ title: 'Modificar Tareas' }}
+        />
+
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="CrearProyecto" component={CrearProyectoScreen} options={{ headerTitle: 'Crear Proyecto' }} />
+        <Stack.Screen name="ReunionDetails" component={ReunionDetailsScreen} />
+        <Stack.Screen name="CrearReunionScreen" component={CrearReunionScreen} />
+        <Stack.Screen name="PublicacionDetailsScreen" component={PublicacionDetailsScreen} options={{ title: 'Detalle de la Publicación' }} />
+        <Stack.Screen
+          name="ForosScreen"
+          component={ForosScreen}
+          options={{ title: 'Foro' }} 
+        />
+        <Stack.Screen name="CrearPublicacion" component={CrearPublicacionScreen} />
+        {/* aquí se ponen más pantallas */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
