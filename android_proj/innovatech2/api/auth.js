@@ -43,6 +43,16 @@ export const colabRequest = async () => {
     }
 }
 
+//Peticion para obtener la información de un colaborador - GET
+export const colabIdRequest = async (id) => {
+    try{
+        const response = await axios.get(`${API}/colaboradores/colab/${id}`)
+        return response.data
+    } catch (error){
+        return error.response;
+    }
+}
+
 //Peticion para editar datos de usuario - PAATCH
 export const patchColabRequest = async (id, data) => {
     try{
@@ -87,6 +97,17 @@ export const patchProjectRequest = async (id, data) => {
     }
 }
 
+//Peticion actualizar las tareas - PATCH
+export const patchTaskProjectRequest = async (idProject, idTask) => {
+    try{
+        const response = await axios.patch(`${API}/proyectos/patchTaskProyecto/${idProject}/${idTask}`,{});
+        console.log(response);
+    } catch(error) {
+        console.log(error)
+        return error
+    }
+}
+
 //---------------------------- Peticiones para tareas ------------------------------------------
 //Peticion para traer las tareas de un proyecto - GET
 export const getTareasProjectRequest = async (idProject) => {
@@ -99,6 +120,14 @@ export const getTareasProjectRequest = async (idProject) => {
 }
 
 //Peticion para crear tarea - POST
+export const postTareaRequest = async (data) => {
+    try{
+        const response = await axios.post(`${API}/tareas/posttareas`, data);
+        return response.data._id
+    } catch (error) {
+        return error.message;
+    }
+}
 
 //Petición para modificar tarea - PATCH
 export const patchTareaRequest = async (id, data) => {

@@ -3,7 +3,6 @@ const router = express.Router();
 const Proyecto = require('../models/Proyecto');
 const authRequired = require('../middlewares/validateToken')
 const Tarea = require('../models/Tarea'); // Modelo de tarea
-const { populate } = require('mongoose');
 
 // Endpoint para crear un nuevo proyecto
 router.post('/postproyectos', authRequired, async (req, res) => {
@@ -23,6 +22,19 @@ router.post('/postproyectos', authRequired, async (req, res) => {
         });
     }
 });
+
+//Endpoint para agregar una tarea - PATCH
+router.patch('/patchTaskProyecto/:idProject/:idTarea', async (req, res) => {
+    try{
+        const projectFound = await Proyecto.findById(req.params.idProject);
+        if(!projectFound) return res.status(404).send({ message: "Proyecto no encontrado" });
+        const tareasProject = [...projectFound.tareas, req.params.idTarea]
+        const proyectoUpdate = await Proyecto.findByIdAndUpdate(req.params.idProject, {tareas : tareasProject}, {new : true, runValidators : true},);
+        return proyectoUpdate.tareas;
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 // Endpoint para obtener todos los proyectos
 router.get('/getproyectos', async (req, res) => {

@@ -44,7 +44,7 @@ router.get('/getcolaboradoresfree', authRequired ,async (req, res) => {
     }
 });
 
-// Endpoint para obtener la información de un colaborador
+// Endpoint para obtener la información del usuario
 router.get('/colab', authRequired, async (req, res) => {
     const userFound = await Colaborador.findById(req.user.id)
     if(!userFound) return res.status(400).json({ message : "Colaborador no encotrado" });
@@ -56,6 +56,21 @@ router.get('/colab', authRequired, async (req, res) => {
         departamentoTrabajo : userFound.departamentoTrabajo,
         telefono : userFound.telefono
     })
+})
+
+// Endpoint para obtener la información de un colaborador por el ID
+router.get('/colab/:id', async (req, res) => {
+    try{
+        const userFound = await Colaborador.findById(req.params.id);
+        if(!userFound) return res.status(404).send(["Usuario no encontrado"])
+        return res.json({
+            idColab : userFound._id,
+            nameColab : userFound.nombreCompleto
+        })
+    } catch(error){
+        console.log("Al obtener el colaborador por ID:" + error);
+        return res.status(500).send({message : error.message});
+    }
 })
 
 // Endpoint para actualizar un colaborador por ID

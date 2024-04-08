@@ -6,7 +6,7 @@ import {getProyectRequest,getTareasProjectRequest} from './api/auth.js'
 import { useNavigation } from '@react-navigation/native';
 
 const ProjectDetailsScreen = ({ route }) => {
-  const { proyectoId } = route.params;
+  const { proyectoId, proyectoColabs } = route.params;
 
   const navigation = useNavigation();
 
@@ -26,7 +26,6 @@ const ProjectDetailsScreen = ({ route }) => {
     const responseTasks = await getTareasProjectRequest(proyectoId);
     setProyecto(response)
     setTareas(responseTasks);
-    console.log(responseTasks);
   };
 
   // Organizar las tareas por estado
@@ -36,7 +35,7 @@ const ProjectDetailsScreen = ({ route }) => {
   
   const handleEditTasks = () => {
     // Navega a la pantalla de edición de tareas
-    navigation.navigate('ModificarTareas', { proyectoId });
+    navigation.navigate('ModificarTareas', { proyectoId,proyectoColabs });
   };
 
   const handleManageCollaborators = () => {

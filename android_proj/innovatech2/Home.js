@@ -11,8 +11,6 @@ import { useNavigation } from '@react-navigation/native';
 import { getProyectosRequest } from './api/auth.js'
 //import { View, Button } from 'react-native';
 
-// Importa los datos de los proyectos desde el archivo JSON
-import projectData from './data.json';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -32,8 +30,8 @@ const HomeScreen = () => {
     navigation.navigate('CrearProyecto'); // Utiliza el nombre de la ruta asignado a CrearProyectoScreen
   };
 
-  const handleOptionsPress = (proyectoId) => {
-    navigation.navigate('ProjectDetails', { proyectoId });
+  const handleOptionsPress = (proyectoId, proyectoColabs) => {
+    navigation.navigate('ProjectDetails', { proyectoId, proyectoColabs });
   };
 
   return (
@@ -51,7 +49,7 @@ const HomeScreen = () => {
             {/* Aquí puedes agregar más detalles del proyecto */}
             <TouchableOpacity
               style={styles.optionsButton}
-              onPress={() => handleOptionsPress(proyecto._id)}
+              onPress={() => handleOptionsPress(proyecto._id, proyecto.colaboradores)}
             >
               <Text style={styles.optionsButtonText}>Gestionar proyecto</Text>
             </TouchableOpacity>

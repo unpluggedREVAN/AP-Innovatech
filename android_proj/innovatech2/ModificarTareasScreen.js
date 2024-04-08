@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput } from 'react-native';
-import {getTareasProjectRequest, patchTareaRequest} from './api/auth.js'
+import {getTareasProjectRequest, patchTareaRequest, colabIdRequest, postTareaRequest, patchTaskProjectRequest} from './api/auth.js'
 import colaboradoresData from './colab_data.json'; // Asegúrate de que la ruta al archivo JSON de colaboradores sea correcta
 
 // Componente para el formulario de modificación de una tarea específica
@@ -53,7 +53,7 @@ const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
 };
 
 // Componente para el formulario de creación de una nueva tarea
-const CrearTareaForm = ({ onGuardar, onCancelar }) => {
+const CrearTareaForm = ({ onGuardar, onCancelar,colaboradores }) => {
     const [nombreTarea, setNombreTarea] = useState('');
     const [storyPoints, setStoryPoints] = useState('');
     const [estado, setEstado] = useState('');
@@ -84,16 +84,16 @@ const CrearTareaForm = ({ onGuardar, onCancelar }) => {
         
         <Text style={styles.label}>Responsable:</Text>
         <View style={styles.colaboradoresContainer}>
-          {colaboradoresData.map((colaborador) => (
+          {colaboradores.map((colaborador) => (
             <TouchableOpacity
-              key={colaborador._id}
+              key={colaborador.idColab}
               style={[
                 styles.colaboradorButton,
-                { backgroundColor: responsable === colaborador._id ? '#4e9ec5' : '#f0f0f0' },
+                { backgroundColor: responsable === colaborador.idColab ? '#4e9ec5' : '#f0f0f0' },
               ]}
-              onPress={() => setResponsable(colaborador._id)}
+              onPress={() => setResponsable(colaborador.idColab)}
             >
-              <Text style={styles.colaboradorButtonText}>{colaborador.nombreCompleto}</Text>
+              <Text style={styles.colaboradorButtonText}>{colaborador.nameColab}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -112,10 +112,12 @@ const CrearTareaForm = ({ onGuardar, onCancelar }) => {
 };
 
 const ModificarTareasScreen = ({ route }) => {
-  const { proyectoId } = route.params;
+  const { proyectoId, proyectoColabs } = route.params;
   const [tareas, setTareas] = useState([]);
   const [tareaAEditar, setTareaAEditar] = useState(null);
   const [mostrarFormCrear, setMostrarFormCrear] = useState(false);
+  const [infoColabs, setInfoColabs] = useState([]);
+  const [idTareas, setIdTareas] = useState([]);
 
   useEffect(() => {
     fetchDataTasks();
@@ -124,6 +126,10 @@ const ModificarTareasScreen = ({ route }) => {
   const fetchDataTasks = async () => {
     const responseTasks = await getTareasProjectRequest(proyectoId);
     setTareas(responseTasks);
+    proyectoColabs.forEach( async function(colab, index) {
+      const infoColab = await colabIdRequest(colab); 
+      infoColabs.push(infoColab);
+    })
   }
 
   const handleEliminarTarea = (index) => {
@@ -150,9 +156,22 @@ const ModificarTareasScreen = ({ route }) => {
     setTareaAEditar(null); // Cerrar el formulario de edición
   };
 
-  const handleAgregarTarea = (nuevaTarea) => {
+  const handleAgregarTarea = async (nuevaTarea) => {
+    //Esto tengo que quitarlo
     setTareas([...tareas, nuevaTarea]);
     setMostrarFormCrear(false); // Cerrar el formulario de creación
+
+    //Hacer el request para agregar una tarea
+    const nuevaTask = {
+      nombreTarea : nuevaTarea.nombreTarea,
+      points : nuevaTarea.storyPoints,
+      estado : nuevaTarea.estado,
+      idColaborador : nuevaTarea.responsable
+    }
+    const idTask = await postTareaRequest(nuevaTask);
+    
+    //Agregar la tarea al proyecto
+    await patchTaskProjectRequest(proyectoId, idTask);
   };
 
   return (
@@ -189,6 +208,7 @@ const ModificarTareasScreen = ({ route }) => {
         <CrearTareaForm
           onGuardar={handleAgregarTarea}
           onCancelar={() => setMostrarFormCrear(false)}
+          colaboradores={infoColabs}
         />
       )}
     </ScrollView>

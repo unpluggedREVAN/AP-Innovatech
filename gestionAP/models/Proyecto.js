@@ -6,7 +6,7 @@ const proyectoSchema = new Schema({
   recursosNecesarios: [{ type: String, required: true }],
   presupuesto: { type: Number, required: true },
   colaboradores: [{ type: Schema.Types.ObjectId, ref: 'Colaborador', required: true }],
-  estadoProyecto: { type: String, required: true, enum: ['En progreso', 'Completado', 'Pausado', 'Cancelado'] },
+  estadoProyecto: { type: String, required: true, default : "En progreso",enum: ['En progreso', 'Completado', 'Pausado', 'Cancelado'] },
   descripcion: { type: String, required: true },
   fechaInicio: { type: Date, required: true },
   historialCambios: [{ type: String }],
