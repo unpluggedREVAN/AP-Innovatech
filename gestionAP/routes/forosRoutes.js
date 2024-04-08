@@ -45,6 +45,8 @@ router.patch('/patchforos/:id', async (req, res) => {
     }
 });
 
+
+
 // Endpoint para eliminar un foro por ID
 router.delete('/deleteforos/:id', async (req, res) => {
     try {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import colabData from './colab_data.json'; 
 import { Alert } from 'react-native';
 import { colabRequest,logoutResquest,patchColabRequest } from './api/auth.js'
 
