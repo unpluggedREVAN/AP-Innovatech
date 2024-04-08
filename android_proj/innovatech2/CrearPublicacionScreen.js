@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { Alert } from 'react-native';
+import {getProyectosRequest, postForoRequest} from './api/auth'
 
 const CrearPublicacionScreen = ({ navigation }) => {
   const [tema, setTema] = useState('');
   const [tipo, setTipo] = useState('');
+  const [proyectos, setProyectos] = useState([]);
+  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
+ 
+  useEffect(() => {
+    fecthForoData();
+  }, [])
 
-  const handleCrearPublicacion = () => {
+  const fecthForoData = async () => {
+    const responseProyectos = await getProyectosRequest();
+    setProyectos(responseProyectos)
+  }
+
+  const handleCrearPublicacion = async () => {
     console.log('Crear Publicación:', tema, tipo); // Log de control
     // Nota para Darío: Aquí va la lógica de guardar publicación
-
+    const response = await postForoRequest({tipo : tipo, titulo : tema, proyecto : proyectoSeleccionado});
+    console.log(response.data.message)
     Alert.alert(
         "Publicación Creada",
-        "La publicación fue creada correctamente.",
+        response.data.message,
         [
           {
             text: "OK",
@@ -37,6 +50,19 @@ const CrearPublicacionScreen = ({ navigation }) => {
         onChangeText={setTipo}
         placeholder="Tipo de publicación (técnico, diseño, general...)"
       />
+      <Text style={styles.label}>Proyecto Asociado:</Text>
+      {proyectos.map((proyecto) => (
+        <TouchableOpacity
+        key={proyecto._id}
+        style={[
+          styles.proyectoContainer,
+          proyectoSeleccionado === proyecto._id && styles.proyectoSeleccionado,
+        ]}
+        onPress={() => setProyectoSeleccionado(proyecto._id)}
+        >
+          <Text style={styles.proyectoTexto}>{proyecto.nombreProyecto}</Text>
+        </TouchableOpacity>
+      ))}
       <TouchableOpacity style={styles.boton} onPress={handleCrearPublicacion}>
         <Text style={styles.botonTexto}>Crear Publicación</Text>
       </TouchableOpacity>
@@ -49,6 +75,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: 'center',
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
   },
   titulo: {
     fontSize: 20,
@@ -69,11 +99,26 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
+    marginTop : 10,
+  },
+  proyectoContainer: {
+    padding: 10,
+    marginBottom: 5,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+  },
+  proyectoSeleccionado: {
+    backgroundColor: '#e0f7ff',
+  },
+  proyectoTexto: {
+    fontSize: 16,
   },
   botonTexto: {
     color: '#fff',
     fontWeight: 'bold',
   },
+  
 });
 
 export default CrearPublicacionScreen;

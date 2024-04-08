@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 const PublicacionDetailsScreen = ({ route }) => {
   const { publicacion } = route.params;
+  
+  console.log(publicacion);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -10,9 +12,9 @@ const PublicacionDetailsScreen = ({ route }) => {
       <Text style={styles.detail}>Tipo: {publicacion.tipo}</Text>
       <Text style={styles.detail}>Mensajes:</Text>
       {/* Se comprueba que publicacion.mensajes es un array antes de mapearlo */}
-      {Array.isArray(publicacion.mensajes) && publicacion.mensajes.map((mensaje, index) => (
+      {publicacion.mensajes.map((mensaje, index) => (
         <Text key={index} style={styles.mensaje}>
-          {mensaje.contenido} - {mensaje.autor}
+          {mensaje.mensaje} - {mensaje._id}
         </Text>
       ))}
     </ScrollView>

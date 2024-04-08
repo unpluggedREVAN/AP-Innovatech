@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import {getForoRequest} from './api/auth'
 import forosData from './data_foros.json'; 
 
 const ForosScreen = ({ navigation }) => {
@@ -7,8 +8,13 @@ const ForosScreen = ({ navigation }) => {
 
   // Simula la carga de publicaciones, este useEffect es importante para el backend
   useEffect(() => {
-    setPublicaciones(forosData);
+    fecthForoData()
   }, []);
+
+  const fecthForoData = async () => {
+    const response = await getForoRequest();
+    setPublicaciones(response)
+  }
 
   const handleAbrirPublicacion = (publicacion) => {
     navigation.navigate('PublicacionDetailsScreen', { publicacion });

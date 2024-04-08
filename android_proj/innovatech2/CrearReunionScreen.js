@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, ScrollView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {postReunionesRequest, getProyectosRequest} from './api/auth'
 import projectData from './data.json'; // Importa los datos de prueba del proyecto
 
 const CrearReunionScreen = () => {
@@ -9,11 +10,22 @@ const CrearReunionScreen = () => {
   const [fecha, setFecha] = useState(new Date());
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [proyectos, setProyectos] = useState([]);
 
-  const handleGuardarReunion = () => {
+  const handleGuardarReunion = async () => {
     // Nota para Darío: Aquí guarda los datos de la reunión
+    await postReunionesRequest({fecha : fecha, tema : tema, medio : medio, proyecto : proyectoSeleccionado})
     Alert.alert('Reunión Guardada', `Tema: ${tema}, Medio: ${medio}, Fecha: ${fecha}, Proyecto: ${proyectoSeleccionado}`);
   };
+
+  useEffect(() => {
+    fecthReuData();
+  }, [])
+
+  const fecthReuData = async () => {
+    const responseProyectos = await getProyectosRequest();
+    setProyectos(responseProyectos)
+  }
 
   const onChangeFecha = (event, selectedDate) => {
     const currentDate = selectedDate || fecha;
@@ -54,7 +66,7 @@ const CrearReunionScreen = () => {
       )}
 
       <Text style={styles.label}>Proyecto Asociado:</Text>
-      {projectData.map((proyecto) => (
+      {proyectos.map((proyecto) => (
         <TouchableOpacity
           key={proyecto._id}
           style={[

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Alert } from 'react-native';
 import projectData from './data.json';
-import {getProyectRequest,getTareasProjectRequest} from './api/auth.js'
+import {getProyectRequest,getTareasProjectRequest, deleteProjectRequest} from './api/auth.js'
 import { useNavigation } from '@react-navigation/native';
 
 const ProjectDetailsScreen = ({ route }) => {
@@ -49,7 +49,10 @@ const ProjectDetailsScreen = ({ route }) => {
       "¿Estás seguro de que deseas eliminar este proyecto?",
       [
         { text: "Cancelar", style: "cancel" },
-        { text: "Eliminar", onPress: () => console.log('Eliminar proyecto') }, // Aquí la lógica de eliminación, agregarla cuando ya esté el API
+        { text: "Eliminar", onPress: async () => {
+          console.log('Eliminar proyecto')
+          await deleteProjectRequest(proyectoId);
+        }}, // Aquí la lógica de eliminación, agregarla cuando ya esté el API
       ]
     );
   };

@@ -108,6 +108,12 @@ export const patchTaskProjectRequest = async (idProject, idTask) => {
     }
 }
 
+//Peticion para eliminar proyectos - DELETE
+export const deleteProjectRequest = async (idProject) => {
+    const response = await axios.delete(`${API}/proyectos/deleteproyectos/${idProject}`);
+    console.log(response);
+}
+
 //---------------------------- Peticiones para tareas ------------------------------------------
 //Peticion para traer las tareas de un proyecto - GET
 export const getTareasProjectRequest = async (idProject) => {
@@ -141,11 +147,32 @@ export const patchTareaRequest = async (id, data) => {
 }
 
 //---------------------------- Peticiones para reuniones ------------------------------------------
+//Endpoint para obtener la información de las reuniones - GET
 export const getReunionesRequest = async () => {
     try{
         const response = await axios.get(`${API}/reuniones/getreuniones`)
         return response.data
     } catch(error) {
-        console.log(error)
+        console.log("Error en el getReuniones: " + error)
     }
+}
+
+//Endpoint para crear una reunión - POST
+export const postReunionesRequest = async (data) => {
+    const response = await axios.post(`${API}/reuniones/postreuniones`, data)
+    console.log(response);
+}
+
+//---------------------------- Peticiones para foro ------------------------------------------
+//Endpoint para obtener la información de los foros - GET
+export const getForoRequest = async () => {
+    const response = await axios.get(`${API}/foro/getforos`)
+    console.log(response);
+    return response.data;
+}
+
+//Endpoint para crear una publicación del foro - POST
+export const postForoRequest = async (data) => {
+    const response = await axios.post(`${API}/foro/postforos`, data);
+    return response
 }

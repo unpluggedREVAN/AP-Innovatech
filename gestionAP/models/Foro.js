@@ -8,13 +8,12 @@ const mensajeSchema = new Schema({
 });
 
 const foroSchema = new Schema({
-  _id: Schema.Types.ObjectId,
-  tipo: { type: String, required: true, enum: ['general', 'específico'] }, // Asumiendo posibles tipos
+  tipo: { type: String, required: true }, // Asumiendo posibles tipos
   titulo: { type: String, required: true },
   mensajes: [mensajeSchema],
   proyecto: { type: Schema.Types.ObjectId, required: true }
 });
 
-const Foro = mongoose.model('Foro', foroSchema);
+const Foro = mongoose.model('Foro', foroSchema,'Foros');
 
 module.exports = Foro;

@@ -7,7 +7,7 @@ router.post('/postforos', async (req, res) => {
     try {
         const foro = new Foro(req.body);
         await foro.save();
-        res.status(201).send(foro);
+        res.status(201).send({message : "Foro creado exitosamente"});
     } catch (error) {
         console.error(error); // Para ver el error en la consola del servidor
         res.status(400).send({
@@ -21,7 +21,9 @@ router.post('/postforos', async (req, res) => {
 router.get('/getforos', async (req, res) => {
     try {
         const foros = await Foro.find({});
-        res.send(foros);
+        console.log(foros);
+        console.log("Busca foro");
+        res.json(foros);
     } catch (error) {
         res.status(500).send(error);
     }
