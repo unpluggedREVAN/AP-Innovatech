@@ -1,4 +1,3 @@
-// CrearMensajePublicacion.js
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
@@ -7,8 +6,8 @@ const CrearMensajePublicacionScreen = ({ navigation }) => {
 
   const handleEnviarMensaje = () => {
     console.log('Mensaje enviado:', mensaje);
-    // Aquí puedes agregar la lógica para enviar el mensaje a la base de datos o API
-    // Después de enviar el mensaje, puedes volver a la pantalla anterior o manejar la navegación como prefieras
+    // Aquí se pone el backend
+    // Después devuelve a la pantalla anterior
     navigation.goBack();
   };
 
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 20,
-    textAlignVertical: 'top', // Asegúrate de que el texto comience desde la parte superior
+    textAlignVertical: 'top',
   },
   botonEnviar: {
     backgroundColor: '#4e9ec5',

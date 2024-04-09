@@ -6,7 +6,7 @@ const PublicacionDetailsScreen = ({ route, navigation }) => {
 
   const handleCrearMensaje = () => {
     console.log('Botón Crear Mensaje presionado');
-    // Aquí puedes agregar la lógica para navegar a la pantalla de creación de mensaje o cualquier otra funcionalidad deseada.
+    // Aquí pone el backend
   };
 
   return (
@@ -61,14 +61,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   crearMensajeButton: {
-    backgroundColor: '#4CAF50', // O cualquier otro color que prefieras
+    backgroundColor: '#4CAF50', 
     padding: 10,
     borderRadius: 5,
     marginTop: 20,
     alignItems: 'center',
   },
   crearMensajeButtonText: {
-    color: '#FFFFFF', // Color del texto
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
   },
