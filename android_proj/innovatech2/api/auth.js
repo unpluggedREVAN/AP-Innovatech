@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API = 'http://10.0.0.76:3000'
+const API = 'http://172.18.103.18:3000'
 
 // ------------------- Peticiones para autenticación ------------------------
 //Peticion de register - POST
