@@ -24,7 +24,7 @@ const LoginScreen = () => {
       <h1 className="title">InnovaTech</h1>
       <h2 className="header">Plataforma de Gestión de Proyectos</h2>
       
-      <img src="/logo_nofondo.png" className="logo" alt="InnovaTech Logo" />
+      <img src="/logo_nofondo.png" className="logo-login" alt="InnovaTech Logo" />
 
       <input
         type="email"
