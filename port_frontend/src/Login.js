@@ -7,7 +7,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  // Autenticación simple para pruebas
+  // autenticación simple para pruebas
   const handleLogin = () => {
     console.log('Login con:', email, password);
     

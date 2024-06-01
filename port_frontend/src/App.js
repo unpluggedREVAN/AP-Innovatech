@@ -13,7 +13,7 @@ function App() {
           <Route exact path="/" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/main" element={<HomeScreen />} />
-          {/* Aquí puedes agregar más rutas para nuevas pantallas en el futuro */}
+          {/* aquí vamos agregando pantallas */}
         </Routes>
       </div>
     </Router>

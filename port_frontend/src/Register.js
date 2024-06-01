@@ -17,7 +17,7 @@ const RegisterScreen = () => {
       alert('Las contraseñas no coinciden.');
       return;
     }
-    // Autenticación simple para pruebas
+    // Nota para Darío: Mae igual que siempre esto es para pruebas
     if (email === 'admin' && password === 'admin') {
       alert('Registro exitoso');
       navigate('/main');

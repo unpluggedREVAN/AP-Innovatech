@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
 
-// Importa el archivo JSON simulado
+// se importa el archivo json para las pruebas
 import data from './data.json';
 
 const HomeScreen = () => {
@@ -15,7 +15,7 @@ const HomeScreen = () => {
     // const response = await getProyectosRequest();
     // setProyectos(response);
 
-    // Simulamos la carga de datos con el JSON
+    // pero se simula la carga de datos con el json
     setProyectos(data);
   }, []);
 
