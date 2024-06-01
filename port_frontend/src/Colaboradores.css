@@ -1,0 +1,49 @@
+@import './Menu.css';
+
+.colaboradores-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.header {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.colaboradores-scroll {
+  width: 100%;
+  max-width: 800px;
+  overflow-y: auto;
+}
+
+.colaborador-card {
+  background-color: #f2f2f2;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.colaborador-info {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.more-info-button {
+  background-color: #4e9ec5;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+}
+
+.more-info-button:hover {
+  background-color: #3a8bb5;
+}
