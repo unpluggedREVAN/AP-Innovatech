@@ -28,11 +28,39 @@ export const infoTask = async (req, res) => {
     } catch (err) {
         return res.status(500).send({message : err.message})
     }
-    return res.status(200).send({message : "Info task"})
 }
 
-export const infoAllTasks = async (req, res) => {
-    return res.status(200).send({message : "Info all task"})
+export const infoTasksToDo = async (req, res) => {
+    try{
+        //Buscar las tareas
+        const tasksToDo = await Task.find({proyecto : req.params.idProject, estado : 0})
+
+        return res.status(200).send({data : tasksToDo})
+    } catch(err) {
+        return res.status(500).send({message : err.message})
+    }
+}
+
+export const infoTasksProgress = async (req, res) => {
+    try{
+        //Buscar las tareas
+        const tasksProgress = await Task.find({proyecto : req.params.idProject, estado : 1})
+
+        return res.status(200).send({data : tasksProgress})
+    } catch(err) {
+        return res.status(500).send({message : err.message})
+    }
+}
+
+export const infoTasksDone = async (req, res) => {
+    try{
+        //Buscar las tareas
+        const tasksDone = await Task.find({proyecto : req.params.idProject, estado : 2})
+
+        return res.status(200).send({data : tasksDone})
+    } catch(err) {
+        return res.status(500).send({message : err.message})
+    }
 }
 
 export const editTask = async (req, res) => {
