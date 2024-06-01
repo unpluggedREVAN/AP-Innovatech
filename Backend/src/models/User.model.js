@@ -1,4 +1,4 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, {Schema, SchemaTypes} from "mongoose";
 
 //Faltan definir cosas
 
@@ -9,7 +9,7 @@ const userSchema = new Schema({
     departamentoTrabajo : {type : String, required : true},
     telefono : {type : String, required : true},
     estado : {type : Number, required : true},
-    proyectoActual : {type : String},
+    proyectoActual : {type : SchemaTypes.ObjectId, ref : 'Project'},
     contrasena : {type : String, required : true}
 })
 

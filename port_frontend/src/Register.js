@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Register.css';
 import { useNavigate } from 'react-router-dom';
+import {useAuth} from './contexts/authContext.js'
 
 const RegisterScreen = () => {
   const [fullName, setFullName] = useState('');
@@ -12,18 +13,31 @@ const RegisterScreen = () => {
   const [telefono, setTelefono] = useState(''); 
   const navigate = useNavigate();
 
+  const {register, user} = useAuth();
+
+  useEffect(() => {
+    if(!user){
+      navigate('/main')
+    }
+  }, [user])
+
   const handleRegister = () => {
     if (password !== confirmPassword) {
       alert('Las contraseñas no coinciden.');
       return;
     }
     // Nota para Darío: Mae igual que siempre esto es para pruebas
-    if (email === 'admin' && password === 'admin') {
-      alert('Registro exitoso');
-      navigate('/main');
-    } else {
-      alert('Registro fallido');
-    }
+    const data = {
+      nombreCompleto : fullName,
+      cedula : cedula,
+      email : email,
+      departamentoTrabajo : departamentoTrabajo,
+      telefono : telefono,
+      estado : 0,
+      contrasena : password
+    } 
+
+    register(data);
   };
   
   return (

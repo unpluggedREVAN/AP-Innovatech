@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './contexts/authContext';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  const {login, isAuthenticated} = useAuth();
   // autenticación simple para pruebas
+  useEffect(() => {
+    if(isAuthenticated){
+      navigate('/main')
+      
+    }
+  }, [isAuthenticated])
+
   const handleLogin = () => {
     console.log('Login con:', email, password);
     
-    if (email === 'admin' && password === 'admin') {
-      alert('Login exitoso');
-      navigate('/main');
-    } else {
-      alert('Usuario o contraseña incorrectos');
+    const data = {
+      email : email,
+      contrasena : password
     }
+    login(data)
   };
 
   return (
