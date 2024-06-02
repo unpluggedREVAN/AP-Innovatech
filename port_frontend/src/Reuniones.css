@@ -1,0 +1,74 @@
+@import './Menu.css';
+
+.reuniones-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.header {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.reuniones-scroll {
+  width: 100%;
+  max-width: 800px;
+  overflow-y: auto;
+}
+
+.reunion-card {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reunion-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.reunion-content {
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.options-button {
+  margin-top: 10px;
+  background-color: #4e9ec5;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+}
+
+.options-button:hover {
+  background-color: #3a8bb5;
+}
+
+.button {
+  background-color: #4e9ec5;
+  padding: 15px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  width: 100%;
+  max-width: 320px;
+}
+
+.button:hover {
+  background-color: #3a8bb5;
+}

@@ -6,6 +6,9 @@ import HomeScreen from './Home';
 import ColaboradoresScreen from './Colaboradores';
 import {AuthProvider} from './contexts/authContext'
 import {UserProvider} from './contexts/userContext'
+import ReunionesScreen from './Reuniones';
+import EvaluacionScreen from './Evaluacion';
+import CuentaScreen from './Cuenta';
 import './App.css';
 
 function App() {
@@ -19,12 +22,16 @@ function App() {
               <Route path="/register" element={<RegisterScreen />} />
               <Route path="/main" element={<HomeScreen />} />
               <Route path="/colaboradores" element={<ColaboradoresScreen />} />
+              <Route path="/reuniones" element={<ReunionesScreen />} />
+              <Route path="/evaluacion" element={<EvaluacionScreen />} />
+              <Route path="/cuenta" element={<CuentaScreen />} />
               {/* Aquí puedes agregar más rutas para nuevas pantallas en el futuro */}
             </Routes>
           </BrowserRouter>
         </UserProvider>
       </AuthProvider>
     </div>
+
   );
 }
 

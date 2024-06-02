@@ -1,0 +1,55 @@
+@import './Menu.css';
+
+.cuenta-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.header {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.cuenta-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.input {
+  height: 40px;
+  border: 1px solid gray;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 90px;
+}
+
+.button {
+  background-color: #4e9ec5;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 10px;
+  border: none;
+  margin-left: 90px;
+}
+
+.button:hover {
+  background-color: #3a8bb5;
+}
