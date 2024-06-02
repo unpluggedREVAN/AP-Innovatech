@@ -3,7 +3,7 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './Colaboradores.css';
-import './Menu.css'; // Importar los estilos del menú y barra superior
+import './Menu.css'; 
 import colabData from './colab_data.json'; // Datos de prueba de los colaboradores
 
 const ColaboradoresScreen = () => {

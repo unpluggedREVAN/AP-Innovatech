@@ -9,7 +9,7 @@ import {
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import './Cuenta.css';
-import './Menu.css'; // Importar los estilos del menú y barra superior
+import './Menu.css'; 
 
 const CuentaScreen = () => {
   const location = useLocation();
@@ -17,7 +17,7 @@ const CuentaScreen = () => {
   const [colaborador, setColaborador] = useState({});
 
   useEffect(() => {
-    // Simulamos la carga de datos con JSON o una llamada a la API
+    // Simula la carga de datos con JSON o una llamada a la API
     fetchUserData();
   }, []);
 
@@ -25,7 +25,7 @@ const CuentaScreen = () => {
     // Reemplazar esto con una llamada a la API real
     const response = await fetch('/path/to/colab_data.json');
     const data = await response.json();
-    setColaborador(data[0]); // Simulamos obtener el primer colaborador
+    setColaborador(data[0]); // Simula obtener el primer colaborador
   };
 
   const handleInputChange = (name, value) => {
@@ -34,7 +34,7 @@ const CuentaScreen = () => {
 
   const handleLogOut = async () => {
     try {
-      // Simulamos la llamada a la API para cerrar sesión
+      // Simula la llamada a la API para cerrar sesión
       await fetch('/path/to/logout', { method: 'POST' });
       alert('Sesión cerrada correctamente.');
       navigate('/login');
@@ -45,7 +45,7 @@ const CuentaScreen = () => {
 
   const handleSaveChanges = async () => {
     console.log('Guardar cambios', colaborador);
-    // Simulamos la llamada a la API para guardar cambios
+    // Simula la llamada a la API para guardar cambios
     await fetch(`/path/to/colab/${colaborador.idUser}`, {
       method: 'PATCH',
       headers: {

@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './CrearProyecto.css';
-import './Menu.css'; // Importar los estilos del menú y barra superior
+import './Menu.css'; 
 import colabData from './colab_data.json'; // Simulación de colaboradores disponibles
 
 const CrearProyectoScreen = () => {

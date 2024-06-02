@@ -5,7 +5,7 @@ import colabData from './colab_data.json'; // Datos de prueba de colaboradores
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './ModificarTareas.css';
-import './Menu.css'; // Importar los estilos del menú y barra superior
+import './Menu.css'; 
 
 // Componente para el formulario de modificación de una tarea específica
 const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
@@ -111,7 +111,7 @@ const CrearTareaForm = ({ onGuardar, onCancelar, colaboradores }) => {
 };
 
 const ModificarTareasScreen = () => {
-  const { proyectoId } = useParams(); // Obtenemos el id del proyecto de los parámetros
+  const { proyectoId } = useParams(); // Se obtiene el id del proyecto de los parámetros
   const location = useLocation();
   const [tareas, setTareas] = useState([]);
   const [tareaAEditar, setTareaAEditar] = useState(null);

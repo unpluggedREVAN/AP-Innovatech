@@ -5,7 +5,7 @@ import projectData from './data.json'; // Datos de proyectos
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './GestionarColaboradores.css';
-import './Menu.css'; // Importar los estilos del menú y barra superior
+import './Menu.css'; 
 
 const GestionarColaboradoresScreen = () => {
   const { proyectoId } = useParams();

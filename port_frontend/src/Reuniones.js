@@ -3,7 +3,7 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './Reuniones.css';
-import './Menu.css'; // Importar los estilos del menú y barra superior
+import './Menu.css'; 
 import reunionesData from './data_reuniones.json'; // Datos de prueba de las reuniones
 
 const ReunionesScreen = () => {
