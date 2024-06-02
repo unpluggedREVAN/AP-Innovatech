@@ -13,13 +13,13 @@ const RegisterScreen = () => {
   const [telefono, setTelefono] = useState(''); 
   const navigate = useNavigate();
 
-  const {register, user} = useAuth();
+  const {register, isRegister} = useAuth();
 
   useEffect(() => {
-    if(!user){
+    if(isRegister){
       navigate('/main')
     }
-  }, [user])
+  }, [isRegister])
 
   const handleRegister = () => {
     if (password !== confirmPassword) {

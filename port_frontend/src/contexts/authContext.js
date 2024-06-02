@@ -13,13 +13,14 @@ export const useAuth = () => {
 
 export const AuthProvider = ({children}) => {
     //Los requestest
-    const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isRegister, setIsRegister] = useState(false);
     const [id, setId] = useState("");
 
     const register = async (user) => {
         try{
             const res = await registerRequest(user)
+            setIsRegister(true);
             alert("Registro realizado correctamente")
         } catch(error){
             console.log(error)
@@ -45,7 +46,7 @@ export const AuthProvider = ({children}) => {
             register,
             login,
             isAuthenticated,
-            user, 
+            isRegister, 
             id
         }}>
             {children}
