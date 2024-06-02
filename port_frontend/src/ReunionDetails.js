@@ -1,31 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import './Reuniones.css';
+import './ReunionDetails.css';
 import './Menu.css'; // Importar los estilos del menú y barra superior
 import reunionesData from './data_reuniones.json'; // Datos de prueba de las reuniones
 
-const ReunionesScreen = () => {
+const ReunionDetailsScreen = () => {
+  const { reunionId } = useParams();
   const location = useLocation();
-  const navigate = useNavigate();
-  const [reuniones, setReuniones] = useState([]);
 
-  useEffect(() => {
-    setReuniones(reunionesData);
-  }, []);
-
-  const handleDetallesReunion = (reunionId) => {
-    navigate(`/reunion-detalles/${reunionId}`);
-  };
-
-  const handleCrearNuevaReunion = () => {
-    navigate('/crear-reunion');
-  };
-
-  const handleIrForos = () => {
-    navigate('/foros');
-  };
+  const reunion = reunionesData.find(reu => reu._id === reunionId);
 
   const menuItems = [
     { name: 'Home', icon: faHome, path: '/main' },
@@ -64,29 +49,18 @@ const ReunionesScreen = () => {
           </div>
         </nav>
         <section className="content">
-          <div className="reuniones-container">
-            <h2 className="header">Reuniones disponibles</h2>
-            <div className="reuniones-list">
-              {reuniones.map((reunion) => (
-                <div key={reunion._id} className="reunion-card">
-                  <h3 className="reunion-title">Tema: {reunion.tema}</h3>
-                  <p className="reunion-info">Fecha: {reunion.fecha}</p>
-                  <p className="reunion-info">Medio: {reunion.medio}</p>
-                  <button
-                    className="reuniones-options-button"
-                    onClick={() => handleDetallesReunion(reunion._id)}
-                  >
-                    Detalles de la reunión
-                  </button>
-                </div>
-              ))}
-            </div>
-            <button className="create-reunion-button" onClick={handleCrearNuevaReunion}>
-              Crear nueva reunión
-            </button>
-            <button className="go-to-forum-button" onClick={handleIrForos}>
-              Ir al foro
-            </button>
+          <div className="reunion-details-container">
+            {reunion ? (
+              <>
+                <h2 className="title">Tema: {reunion.tema}</h2>
+                <p className="detail">Fecha: {reunion.fecha}</p>
+                <p className="detail">Medio: {reunion.medio}</p>
+                <p className="detail">Colaboradores: {reunion.colaboradores.join(', ')}</p>
+                <p className="detail">Proyecto: {reunion.proyecto}</p>
+              </>
+            ) : (
+              <p className="detail">Reunión no encontrada.</p>
+            )}
           </div>
         </section>
       </div>
@@ -94,4 +68,4 @@ const ReunionesScreen = () => {
   );
 };
 
-export default ReunionesScreen;
+export default ReunionDetailsScreen;

@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHome,
-  faUsers,
-  faBriefcase,
-  faChartBar,
-  faUserCircle,
-} from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './Colaboradores.css';
 import './Menu.css'; // Se importan los estilos del menú
-import data from './colab_data.json';
 import {useUser} from './contexts/userContext.js'
 
 const ColaboradoresScreen = () => {
@@ -83,15 +76,15 @@ const ColaboradoresScreen = () => {
         <section className="content">
           <div className="colaboradores-container">
             <h2 className="header">Colaboradores</h2>
-            <div className="colaboradores-scroll">
+            <div className="colaboradores-list">
               {colaboradores.map((colaborador) => (
                 <div key={colaborador._id} className="colaborador-card">
-                  <p className="colaborador-info">Nombre: {colaborador.nombreCompleto}</p>
+                  <h3 className="colaborador-name">{colaborador.nombreCompleto}</h3>
                   <p className="colaborador-info">Cédula: {colaborador.cedula}</p>
                   <p className="colaborador-info">Estado: {colaborador.estadoString}</p>
                   <button
-                    className="more-info-button"
-                    onClick={() => handleMoreInfoPress(colaborador)}
+                    className="colaboradores-more-info-button"
+                    onClick={() => handleMoreInfoPress(colaborador._id)}
                   >
                     Más información
                   </button>

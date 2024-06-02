@@ -1,27 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useParams, Link, useLocation } from 'react-router-dom'; // Eliminar useNavigate
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import './Home.css';
+import './ColaboradorDetails.css';
 import './Menu.css'; // Importar los estilos del menú y barra superior
-import projectData from './data.json'; // Datos de prueba
+import colabData from './colab_data.json'; // Datos de prueba de los colaboradores
 
-const HomeScreen = () => {
+const ColaboradorDetailsScreen = () => {
+  const { colaboradorId } = useParams();
   const location = useLocation();
-  const navigate = useNavigate();
-  const [proyectos, setProyectos] = useState([]);
 
-  useEffect(() => {
-    setProyectos(projectData);
-  }, []);
-
-  const handleOptionsPress = (proyectoId) => {
-    navigate(`/proyecto-detalles/${proyectoId}`);
-  };
-
-  const handleCrearNuevoProyecto = () => {
-    navigate('/crear-proyecto');
-  };
+  const colaborador = colabData.find(colab => colab._id === colaboradorId);
 
   const menuItems = [
     { name: 'Home', icon: faHome, path: '/main' },
@@ -60,25 +49,20 @@ const HomeScreen = () => {
           </div>
         </nav>
         <section className="content">
-          <div className="home-container">
-            <h2 className="header">Proyectos disponibles</h2>
-            <div className="proyectos-list">
-              {proyectos.map((proyecto) => (
-                <div key={proyecto._id} className="proyecto-card">
-                  <h3 className="proyecto-title">Proyecto {proyecto._id}: {proyecto.nombreProyecto}</h3>
-                  <p className="proyecto-description">{proyecto.descripcion}</p>
-                  <button
-                    className="home-options-button"
-                    onClick={() => handleOptionsPress(proyecto._id)}
-                  >
-                    Gestionar proyecto
-                  </button>
-                </div>
-              ))}
-            </div>
-            <button className="create-project-button" onClick={handleCrearNuevoProyecto}>
-              Crear nuevo proyecto
-            </button>
+          <div className="colaborador-details-container">
+            {colaborador ? (
+              <>
+                <h2 className="title">{colaborador.nombreCompleto}</h2>
+                <p className="detail">Cédula: {colaborador.cedula}</p>
+                <p className="detail">Correo: {colaborador.correoElectronico}</p>
+                <p className="detail">Departamento: {colaborador.departamentoTrabajo}</p>
+                <p className="detail">Teléfono: {colaborador.telefono}</p>
+                <p className="detail">Estado: {colaborador.estado}</p>
+                <p className="detail">Proyecto Actual: {colaborador.proyectoActual || 'Ninguno'}</p>
+              </>
+            ) : (
+              <p className="detail">Colaborador no encontrado.</p>
+            )}
           </div>
         </section>
       </div>
@@ -86,4 +70,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default ColaboradorDetailsScreen;
