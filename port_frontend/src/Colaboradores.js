@@ -11,17 +11,35 @@ import {
 import './Colaboradores.css';
 import './Menu.css'; // Se importan los estilos del menú
 import data from './colab_data.json';
+import {useUser} from './contexts/userContext.js'
 
 const ColaboradoresScreen = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [colaboradores, setColaboradores] = useState([]);
 
+  const {infoAllUsers, colabs} = useUser();
+
   useEffect(() => {
     // simulación de la carga de datos con json
+    infoAllUsers();
     setColaboradores(data);
   }, []);
 
+  useEffect(() => {
+    if(colabs != []) {
+      colabs.forEach(function(colab, index){
+        if(colab.estado == 0){
+          colab.estadoString = "Libre";
+        }
+        else{
+          colab.estadoString = "Ocupado";
+        }
+      });
+      setColaboradores(colabs)
+    }
+  }, [colabs])
+  
   const handleMoreInfoPress = (colaborador) => {
     navigate(`/colaborador-details/${colaborador._id}`, { state: { colaborador } });
   };
@@ -70,7 +88,7 @@ const ColaboradoresScreen = () => {
                 <div key={colaborador._id} className="colaborador-card">
                   <p className="colaborador-info">Nombre: {colaborador.nombreCompleto}</p>
                   <p className="colaborador-info">Cédula: {colaborador.cedula}</p>
-                  <p className="colaborador-info">Estado: {colaborador.estado}</p>
+                  <p className="colaborador-info">Estado: {colaborador.estadoString}</p>
                   <button
                     className="more-info-button"
                     onClick={() => handleMoreInfoPress(colaborador)}
