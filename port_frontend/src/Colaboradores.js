@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHome,
-  faUsers,
-  faBriefcase,
-  faChartBar,
-  faUserCircle,
-} from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './Colaboradores.css';
-import './Menu.css'; // Se importan los estilos del menú
-import data from './colab_data.json';
+import './Menu.css'; // Importar los estilos del menú y barra superior
+import colabData from './colab_data.json'; // Datos de prueba de los colaboradores
 
 const ColaboradoresScreen = () => {
   const location = useLocation();
@@ -18,12 +12,11 @@ const ColaboradoresScreen = () => {
   const [colaboradores, setColaboradores] = useState([]);
 
   useEffect(() => {
-    // simulación de la carga de datos con json
-    setColaboradores(data);
+    setColaboradores(colabData);
   }, []);
 
-  const handleMoreInfoPress = (colaborador) => {
-    navigate(`/colaborador-details/${colaborador._id}`, { state: { colaborador } });
+  const handleMoreInfoPress = (colaboradorId) => {
+    navigate(`/colaborador-detalles/${colaboradorId}`);
   };
 
   const menuItems = [
@@ -65,15 +58,15 @@ const ColaboradoresScreen = () => {
         <section className="content">
           <div className="colaboradores-container">
             <h2 className="header">Colaboradores</h2>
-            <div className="colaboradores-scroll">
+            <div className="colaboradores-list">
               {colaboradores.map((colaborador) => (
                 <div key={colaborador._id} className="colaborador-card">
-                  <p className="colaborador-info">Nombre: {colaborador.nombreCompleto}</p>
+                  <h3 className="colaborador-name">{colaborador.nombreCompleto}</h3>
                   <p className="colaborador-info">Cédula: {colaborador.cedula}</p>
                   <p className="colaborador-info">Estado: {colaborador.estado}</p>
                   <button
-                    className="more-info-button"
-                    onClick={() => handleMoreInfoPress(colaborador)}
+                    className="colaboradores-more-info-button"
+                    onClick={() => handleMoreInfoPress(colaborador._id)}
                   >
                     Más información
                   </button>

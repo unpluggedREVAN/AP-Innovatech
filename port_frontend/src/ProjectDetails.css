@@ -1,0 +1,71 @@
+@import './Menu.css';
+
+.project-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.info-section {
+  margin-bottom: 10px;
+}
+
+.info-section strong {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.info-section p {
+  font-size: 16px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.tarea-info {
+  font-size: 16px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.nota {
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.button {
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #4e9ec5;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #3a8bb5;
+}
+
+.delete-button {
+  background-color: #ff6347;
+}
+
+.delete-button:hover {
+  background-color: #e53e30;
+}

@@ -9,6 +9,9 @@ import EvaluacionScreen from './Evaluacion';
 import CuentaScreen from './Cuenta';
 import CrearProyectoScreen from './CrearProyecto';
 import CrearReunionScreen from './CrearReunion';
+import ProjectDetailsScreen from './ProjectDetails';
+import ColaboradorDetailsScreen from './ColaboradorDetails';
+import ReunionDetailsScreen from './ReunionDetails';
 import './App.css';
 
 function App() {
@@ -20,11 +23,14 @@ function App() {
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/main" element={<HomeScreen />} />
           <Route path="/colaboradores" element={<ColaboradoresScreen />} />
+          <Route path="/colaborador-detalles/:colaboradorId" element={<ColaboradorDetailsScreen />} />
           <Route path="/reuniones" element={<ReunionesScreen />} />
+          <Route path="/reunion-detalles/:reunionId" element={<ReunionDetailsScreen />} />
           <Route path="/evaluacion" element={<EvaluacionScreen />} />
           <Route path="/cuenta" element={<CuentaScreen />} />
           <Route path="/crear-proyecto" element={<CrearProyectoScreen />} />
           <Route path="/crear-reunion" element={<CrearReunionScreen />} />
+          <Route path="/proyecto-detalles/:proyectoId" element={<ProjectDetailsScreen />} />
           {/* Aquí puedes agregar más rutas para nuevas pantallas en el futuro */}
         </Routes>
       </div>
