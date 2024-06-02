@@ -15,6 +15,7 @@ import GestionarColaboradoresScreen from './GestionarColaboradores';
 import ForoScreen from './ForoScreen';
 import PublicacionDetailsScreen from './PublicacionDetails';
 import CrearMensajePublicacionScreen from './CrearMensajePublicacion';
+import CrearPublicacionScreen from './CrearPublicacion';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/foro" element={<ForoScreen />} />
         <Route path="/publicacion-detalles/:publicacionId" element={<PublicacionDetailsScreen />} />
         <Route path="/crear-mensaje-publicacion" element={<CrearMensajePublicacionScreen />} />
+        <Route path="/crear-publicacion" element={<CrearPublicacionScreen />} />
         <Route path="/" element={<HomeScreen />} />
       </Routes>
     </Router>
