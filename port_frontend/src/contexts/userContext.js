@@ -15,9 +15,9 @@ export const UserProvider = ({children}) => {
     const [colabs, setColabs] = useState([]);
     const [infoUser, setInfoUser] = useState(null);
 
-    const infoAllUsers = async () =>{
+    const infoAllUsers = async (id) =>{
         try{
-            const res = await infoAllUsersRequest();
+            const res = await infoAllUsersRequest(id);
             setColabs(res.data.data)
         } catch(error){
             console.log("error")

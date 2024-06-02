@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './CrearProyecto.css';
 import './Menu.css'; // Importar los estilos del menú y barra superior
-import colabData from './colab_data.json'; // Simulación de colaboradores disponibles
+import {useAuth} from './contexts/authContext'
+import {useUser} from './contexts/userContext'
+import {useProject} from './contexts/proyectoContext'
 
 const CrearProyectoScreen = () => {
   const location = useLocation();
-  const [colaboradoresDisponibles] = useState(colabData);
+  const [colaboradoresDisponibles, setColaboradoresDisponibles] = useState([]);
   const [nombreProyecto, setNombreProyecto] = useState('');
   const [recursosNecesarios, setRecursosNecesarios] = useState('');
   const [presupuesto, setPresupuesto] = useState('');
@@ -16,10 +18,44 @@ const CrearProyectoScreen = () => {
   const [fechaInicio, setFechaInicio] = useState('');
   const [colaboradoresSeleccionados, setColaboradoresSeleccionados] = useState([]);
 
+  const navigate = useNavigate();
+
+  const {id} = useAuth();
+  const {colabs, infoAllUsers} = useUser();
+  const {createProject, isCreateProject} = useProject();
+
+  useEffect(() => {
+    if(colabs != []){
+      setColaboradoresDisponibles(colabs)
+    }
+  }, [colabs])
+
+  useEffect(() => {
+    if(isCreateProject){
+      navigate('/main')
+    }
+  }, [isCreateProject])
+
+  useEffect(() => {
+    infoAllUsers(id);
+  }, [])
+
   const handleCrearProyecto = async () => {
     const presupuestoParse = parseInt(presupuesto);
     console.log('Crear proyecto con los siguientes datos:', { nombreProyecto, recursosNecesarios, presupuestoParse, descripcion, fechaInicio, colaboradoresSeleccionados });
     
+    const data = {
+      nombre : nombreProyecto,
+      recursos : recursosNecesarios,
+      presupuesto : presupuesto,
+      colaboradores : colaboradoresSeleccionados,
+      estadoProyecto : 0,
+      descripcion : descripcion,
+      fechaInicio : fechaInicio,
+      responsable : id
+    }
+
+    createProject(data);
     // Simulación de solicitud POST a la API
     console.log("Proyecto creado con éxito");
 

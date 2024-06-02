@@ -5,7 +5,7 @@ const router = Router();
 
 router.put('/editUser/:id', editUser); //Listo
 router.get('/getUser/:id', getUser); //Listo
-router.get('/infoAllUsers', infoAllUser) //Listo
+router.get('/infoAllUsers/:id', infoAllUser) //Listo
 router.delete('/deleteUser/:id', deleteUser); //Listo
 
 export default router;

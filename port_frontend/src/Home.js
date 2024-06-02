@@ -5,14 +5,23 @@ import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawe
 import './Home.css';
 import './Menu.css'; // Importar los estilos del menú y barra superior
 import projectData from './data.json'; // Datos de prueba
+import { useProject } from './contexts/proyectoContext';
 
 const HomeScreen = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [proyectos, setProyectos] = useState([]);
 
+  const {getAllProjects, projects} = useProject();
+
   useEffect(() => {
-    setProyectos(projectData);
+    if(projects != []) {
+      setProyectos(projects);
+    }
+  }, [projects])
+
+  useEffect(() => {
+    getAllProjects();
   }, []);
 
   const handleOptionsPress = (proyectoId) => {
@@ -65,7 +74,7 @@ const HomeScreen = () => {
             <div className="proyectos-list">
               {proyectos.map((proyecto) => (
                 <div key={proyecto._id} className="proyecto-card">
-                  <h3 className="proyecto-title">Proyecto {proyecto._id}: {proyecto.nombreProyecto}</h3>
+                  <h3 className="proyecto-title">Proyecto: {proyecto.nombre}</h3>
                   <p className="proyecto-description">{proyecto.descripcion}</p>
                   <button
                     className="home-options-button"

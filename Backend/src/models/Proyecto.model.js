@@ -2,7 +2,7 @@ import mongoose, {Schema, SchemaTypes} from "mongoose";
 
 const projectSchema = new Schema({
     nombre : {type : String, required : true},
-    recursos : [{type : String}],
+    recursos : {type : String},
     presupuesto : {type : Number},
     colaboradores : [{type : SchemaTypes.ObjectId, required : true, ref : 'User'}],
     tareas : [{type : SchemaTypes.ObjectId, ref : 'Task'}],

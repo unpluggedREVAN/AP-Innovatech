@@ -5,6 +5,7 @@ import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawe
 import './Colaboradores.css';
 import './Menu.css'; // Se importan los estilos del menú
 import {useUser} from './contexts/userContext.js'
+import {useAuth} from './contexts/authContext.js' 
 
 const ColaboradoresScreen = () => {
   const location = useLocation();
@@ -12,11 +13,11 @@ const ColaboradoresScreen = () => {
   const [colaboradores, setColaboradores] = useState([]);
 
   const {infoAllUsers, colabs} = useUser();
+  const {id} = useAuth();
 
   useEffect(() => {
     // simulación de la carga de datos con json
-    infoAllUsers();
-    setColaboradores(data);
+    infoAllUsers(id);
   }, []);
 
   useEffect(() => {

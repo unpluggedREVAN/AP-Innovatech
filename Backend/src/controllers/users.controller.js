@@ -30,7 +30,7 @@ export const getUser = async (req, res) => {
 
 export const infoAllUser = async (req, res) => {
     try{
-        const usuarios = await User.find({})
+        const usuarios = await User.find({"_id" : {$ne : req.params.id}})
 
         return res.status(200).send({data : usuarios})
     } catch(err) {
