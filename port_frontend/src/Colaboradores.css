@@ -14,22 +14,16 @@
   margin: 20px 0;
 }
 
-.colaboradores-list {
+.colaboradores-scroll {
   width: 100%;
   max-width: 800px;
+  overflow-y: auto;
 }
 
 .colaborador-card {
-  background-color: #f9f9f9;
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.colaborador-name {
-  font-size: 18px;
-  font-weight: bold;
+  background-color: #f2f2f2;
+  padding: 15px;
+  border-radius: 10px;
   margin-bottom: 10px;
 }
 
@@ -38,17 +32,18 @@
   margin-bottom: 5px;
 }
 
-.colaboradores-more-info-button {
+.more-info-button {
   background-color: #4e9ec5;
-  color: #fff;
-  padding: 10px 15px;
-  border: none;
+  padding: 10px;
   border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
+  color: #fff;
   font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  border: none;
+  text-align: center;
 }
 
-.colaboradores-more-info-button:hover {
+.more-info-button:hover {
   background-color: #3a8bb5;
 }

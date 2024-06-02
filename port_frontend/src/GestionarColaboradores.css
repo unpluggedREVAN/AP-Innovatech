@@ -1,0 +1,46 @@
+@import './Menu.css';
+
+.gestionar-colaboradores-container {
+  padding: 20px;
+}
+
+.gestionar-colaboradores-titulo {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.gestionar-colaboradores-nota {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.gestionar-colaboradores-colaborador-container {
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.gestionar-colaboradores-colaborador-container.selected {
+  background-color: #e0f7ff;
+}
+
+.gestionar-colaboradores-boton-guardar {
+  background-color: #4e9ec5;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  border: none;
+}
+
+.gestionar-colaboradores-boton-guardar:hover {
+  background-color: #3a8bb5;
+}
