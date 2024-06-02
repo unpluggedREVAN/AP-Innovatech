@@ -16,6 +16,7 @@ export const ProjectProvider = ({children}) => {
     //Banderas
     const [isCreateProject, setIsCreateProject] = useState(false);
     const [projects, setProjects] = useState([]);
+    const [project, setProject] = useState(null)
 
     const createProject = async (data) => {
         try{
@@ -25,6 +26,16 @@ export const ProjectProvider = ({children}) => {
         } catch(error) {
             console.log(error)
             alert("Error")
+        }
+    }
+
+    const getProject = async (id) => {
+        try{
+            const res = await getProjectRequest(id);
+            setProject(res.data.data)
+        } catch(error){
+            console.log(error)
+            alert("error")
         }
     }
 
@@ -42,7 +53,9 @@ export const ProjectProvider = ({children}) => {
             createProject,
             isCreateProject,
             getAllProjects,
-            projects
+            projects,
+            getProject,
+            project
         }}>
             {children}
         </ProjectContext.Provider>

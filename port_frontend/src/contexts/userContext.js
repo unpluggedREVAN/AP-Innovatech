@@ -20,7 +20,7 @@ export const UserProvider = ({children}) => {
             const res = await infoAllUsersRequest(id);
             setColabs(res.data.data)
         } catch(error){
-            console.log("error")
+            console.log(error)
             alert("Error")
         }
     }

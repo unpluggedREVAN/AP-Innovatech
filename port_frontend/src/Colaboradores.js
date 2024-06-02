@@ -35,7 +35,7 @@ const ColaboradoresScreen = () => {
   }, [colabs])
   
   const handleMoreInfoPress = (colaborador) => {
-    navigate(`/colaborador-details/${colaborador._id}`, { state: { colaborador } });
+    navigate(`/colaborador-detalles/${colaborador}`, { state: { colaborador } });
   };
 
   const menuItems = [

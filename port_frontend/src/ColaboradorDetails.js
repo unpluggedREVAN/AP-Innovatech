@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom'; // Eliminar useNavigate
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './ColaboradorDetails.css';
 import './Menu.css'; 
-import colabData from './colab_data.json'; // Datos de prueba de los colaboradores
+import {useUser} from './contexts/userContext'
 
 const ColaboradorDetailsScreen = () => {
   const { colaboradorId } = useParams();
   const location = useLocation();
 
-  const colaborador = colabData.find(colab => colab._id === colaboradorId);
+  const {infoUser, getInfoUser} = useUser();
+
+  const [colaborador, setColaborador] = useState([]);
+
+  useEffect(() => {
+    if(infoUser != null){
+      if(infoUser.estado == 0){
+        infoUser.estadoString = "Libre";
+      }
+      else{
+        infoUser.estadoString = "Ocupado";
+      }
+      setColaborador([infoUser])
+    }
+  }, [infoUser])
+
+  useEffect(() => {
+    getInfoUser(colaboradorId);
+  }, [])
 
   const menuItems = [
     { name: 'Home', icon: faHome, path: '/main' },
@@ -50,18 +68,15 @@ const ColaboradorDetailsScreen = () => {
         </nav>
         <section className="content">
           <div className="colaborador-details-container">
-            {colaborador ? (
-              <>
-                <h2 className="title">{colaborador.nombreCompleto}</h2>
-                <p className="detail">Cédula: {colaborador.cedula}</p>
-                <p className="detail">Correo: {colaborador.correoElectronico}</p>
-                <p className="detail">Departamento: {colaborador.departamentoTrabajo}</p>
-                <p className="detail">Teléfono: {colaborador.telefono}</p>
-                <p className="detail">Estado: {colaborador.estado}</p>
-                <p className="detail">Proyecto Actual: {colaborador.proyectoActual || 'Ninguno'}</p>
-              </>
-            ) : (
-              <p className="detail">Colaborador no encontrado.</p>
+            {colaborador.map((colab) =>
+              <div> 
+                <h2 className="title">{colab.nombreCompleto}</h2>
+                <p className="detail">Cédula: {colab.cedula}</p>
+                <p className="detail">Correo: {colab.correoElectronico}</p>
+                <p className="detail">Departamento: {colab.departamentoTrabajo}</p>
+                <p className="detail">Teléfono: {colab.telefono}</p>
+                <p className="detail">Estado: {colab.estadoString}</p>
+              </div>
             )}
           </div>
         </section>

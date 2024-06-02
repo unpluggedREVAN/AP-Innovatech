@@ -5,14 +5,23 @@ import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawe
 import './Reuniones.css';
 import './Menu.css'; 
 import reunionesData from './data_reuniones.json'; // Datos de prueba de las reuniones
+import { useReunion } from './contexts/reunionContext';
 
 const ReunionesScreen = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [reuniones, setReuniones] = useState([]);
 
+  const {infoAllMeetings, meetings} = useReunion();
+
   useEffect(() => {
-    setReuniones(reunionesData);
+    if(meetings != []) {
+      setReuniones(meetings);
+    }
+  }, [meetings])
+
+  useEffect(() => {
+    infoAllMeetings();
   }, []);
 
   const handleDetallesReunion = (reunionId) => {

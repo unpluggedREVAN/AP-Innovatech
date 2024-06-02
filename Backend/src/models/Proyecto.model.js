@@ -6,7 +6,7 @@ const projectSchema = new Schema({
     presupuesto : {type : Number},
     colaboradores : [{type : SchemaTypes.ObjectId, required : true, ref : 'User'}],
     tareas : [{type : SchemaTypes.ObjectId, ref : 'Task'}],
-    estadoProyecto : {type : Number},
+    estadoProyecto : {type : Number}, //0:En progreso 1:Finalizado
     descripcion : {type : String, required : true},
     fechaInicio : {type : Date, required : true},
     historialCambios : [{type : Date}],

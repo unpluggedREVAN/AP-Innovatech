@@ -7,6 +7,8 @@ import './Menu.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import projectData from './data.json'; // Datos de prueba del proyecto
+import {useProject} from './contexts/proyectoContext'
+import { useReunion } from './contexts/reunionContext';
 
 const CrearReunionScreen = () => {
   const location = useLocation();
@@ -16,13 +18,31 @@ const CrearReunionScreen = () => {
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [proyectos, setProyectos] = useState([]);
 
+  const {getAllProjects, projects} = useProject();
+  const {createMeeting} = useReunion();
+
   const handleGuardarReunion = async () => {
+    const data = {
+      tema : tema,
+      medio : medio,
+      fecha : fecha,
+      colaboradoresSolicitados : [],
+      proyecto : proyectoSeleccionado
+    }
+    createMeeting(data);
     console.log('Reunión Guardada', { fecha, tema, medio, proyecto: proyectoSeleccionado });
     alert(`Reunión Guardada\nTema: ${tema}\nMedio: ${medio}\nFecha: ${fecha.toLocaleDateString()}\nProyecto: ${proyectoSeleccionado}`);
   };
 
   useEffect(() => {
-    setProyectos(projectData);
+    if(projects != []) {
+      console.log(projects)
+      setProyectos(projects)
+    }
+  }, [projects])
+
+  useEffect(() => {
+    getAllProjects();
   }, []);
 
   const menuItems = [
@@ -98,7 +118,7 @@ const CrearReunionScreen = () => {
                   className={`proyecto-container ${proyectoSeleccionado === proyecto._id ? 'proyecto-seleccionado' : ''}`}
                   onClick={() => setProyectoSeleccionado(proyecto._id)}
                 >
-                  <span className="proyecto-texto">{proyecto.nombreProyecto}</span>
+                  <span className="proyecto-texto">{proyecto.nombre}</span>
                 </div>
               ))}
 

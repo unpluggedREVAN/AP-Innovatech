@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './ReunionDetails.css';
 import './Menu.css'; 
 import reunionesData from './data_reuniones.json'; // Datos de prueba de las reuniones
+import {useReunion} from './contexts/reunionContext'
 
 const ReunionDetailsScreen = () => {
   const { reunionId } = useParams();
   const location = useLocation();
+  const [reunion, setReunion] = useState([]);
 
-  const reunion = reunionesData.find(reu => reu._id === reunionId);
+  const {infoMeeting, meeting} = useReunion();
+
+
+  useEffect(() => {
+    if(meeting != null) {
+      setReunion([meeting]);
+    }
+  }, [meeting])
+
+  useEffect(() => {
+    infoMeeting(reunionId);
+  }, [])
 
   const menuItems = [
     { name: 'Home', icon: faHome, path: '/main' },
@@ -50,17 +63,16 @@ const ReunionDetailsScreen = () => {
         </nav>
         <section className="content">
           <div className="reunion-details-container">
-            {reunion ? (
-              <>
-                <h2 className="title">Tema: {reunion.tema}</h2>
-                <p className="detail">Fecha: {reunion.fecha}</p>
-                <p className="detail">Medio: {reunion.medio}</p>
-                <p className="detail">Colaboradores: {reunion.colaboradores.join(', ')}</p>
-                <p className="detail">Proyecto: {reunion.proyecto}</p>
-              </>
-            ) : (
-              <p className="detail">Reunión no encontrada.</p>
-            )}
+            {reunion.map((reu) => (
+              <div> 
+                <h2 className='title'>Tema: {reu.tema}</h2>
+                <p className='detail'>Fecha: {reu.fecha}</p>
+                <p className='detail'>Medio: {reu.medio}</p>
+                <p className='detail'>Proyecto: {reu.proyecto.nombre}</p>
+              </div>
+            ))
+
+            }
           </div>
         </section>
       </div>

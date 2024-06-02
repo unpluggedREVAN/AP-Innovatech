@@ -5,24 +5,33 @@ import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawe
 import './ProjectDetails.css';
 import './Menu.css'; 
 import projectData from './data.json'; // Datos de prueba del proyecto
+import {useProject} from './contexts/proyectoContext'
 
 const ProjectDetailsScreen = () => {
   const { proyectoId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const [proyecto, setProyecto] = useState({ recursosNecesarios: [], colaboradores: [] });
+  const [proyecto, setProyecto] = useState({colaboradores: [] });
   const [tareasProject, setTareas] = useState([]);
   const [showContent, setShowContent] = useState(false);
 
+  const {getProject, project} = useProject();
+
   useEffect(() => {
-    const fetchProyectData = async () => {
-      const response = projectData.find(proj => proj._id === proyectoId);
-      if (response) {
-        setProyecto(response);
-        setTareas(response.tareas || []);
+    if(project != null) {
+      if(project.estadoProyecto == 0){
+        project.estadoString = "En progreso"
       }
-    };
-    fetchProyectData();
+      else{
+        project.estadoString = "Finalizado"
+      }
+      setProyecto(project);
+      console.log(proyecto)
+    }
+  }, [project])
+
+  useEffect(() => {
+    getProject(proyectoId);
     setTimeout(() => setShowContent(true), 1000);
   }, [proyectoId]);
 
@@ -83,22 +92,19 @@ const ProjectDetailsScreen = () => {
           <div className="project-details-container">
             {showContent && proyecto ? (
               <>
-                <h2 className="title">{proyecto.nombreProyecto}</h2>
+                <h2 className="title">{proyecto.nombre}</h2>
                 <div className="info-section">
                   <strong>Descripción:</strong>
                   <p>{proyecto.descripcion}</p>
                 </div>
                 <div className="info-section">
                   <strong>Recursos Necesarios:</strong>
-                  <p>{proyecto.recursosNecesarios.join(', ')}</p>
+                  <p>{proyecto.recursos}</p>
                 </div>
-                <div className="info-section">
-                  <strong>Colaboradores:</strong>
-                  <p>{proyecto.colaboradores.join(', ')}</p>
-                </div>
+                
                 <div className="info-section">
                   <strong>Responsable:</strong>
-                  <p>{proyecto.responsable}</p>
+                  <p>{proyecto.responsable.nombreCompleto}</p>
                 </div>
                 <div className="info-section">
                   <strong>Presupuesto:</strong>
@@ -106,7 +112,7 @@ const ProjectDetailsScreen = () => {
                 </div>
                 <div className="info-section">
                   <strong>Estado del Proyecto:</strong>
-                  <p>{proyecto.estadoProyecto}</p>
+                  <p>{proyecto.estadoString}</p>
                 </div>
                 <div className="info-section">
                   <strong>Fecha de Inicio:</strong>

@@ -32,7 +32,7 @@ export const infoMeeting = async (req, res) => {
 
 export const infoAllMeetings = async (req, res) => {
     try{
-        const reuniones = await Meeting.find({proyecto : req.params.idProject})
+        const reuniones = await Meeting.find({})
 
         return res.status(200).send({data : reuniones})
     } catch(err) {
