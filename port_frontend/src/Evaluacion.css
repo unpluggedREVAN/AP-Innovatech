@@ -1,0 +1,48 @@
+@import './Menu.css';
+
+.evaluacion-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.header {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.picker {
+  height: 50px;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  margin-bottom: 20px;
+}
+
+.button {
+  background-color: #4e9ec5;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+}
+
+.button:hover {
+  background-color: #3a8bb5;
+}
