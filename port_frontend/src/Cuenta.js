@@ -44,7 +44,7 @@ const CuentaScreen = () => {
 
   const handleLogOut = async () => {
     try {
-      // Simulamos la llamada a la API para cerrar sesión
+      // Simula la llamada a la API para cerrar sesión
       await fetch('/path/to/logout', { method: 'POST' });
       alert('Sesión cerrada correctamente.');
       navigate('/login');

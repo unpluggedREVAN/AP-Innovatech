@@ -5,7 +5,7 @@ import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawe
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto'; // Importar para registrar los controladores de gráficos
 import './Evaluacion.css';
-import './Menu.css'; // Importar los estilos del menú y barra superior
+import './Menu.css'; 
 import projectData from './data.json';
 
 const EvaluacionScreen = () => {

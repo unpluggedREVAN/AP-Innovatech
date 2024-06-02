@@ -1,35 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import './Home.css';
+import './CrearMensajePublicacion.css';
 import './Menu.css'; 
-import projectData from './data.json'; // Datos de prueba
-import { useProject } from './contexts/proyectoContext';
 
-const HomeScreen = () => {
+const CrearMensajePublicacionScreen = () => {
+  const [mensaje, setMensaje] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
-  const [proyectos, setProyectos] = useState([]);
 
-  const {getAllProjects, projects} = useProject();
-
-  useEffect(() => {
-    if(projects != []) {
-      setProyectos(projects);
-    }
-  }, [projects])
-
-  useEffect(() => {
-    getAllProjects();
-  }, []);
-
-  const handleOptionsPress = (proyectoId) => {
-    navigate(`/proyecto-detalles/${proyectoId}`);
-  };
-
-  const handleCrearNuevoProyecto = () => {
-    navigate('/crear-proyecto');
+  const handleEnviarMensaje = () => {
+    console.log('Mensaje enviado:', mensaje);
+    // Aquí se puede implementar la lógica para enviar el mensaje al backend
+    // Después de enviar el mensaje, redirige a la página anterior
+    navigate(-1);
   };
 
   const menuItems = [
@@ -69,24 +54,16 @@ const HomeScreen = () => {
           </div>
         </nav>
         <section className="content">
-          <div className="home-container">
-            <h2 className="header">Proyectos disponibles</h2>
-            <div className="proyectos-list">
-              {proyectos.map((proyecto) => (
-                <div key={proyecto._id} className="proyecto-card">
-                  <h3 className="proyecto-title">Proyecto: {proyecto.nombre}</h3>
-                  <p className="proyecto-description">{proyecto.descripcion}</p>
-                  <button
-                    className="home-options-button"
-                    onClick={() => handleOptionsPress(proyecto._id)}
-                  >
-                    Gestionar proyecto
-                  </button>
-                </div>
-              ))}
-            </div>
-            <button className="create-project-button" onClick={handleCrearNuevoProyecto}>
-              Crear nuevo proyecto
+          <div className="crear-mensaje-container">
+            <textarea
+              className="text-input"
+              placeholder="Escribe tu mensaje aquí..."
+              value={mensaje}
+              onChange={(e) => setMensaje(e.target.value)}
+              rows={10}
+            />
+            <button className="boton-enviar" onClick={handleEnviarMensaje}>
+              Enviar Mensaje
             </button>
           </div>
         </section>
@@ -95,4 +72,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default CrearMensajePublicacionScreen;

@@ -15,7 +15,12 @@ import CrearReunionScreen from './CrearReunion';
 import ProjectDetailsScreen from './ProjectDetails';
 import ColaboradorDetailsScreen from './ColaboradorDetails';
 import ReunionDetailsScreen from './ReunionDetails';
-import './App.css';
+import ModificarTareasScreen from './ModificarTareas';
+import GestionarColaboradoresScreen from './GestionarColaboradores';
+import ForoScreen from './ForoScreen';
+import PublicacionDetailsScreen from './PublicacionDetails';
+import CrearMensajePublicacionScreen from './CrearMensajePublicacion';
+import CrearPublicacionScreen from './CrearPublicacion';
 
 function App() {
   return (
@@ -35,6 +40,14 @@ function App() {
                 <Route path="/crear-proyecto" element={<CrearProyectoScreen />} />
                 <Route path="/crear-reunion" element={<CrearReunionScreen />} />
                 <Route path="/proyecto-detalles/:proyectoId" element={<ProjectDetailsScreen />} />
+                <Route path="/colaborador-detalles/:colaboradorId" element={<ColaboradorDetailsScreen />} />
+                <Route path="/reunion-detalles/:reunionId" element={<ReunionDetailsScreen />} />
+                <Route path="/modificar-tareas/:proyectoId" element={<ModificarTareasScreen />} />
+                <Route path="/gestionar-colaboradores/:proyectoId" element={<GestionarColaboradoresScreen />} />
+                <Route path="/foro" element={<ForoScreen />} />
+                <Route path="/publicacion-detalles/:publicacionId" element={<PublicacionDetailsScreen />} />
+                <Route path="/crear-mensaje-publicacion" element={<CrearMensajePublicacionScreen />} />
+                <Route path="/crear-publicacion" element={<CrearPublicacionScreen />} />
                 {/* Aquí puedes agregar más rutas para nuevas pantallas en el futuro */}
               </Routes>
             </BrowserRouter>
@@ -42,6 +55,7 @@ function App() {
         </UserProvider>
       </AuthProvider>
     </div>
+
   );
 }
 

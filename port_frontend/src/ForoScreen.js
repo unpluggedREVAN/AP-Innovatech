@@ -2,34 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import './Home.css';
+import './ForoScreen.css';
 import './Menu.css'; 
-import projectData from './data.json'; // Datos de prueba
-import { useProject } from './contexts/proyectoContext';
+import forosData from './data_foros.json'; // Datos de prueba
 
-const HomeScreen = () => {
+const ForoScreen = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [proyectos, setProyectos] = useState([]);
-
-  const {getAllProjects, projects} = useProject();
+  const [publicaciones, setPublicaciones] = useState([]);
 
   useEffect(() => {
-    if(projects != []) {
-      setProyectos(projects);
-    }
-  }, [projects])
-
-  useEffect(() => {
-    getAllProjects();
+    setPublicaciones(forosData);
   }, []);
 
-  const handleOptionsPress = (proyectoId) => {
-    navigate(`/proyecto-detalles/${proyectoId}`);
+  const handleAbrirPublicacion = (publicacion) => {
+    navigate(`/publicacion-detalles/${publicacion._id}`);
   };
 
-  const handleCrearNuevoProyecto = () => {
-    navigate('/crear-proyecto');
+  const handleCrearPublicacion = () => {
+    navigate('/crear-publicacion');
   };
 
   const menuItems = [
@@ -69,24 +60,24 @@ const HomeScreen = () => {
           </div>
         </nav>
         <section className="content">
-          <div className="home-container">
-            <h2 className="header">Proyectos disponibles</h2>
-            <div className="proyectos-list">
-              {proyectos.map((proyecto) => (
-                <div key={proyecto._id} className="proyecto-card">
-                  <h3 className="proyecto-title">Proyecto: {proyecto.nombre}</h3>
-                  <p className="proyecto-description">{proyecto.descripcion}</p>
+          <div className="foro-container">
+            <h2 className="header">Publicaciones</h2>
+            <div className="publicaciones-list">
+              {publicaciones.map((publicacion) => (
+                <div key={publicacion._id} className="publicacion-card">
+                  <h3 className="publicacion-title">{publicacion.titulo}</h3>
+                  <p className="publicacion-tipo">Tipo: {publicacion.tipo}</p>
                   <button
-                    className="home-options-button"
-                    onClick={() => handleOptionsPress(proyecto._id)}
+                    className="abrir-button"
+                    onClick={() => handleAbrirPublicacion(publicacion)}
                   >
-                    Gestionar proyecto
+                    Abrir publicación
                   </button>
                 </div>
               ))}
             </div>
-            <button className="create-project-button" onClick={handleCrearNuevoProyecto}>
-              Crear nuevo proyecto
+            <button className="crear-button" onClick={handleCrearPublicacion}>
+              Crear Publicación
             </button>
           </div>
         </section>
@@ -95,4 +86,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default ForoScreen;
