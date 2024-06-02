@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginScreen from './Login';
+import RegisterScreen from './Register';
 import HomeScreen from './Home';
 import ColaboradoresScreen from './Colaboradores';
 import ReunionesScreen from './Reuniones';
@@ -21,6 +23,8 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route exact path="/" element={<LoginScreen />} />
+        <Route path="/register" element={<RegisterScreen />} />
         <Route path="/main" element={<HomeScreen />} />
         <Route path="/colaboradores" element={<ColaboradoresScreen />} />
         <Route path="/reuniones" element={<ReunionesScreen />} />
@@ -37,7 +41,6 @@ function App() {
         <Route path="/publicacion-detalles/:publicacionId" element={<PublicacionDetailsScreen />} />
         <Route path="/crear-mensaje-publicacion" element={<CrearMensajePublicacionScreen />} />
         <Route path="/crear-publicacion" element={<CrearPublicacionScreen />} />
-        <Route path="/" element={<HomeScreen />} />
       </Routes>
     </Router>
   );
