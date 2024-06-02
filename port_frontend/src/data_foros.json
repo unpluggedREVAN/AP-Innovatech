@@ -1,0 +1,45 @@
+[
+    {
+      "_id": "8815v0vw614w639zo7j15v1",
+      "tipo": "técnico",
+      "titulo": "Mejores prácticas para el desarrollo backend",
+      "mensajes": [],
+      "idproyecto": "6611a7eb234b078c3fd42ba1"
+    },
+    {
+      "_id": "8926w1wx715x740ap8k26w2",
+      "tipo": "diseño",
+      "titulo": "Tendencias de diseño UI/UX en 2023",
+      "mensajes": [],
+      "idproyecto": "6622b8fc345c189d4ee53cc2"
+    },
+    {
+      "_id": "81037x2xy816y851bq9l37x3",
+      "tipo": "general",
+      "titulo": "Estrategias de trabajo remoto efectivas",
+      "mensajes": [],
+      "idproyecto": "6733c9gd456d29ae5ff64dd3"
+    },
+    {
+      "_id": "81148y3yz917z962cr0m48y4",
+      "tipo": "finanzas",
+      "titulo": "Optimización de presupuestos en proyectos de IT",
+      "mensajes": [],
+      "idproyecto": "6844dahd567e3abf6gg75ee4"
+    },
+    {
+      "_id": "81259z4z018a073ds1n59z5",
+      "tipo": "innovación",
+      "titulo": "Inteligencia Artificial en la gestión de proyectos",
+      "mensajes": [],
+      "idproyecto": "6955ebie678f4dch7hh86ff5"
+    },
+    {
+      "_id": "81360a5a119b184et2o60a6",
+      "tipo": "seguridad",
+      "titulo": "Mejoras en la seguridad de aplicaciones web",
+      "mensajes": [],
+      "idproyecto": "7066fckf789g5dei8ii97gg6"
+    }
+  ]
+  

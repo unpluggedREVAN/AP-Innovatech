@@ -1,0 +1,30 @@
+@import './Menu.css';
+
+.crear-mensaje-container {
+    padding: 20px;
+  }
+  
+  .text-input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: vertical;
+  }
+  
+  .boton-enviar {
+    background-color: #4e9ec5;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .boton-enviar:hover {
+    background-color: #3a8bb5;
+  }
+  

@@ -11,7 +11,10 @@ import ProjectDetailsScreen from './ProjectDetails';
 import ColaboradorDetailsScreen from './ColaboradorDetails';
 import ReunionDetailsScreen from './ReunionDetails';
 import ModificarTareasScreen from './ModificarTareas';
-import GestionarColaboradoresScreen from './GestionarColaboradores'; // Importar la nueva pantalla
+import GestionarColaboradoresScreen from './GestionarColaboradores';
+import ForoScreen from './ForoScreen';
+import PublicacionDetailsScreen from './PublicacionDetails';
+import CrearMensajePublicacionScreen from './CrearMensajePublicacion';
 
 function App() {
   return (
@@ -28,7 +31,10 @@ function App() {
         <Route path="/colaborador-detalles/:colaboradorId" element={<ColaboradorDetailsScreen />} />
         <Route path="/reunion-detalles/:reunionId" element={<ReunionDetailsScreen />} />
         <Route path="/modificar-tareas/:proyectoId" element={<ModificarTareasScreen />} />
-        <Route path="/gestionar-colaboradores/:proyectoId" element={<GestionarColaboradoresScreen />} /> {/* Nueva ruta */}
+        <Route path="/gestionar-colaboradores/:proyectoId" element={<GestionarColaboradoresScreen />} />
+        <Route path="/foro" element={<ForoScreen />} />
+        <Route path="/publicacion-detalles/:publicacionId" element={<PublicacionDetailsScreen />} />
+        <Route path="/crear-mensaje-publicacion" element={<CrearMensajePublicacionScreen />} />
         <Route path="/" element={<HomeScreen />} />
       </Routes>
     </Router>

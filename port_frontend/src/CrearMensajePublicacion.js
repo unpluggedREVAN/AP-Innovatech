@@ -1,30 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import './Reuniones.css';
+import './CrearMensajePublicacion.css';
 import './Menu.css'; // Importar los estilos del menú y barra superior
-import reunionesData from './data_reuniones.json'; // Datos de prueba de las reuniones
 
-const ReunionesScreen = () => {
+const CrearMensajePublicacionScreen = () => {
+  const [mensaje, setMensaje] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
-  const [reuniones, setReuniones] = useState([]);
 
-  useEffect(() => {
-    setReuniones(reunionesData);
-  }, []);
-
-  const handleDetallesReunion = (reunionId) => {
-    navigate(`/reunion-detalles/${reunionId}`);
-  };
-
-  const handleCrearNuevaReunion = () => {
-    navigate('/crear-reunion');
-  };
-
-  const handleIrForos = () => {
-    navigate('/foro');
+  const handleEnviarMensaje = () => {
+    console.log('Mensaje enviado:', mensaje);
+    // Aquí se puede implementar la lógica para enviar el mensaje al backend
+    // Después de enviar el mensaje, redirige a la página anterior
+    navigate(-1);
   };
 
   const menuItems = [
@@ -64,28 +54,16 @@ const ReunionesScreen = () => {
           </div>
         </nav>
         <section className="content">
-          <div className="reuniones-container">
-            <h2 className="header">Reuniones disponibles</h2>
-            <div className="reuniones-list">
-              {reuniones.map((reunion) => (
-                <div key={reunion._id} className="reunion-card">
-                  <h3 className="reunion-title">Tema: {reunion.tema}</h3>
-                  <p className="reunion-info">Fecha: {reunion.fecha}</p>
-                  <p className="reunion-info">Medio: {reunion.medio}</p>
-                  <button
-                    className="reuniones-options-button"
-                    onClick={() => handleDetallesReunion(reunion._id)}
-                  >
-                    Detalles de la reunión
-                  </button>
-                </div>
-              ))}
-            </div>
-            <button className="create-reunion-button" onClick={handleCrearNuevaReunion}>
-              Crear nueva reunión
-            </button>
-            <button className="go-to-forum-button" onClick={handleIrForos}>
-              Ir al foro
+          <div className="crear-mensaje-container">
+            <textarea
+              className="text-input"
+              placeholder="Escribe tu mensaje aquí..."
+              value={mensaje}
+              onChange={(e) => setMensaje(e.target.value)}
+              rows={10}
+            />
+            <button className="boton-enviar" onClick={handleEnviarMensaje}>
+              Enviar Mensaje
             </button>
           </div>
         </section>
@@ -94,4 +72,4 @@ const ReunionesScreen = () => {
   );
 };
 
-export default ReunionesScreen;
+export default CrearMensajePublicacionScreen;
