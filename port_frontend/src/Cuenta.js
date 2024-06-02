@@ -10,23 +10,33 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import './Cuenta.css';
 import './Menu.css'; // Importar los estilos del menú y barra superior
+import { useAuth } from './contexts/authContext';
+import { useUser } from './contexts/userContext';
 
 const CuentaScreen = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [colaborador, setColaborador] = useState({});
 
+  const {id} = useAuth();
+  const {getInfoUser, infoUser, editUser} = useUser();  
+
+  useEffect(() => {
+    if(infoUser != null){
+      if(infoUser.estado == 0){
+        infoUser.estadoString = "Libre";
+      }
+      else{
+        infoUser.estadoString = "Ocupado";
+      }
+      setColaborador(infoUser);
+    }
+  }, [infoUser])
+
   useEffect(() => {
     // Simulamos la carga de datos con JSON o una llamada a la API
-    fetchUserData();
+    getInfoUser(id);
   }, []);
-
-  const fetchUserData = async () => {
-    // Reemplazar esto con una llamada a la API real
-    const response = await fetch('/path/to/colab_data.json');
-    const data = await response.json();
-    setColaborador(data[0]); // Simulamos obtener el primer colaborador
-  };
 
   const handleInputChange = (name, value) => {
     setColaborador(prevState => ({ ...prevState, [name]: value }));
@@ -46,14 +56,19 @@ const CuentaScreen = () => {
   const handleSaveChanges = async () => {
     console.log('Guardar cambios', colaborador);
     // Simulamos la llamada a la API para guardar cambios
-    await fetch(`/path/to/colab/${colaborador.idUser}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(colaborador),
-    });
-    alert('Cambio realizado correctamente.');
+    var estadoVar = 1;
+    if(colaborador.estadoString == "Libre"){
+      estadoVar = 0;
+    }
+    const data = {
+      nombreCompleto : colaborador.nombreCompleto,
+      cedula : colaborador.cedula,
+      email : colaborador.email,
+      departamentoTrabajo : colaborador.departamentoTrabajo,
+      telefono : colaborador.telefono,
+      estado : estadoVar
+    }
+    editUser(data, id)
   };
 
   const menuItems = [
@@ -117,7 +132,7 @@ const CuentaScreen = () => {
               <input
                 className="input"
                 type="email"
-                value={colaborador.correoElectronico || ''}
+                value={colaborador.email || ''}
                 onChange={(e) => handleInputChange('correoElectronico', e.target.value)}
                 placeholder="Correo Electrónico"
               />
@@ -142,7 +157,7 @@ const CuentaScreen = () => {
               <input
                 className="input"
                 type="text"
-                value={colaborador.estado || ''}
+                value={colaborador.estadoString || ''}
                 onChange={(e) => handleInputChange('estado', e.target.value)}
                 placeholder="Estado"
               />

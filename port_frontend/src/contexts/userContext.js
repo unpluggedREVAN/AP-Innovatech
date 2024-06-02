@@ -13,6 +13,7 @@ export const useUser = () => {
 
 export const UserProvider = ({children}) => {
     const [colabs, setColabs] = useState([]);
+    const [infoUser, setInfoUser] = useState(null);
 
     const infoAllUsers = async () =>{
         try{
@@ -24,10 +25,34 @@ export const UserProvider = ({children}) => {
         }
     }
 
+    const getInfoUser = async (id) => {
+        try{
+            const res = await getUserRequest(id)
+            setInfoUser(res.data.data);
+            console.log(res.data.data)
+        } catch(error){
+            console.log(error)
+            alert("Error")
+        }
+    }
+
+    const editUser = async (data, id) => {
+        try{
+            const res = await editUserRequest(data, id)
+            console.log(res)
+            alert(res.data.message)
+        } catch(error) {
+            console.log(error)
+            alert("Error")
+        }
+    }
     return (
         <UserContext.Provider value={{
             infoAllUsers,
-            colabs
+            colabs,
+            getInfoUser,
+            infoUser, 
+            editUser
         }}>
             {children}
         </UserContext.Provider>

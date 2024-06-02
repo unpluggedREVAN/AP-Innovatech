@@ -32,7 +32,7 @@ export const login = async (req, res) => {
             //Crear token de validación
 
             //Mandar resultado
-            return res.status(200).send({message : "Login realizado existosamente."})
+            return res.status(200).send({message : "Login realizado existosamente.", id : usuario._id})
         } else {
             //Autenticacion fallida
             return res.status(400).send({message : "Correo electrónico o contraseña incorrectos."})
