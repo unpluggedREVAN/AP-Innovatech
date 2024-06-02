@@ -1,0 +1,81 @@
+@import './Menu.css';
+
+.crear-proyecto-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.header {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.crear-proyecto-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+}
+
+.label {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.input-form {
+  height: 40px;
+  border: 1px solid gray;
+  margin-left: 50px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+textarea.input {
+  height: 100px;
+  resize: none;
+}
+
+.colaborador-container {
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.colaborador-seleccionado {
+  background-color: #e0f7ff;
+}
+
+.colaborador-texto {
+  font-size: 16px;
+}
+
+.boton-crear {
+  background-color: #4e9ec5;
+  padding: 15px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  margin-top: 20px;
+}
+
+.boton-crear:hover {
+  background-color: #3a8bb5;
+}
+
+.label-tareas {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  margin-top: 5px;
+}
