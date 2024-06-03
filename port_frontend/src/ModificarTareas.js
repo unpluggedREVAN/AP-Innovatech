@@ -11,7 +11,7 @@ import './Menu.css';
 const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
   const [nombreTarea, setNombreTarea] = useState(tarea.nombreTarea);
   const [storyPoints, setStoryPoints] = useState(tarea.storyPoints.toString());
-  const [estado, setEstado] = useState(tarea.estado);
+  const [descripcion, setDescripcion] = useState(tarea.descripcion || '');
   const [responsable, setResponsable] = useState(tarea.responsable); 
 
   return (
@@ -30,11 +30,11 @@ const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
         placeholder="Story Points"
         type="number"
       />
-      <input
-        className="modificar-tarea-input"
-        value={estado}
-        onChange={(e) => setEstado(e.target.value)}
-        placeholder="Estado"
+      <textarea
+        className="modificar-tarea-textarea"
+        value={descripcion}
+        onChange={(e) => setDescripcion(e.target.value)}
+        placeholder="Descripción"
       />
       <input
         className="modificar-tarea-input"
@@ -45,7 +45,7 @@ const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
       />
       <button
         className="modificar-tarea-button modificar-tarea-guardar"
-        onClick={() => onGuardar({ nombreTarea, storyPoints, estado, responsable, tarea })}
+        onClick={() => onGuardar({ nombreTarea, storyPoints, descripcion, responsable, tarea })}
       >
         Guardar
       </button>
@@ -60,7 +60,7 @@ const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
 const CrearTareaForm = ({ onGuardar, onCancelar, colaboradores }) => {
   const [nombreTarea, setNombreTarea] = useState('');
   const [storyPoints, setStoryPoints] = useState('');
-  const [estado, setEstado] = useState('');
+  const [descripcion, setDescripcion] = useState('');
   const [responsable, setResponsable] = useState('');
 
   return (
@@ -79,11 +79,11 @@ const CrearTareaForm = ({ onGuardar, onCancelar, colaboradores }) => {
         placeholder="Story Points"
         type="number"
       />
-      <input
-        className="crear-tarea-input"
-        value={estado}
-        onChange={(e) => setEstado(e.target.value)}
-        placeholder="Estado"
+      <textarea
+        className="crear-tarea-textarea"
+        value={descripcion}
+        onChange={(e) => setDescripcion(e.target.value)}
+        placeholder="Descripción"
       />
       <label className="crear-tarea-label">Responsable:</label>
       <div className="crear-tarea-colaboradores-container">
@@ -99,7 +99,7 @@ const CrearTareaForm = ({ onGuardar, onCancelar, colaboradores }) => {
       </div>
       <button
         className="crear-tarea-button crear-tarea-guardar"
-        onClick={() => onGuardar({ nombreTarea, storyPoints, estado, responsable })}
+        onClick={() => onGuardar({ nombreTarea, storyPoints, descripcion, responsable })}
       >
         Guardar
       </button>
@@ -180,7 +180,7 @@ const ModificarTareasScreen = () => {
             <h2 className="modificar-tareas-titulo">Modificar Tareas del Proyecto</h2>
             {tareas.map((tarea, index) => (
               <div key={index} className="modificar-tareas-tarea-container">
-                <p>{tarea.nombreTarea} - SP: {tarea.storyPoints} - Estado: {tarea.estado} - Responsable: {tarea.responsable}</p>
+                <p>{tarea.nombreTarea} - SP: {tarea.storyPoints} - Descripción: {tarea.descripcion} - Responsable: {tarea.responsable}</p>
                 <div className="modificar-tareas-botones-container">
                   <button className="modificar-tareas-button modificar-tareas-modificar" onClick={() => setTareaAEditar(tarea)}>
                     Modificar
