@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import './Reuniones.css';
-import './Menu.css'; 
+import styles from './Reuniones.module.css';
 import reunionesData from './data_reuniones.json'; // Datos de prueba de las reuniones
 
 const ReunionesScreen = () => {
@@ -36,44 +35,44 @@ const ReunionesScreen = () => {
   ];
 
   return (
-    <div className="dashboard">
-      <aside className="sidebar">
+    <div className={styles.dashboard}>
+      <aside className={styles.sidebar}>
         {menuItems.map(item => (
-          <Link key={item.name} to={item.path} className={`menu-item ${location.pathname === item.path ? 'active' : ''}`}>
-            <FontAwesomeIcon icon={item.icon} className="menu-icon" />
+          <Link key={item.name} to={item.path} className={`${styles.menuItem} ${location.pathname === item.path ? styles.active : ''}`}>
+            <FontAwesomeIcon icon={item.icon} className={styles.menuIcon} />
             {item.name}
           </Link>
         ))}
       </aside>
       
-      <div className="main-content">
-        <nav className="navbar">
-          <div className="logo-container">
+      <div className={styles.mainContent}>
+        <nav className={styles.navbar}>
+          <div className={styles.logoContainer}>
             <Link to="/main">
               <img 
                 src={`${process.env.PUBLIC_URL}/logo_letra_nofondo.png`} 
                 alt="InnovaTech Logo" 
-                className="logo"
+                className={styles.logo}
               />
             </Link>
           </div>
-          <div className="user-container">
-            <Link to="/cuenta" className="account-info-btn">
-              <FontAwesomeIcon icon={faUserCircle} className="menu-icon" />
+          <div className={styles.userContainer}>
+            <Link to="/cuenta" className={styles.accountInfoBtn}>
+              <FontAwesomeIcon icon={faUserCircle} className={styles.menuIcon} />
             </Link>
           </div>
         </nav>
-        <section className="content">
-          <div className="reuniones-container">
-            <h2 className="header">Reuniones disponibles</h2>
-            <div className="reuniones-list">
+        <section className={styles.content}>
+          <div className={styles.reunionesContainer}>
+            <h2 className={styles.header}>Reuniones disponibles</h2>
+            <div className={styles.reunionesList}>
               {reuniones.map((reunion) => (
-                <div key={reunion._id} className="reunion-card">
-                  <h3 className="reunion-title">Tema: {reunion.tema}</h3>
-                  <p className="reunion-info">Fecha: {reunion.fecha}</p>
-                  <p className="reunion-info">Medio: {reunion.medio}</p>
+                <div key={reunion._id} className={styles.reunionCard}>
+                  <h3 className={styles.reunionTitle}>Tema: {reunion.tema}</h3>
+                  <p className={styles.reunionInfo}>Fecha: {reunion.fecha}</p>
+                  <p className={styles.reunionInfo}>Medio: {reunion.medio}</p>
                   <button
-                    className="reuniones-options-button"
+                    className={styles.reunionesOptionsButton}
                     onClick={() => handleDetallesReunion(reunion._id)}
                   >
                     Detalles de la reunión
@@ -81,10 +80,10 @@ const ReunionesScreen = () => {
                 </div>
               ))}
             </div>
-            <button className="create-reunion-button" onClick={handleCrearNuevaReunion}>
+            <button className={styles.createReunionButton} onClick={handleCrearNuevaReunion}>
               Crear nueva reunión
             </button>
-            <button className="go-to-forum-button" onClick={handleIrForos}>
+            <button className={styles.goToForumButton} onClick={handleIrForos}>
               Ir al foro
             </button>
           </div>

@@ -8,8 +8,7 @@ import {
   faChartBar,
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
-import './Cuenta.css';
-import './Menu.css'; 
+import styles from './Cuenta.module.css'; 
 
 const CuentaScreen = () => {
   const location = useLocation();
@@ -65,91 +64,91 @@ const CuentaScreen = () => {
   ];
 
   return (
-    <div className="dashboard">
-      <aside className="sidebar">
+    <div className={styles.dashboard}>
+      <aside className={styles.sidebar}>
         {menuItems.map(item => (
-          <Link key={item.name} to={item.path} className={`menu-item ${location.pathname === item.path ? 'active' : ''}`}>
-            <FontAwesomeIcon icon={item.icon} className="menu-icon" />
+          <Link key={item.name} to={item.path} className={`${styles.menuItem} ${location.pathname === item.path ? styles.active : ''}`}>
+            <FontAwesomeIcon icon={item.icon} className={styles.menuIcon} />
             {item.name}
           </Link>
         ))}
       </aside>
       
-      <div className="main-content">
-        <nav className="navbar">
-          <div className="logo-container">
+      <div className={styles.mainContent}>
+        <nav className={styles.navbar}>
+          <div className={styles.logoContainer}>
             <Link to="/main">
               <img 
                 src={`${process.env.PUBLIC_URL}/logo_letra_nofondo.png`} 
                 alt="InnovaTech Logo" 
-                className="logo"
+                className={styles.logo}
               />
             </Link>
           </div>
-          <div className="user-container">
-            <Link to="/cuenta" className="account-info-btn">
-              <FontAwesomeIcon icon={faUserCircle} className="menu-icon" />
+          <div className={styles.userContainer}>
+            <Link to="/cuenta" className={styles.accountInfoBtn}>
+              <FontAwesomeIcon icon={faUserCircle} className={styles.menuIcon} />
             </Link>
           </div>
         </nav>
-        <section className="content">
-          <div className="cuenta-container">
-            <h2 className="header">Información de la cuenta</h2>
-            <div className="cuenta-form">
-              <label className="label">Nombre:</label>
+        <section className={styles.content}>
+          <div className={styles.cuentaContainer}>
+            <h2 className={styles.header}>Información de la cuenta</h2>
+            <div className={styles.cuentaForm}>
+              <label className={styles.label}>Nombre:</label>
               <input
-                className="input"
+                className={styles.input}
                 type="text"
                 value={colaborador.nombreCompleto || ''}
                 onChange={(e) => handleInputChange('nombreCompleto', e.target.value)}
                 placeholder="Nombre Completo"
               />
-              <label className="label">Cédula:</label>
+              <label className={styles.label}>Cédula:</label>
               <input
-                className="input"
+                className={styles.input}
                 type="text"
                 value={colaborador.cedula || ''}
                 onChange={(e) => handleInputChange('cedula', e.target.value)}
                 placeholder="Cédula"
                 keyboardType="numeric"
               />
-              <label className="label">Correo electrónico:</label>
+              <label className={styles.label}>Correo electrónico:</label>
               <input
-                className="input"
+                className={styles.input}
                 type="email"
                 value={colaborador.correoElectronico || ''}
                 onChange={(e) => handleInputChange('correoElectronico', e.target.value)}
                 placeholder="Correo Electrónico"
               />
-              <label className="label">Departamento:</label>
+              <label className={styles.label}>Departamento:</label>
               <input
-                className="input"
+                className={styles.input}
                 type="text"
                 value={colaborador.departamentoTrabajo || ''}
                 onChange={(e) => handleInputChange('departamentoTrabajo', e.target.value)}
                 placeholder="Departamento de Trabajo"
               />
-              <label className="label">Teléfono:</label>
+              <label className={styles.label}>Teléfono:</label>
               <input
-                className="input"
+                className={styles.input}
                 type="text"
                 value={colaborador.telefono || ''}
                 onChange={(e) => handleInputChange('telefono', e.target.value)}
                 placeholder="Teléfono"
                 keyboardType="phone-pad"
               />
-              <label className="label">Estado:</label>
+              <label className={styles.label}>Estado:</label>
               <input
-                className="input"
+                className={styles.input}
                 type="text"
                 value={colaborador.estado || ''}
                 onChange={(e) => handleInputChange('estado', e.target.value)}
                 placeholder="Estado"
               />
-              <button className="button" onClick={handleSaveChanges}>
+              <button className={styles.button} onClick={handleSaveChanges}>
                 Guardar Cambios
               </button>
-              <button className="button" onClick={handleLogOut}>
+              <button className={styles.button} onClick={handleLogOut}>
                 Cerrar sesión
               </button>
             </div>
