@@ -20,7 +20,7 @@ export const createProject = async (req, res) => {
 export const getProject = async (req, res) => {
     try{
         //Buscar el proyecto
-        const projectFound = await Project.findById(req.params.id).populate('responsable').populate('colaboradores');
+        const projectFound = await Project.findById(req.params.id).populate('responsable').populate('colaboradores').populate('tareas');
 
         //Definir si el proyecto existe
         if(!projectFound){

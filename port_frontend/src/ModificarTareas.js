@@ -6,10 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './ModificarTareas.css';
 import './Menu.css'; 
+import {useProject} from './contexts/proyectoContext'
+import { useTask } from './contexts/tareaContext'; 
 
 // Componente para el formulario de modificación de una tarea específica
 const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
-  const [nombreTarea, setNombreTarea] = useState(tarea.nombreTarea);
+  const [nombreTarea, setNombreTarea] = useState(tarea.nombre);
   const [storyPoints, setStoryPoints] = useState(tarea.storyPoints.toString());
   const [estado, setEstado] = useState(tarea.estado);
   const [responsable, setResponsable] = useState(tarea.responsable); 
@@ -99,7 +101,7 @@ const CrearTareaForm = ({ onGuardar, onCancelar, colaboradores }) => {
       </div>
       <button
         className="crear-tarea-button crear-tarea-guardar"
-        onClick={() => onGuardar({ nombreTarea, storyPoints, estado, responsable })}
+        onClick={() => onGuardar({ nombre : nombreTarea, storyPoints : storyPoints, estado : 0, responsable : responsable, descripcion : estado })}
       >
         Guardar
       </button>
@@ -118,12 +120,18 @@ const ModificarTareasScreen = () => {
   const [mostrarFormCrear, setMostrarFormCrear] = useState(false);
   const [colaboradores, setColaboradores] = useState([]);
 
+  const {getProject, project, editProject} = useProject();
+  const {createTask, idTask, setIdTask} = useTask();
+
   useEffect(() => {
-    const proyectoEncontrado = projectData.find((proj) => proj._id === proyectoId);
-    if (proyectoEncontrado) {
-      setTareas(proyectoEncontrado.tareas || []);
+    if(project != []) {
+      setColaboradores(project.colaboradores)
+      setTareas(project.tareas);
     }
-    setColaboradores(colabData);
+  }, [project])
+
+  useEffect(() => {
+    getProject(proyectoId);
   }, [proyectoId]);
 
   const handleGuardarModificacion = async (modificaciones) => {
@@ -135,9 +143,20 @@ const ModificarTareasScreen = () => {
   };
 
   const handleAgregarTarea = (nuevaTarea) => {
-    setTareas([...tareas, nuevaTarea]);
+    nuevaTarea.proyecto = proyectoId;
+    createTask(nuevaTarea)
+    //setTareas([...tareas, nuevaTarea]);
     setMostrarFormCrear(false); // Cerrar el formulario de creación
   };
+
+  useEffect(() => {
+    if(idTask != null) {
+      project.tareas.push(idTask)
+      editProject(proyectoId, project)
+      getProject(proyectoId)
+      setIdTask(null);
+    }
+  }, [idTask])
 
   const menuItems = [
     { name: 'Home', icon: faHome, path: '/main' },
@@ -180,7 +199,7 @@ const ModificarTareasScreen = () => {
             <h2 className="modificar-tareas-titulo">Modificar Tareas del Proyecto</h2>
             {tareas.map((tarea, index) => (
               <div key={index} className="modificar-tareas-tarea-container">
-                <p>{tarea.nombreTarea} - SP: {tarea.storyPoints} - Estado: {tarea.estado} - Responsable: {tarea.responsable}</p>
+                <p>{tarea.nombre} - SP: {tarea.storyPoints} - Estado: {tarea.estado} - Responsable: {tarea.responsable}</p>
                 <div className="modificar-tareas-botones-container">
                   <button className="modificar-tareas-button modificar-tareas-modificar" onClick={() => setTareaAEditar(tarea)}>
                     Modificar

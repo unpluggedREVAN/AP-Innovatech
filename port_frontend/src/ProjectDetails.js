@@ -15,7 +15,7 @@ const ProjectDetailsScreen = () => {
   const [tareasProject, setTareas] = useState([]);
   const [showContent, setShowContent] = useState(false);
 
-  const {getProject, project} = useProject();
+  const {getProject, project, deleteProject } = useProject();
 
   useEffect(() => {
     if(project != null) {
@@ -26,7 +26,6 @@ const ProjectDetailsScreen = () => {
         project.estadoString = "Finalizado"
       }
       setProyecto(project);
-      console.log(proyecto)
     }
   }, [project])
 
@@ -46,8 +45,8 @@ const ProjectDetailsScreen = () => {
   const handleDeleteProject = () => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este proyecto?")) {
       console.log('Eliminar proyecto');
+      deleteProject(proyectoId)
       // Simulación de la solicitud de eliminación
-      alert('Proyecto eliminado');
       navigate('/main');
     }
   };

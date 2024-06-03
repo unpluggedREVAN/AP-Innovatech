@@ -52,3 +52,24 @@ export const deleteUser = async (req, res) => {
         return res.status(500).send({message : err.message})
     }
 }
+
+export const userChangeStatus = async (req, res) =>{
+    try{
+        //Buscar el usuario
+        const userFound = await User.findById(req.params.id)
+
+        if(!userFound) {
+            return res.status(404).send({message : "Usuario no encontrado"})
+        }
+
+        if(req.params.status == 0){
+            const userUpdated = await User.findByIdAndUpdate(req.params.id, {estado : 0}, {new : true, runValidators : true})
+        } else{
+            const userUpdated = await User.findByIdAndUpdate(req.params.id, {estado : 1}, {new : true, runValidators : true})
+        }
+
+        return res.status(200).send({message : "Cambio de estado listo"})
+    } catch(err){
+        return res.status(500).send({message : err.message})
+    }
+}

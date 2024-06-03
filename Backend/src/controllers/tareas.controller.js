@@ -9,7 +9,7 @@ export const createTask = async (req, res) => {
         await tarea.save();
 
         //Enviar respuesta
-        return res.status(201).send({message : "Tarea creada exitosamente", data : tarea})
+        return res.status(201).send({message : "Tarea creada exitosamente", data : tarea._id})
     } catch (err) {
         return res.status(500).send({message : err.message})
     }

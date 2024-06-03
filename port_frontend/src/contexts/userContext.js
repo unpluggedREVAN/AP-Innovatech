@@ -1,5 +1,5 @@
 import {createContext, useState, useContext, useEffect} from 'react'
-import {editUserRequest, getUserRequest, infoAllUsersRequest, deleteUserRequest} from '../api/users.js'
+import {editUserRequest, getUserRequest, infoAllUsersRequest, deleteUserRequest, changeUserStatusRequest} from '../api/users.js'
 
 export const UserContext = createContext();
 
@@ -39,8 +39,17 @@ export const UserProvider = ({children}) => {
     const editUser = async (data, id) => {
         try{
             const res = await editUserRequest(data, id)
-            console.log(res)
             alert(res.data.message)
+        } catch(error) {
+            console.log(error)
+            alert("Error")
+        }
+    }
+
+    const changeStatusUser = async (id, status) => {
+        try{
+            const res = await changeUserStatusRequest(id, status)
+            console.log("Change status: ", res.data)
         } catch(error) {
             console.log(error)
             alert("Error")
@@ -52,7 +61,8 @@ export const UserProvider = ({children}) => {
             colabs,
             getInfoUser,
             infoUser, 
-            editUser
+            editUser,
+            changeStatusUser
         }}>
             {children}
         </UserContext.Provider>

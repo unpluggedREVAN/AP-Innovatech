@@ -29,6 +29,16 @@ export const ProjectProvider = ({children}) => {
         }
     }
 
+    const editProject = async (id, data) => {
+        try{
+            const res = await (editProjectRequest(data, id))
+            console.log(res.data)
+        } catch(error){
+            alert("Error")
+            console.log(error)
+        }
+    }
+
     const getProject = async (id) => {
         try{
             const res = await getProjectRequest(id);
@@ -48,6 +58,16 @@ export const ProjectProvider = ({children}) => {
             alert("Error")
         }
     }
+
+    const deleteProject = async (idProject) => {
+        try{
+            const res = await deleteProjectRequest(idProject)
+            alert(res.data.message)
+        } catch(error){
+            console.log(error)
+            alert("Error")
+        }
+    }
     return (
         <ProjectContext.Provider value={{
             createProject,
@@ -55,7 +75,10 @@ export const ProjectProvider = ({children}) => {
             getAllProjects,
             projects,
             getProject,
-            project
+            project,
+            setProject,
+            editProject, 
+            deleteProject
         }}>
             {children}
         </ProjectContext.Provider>

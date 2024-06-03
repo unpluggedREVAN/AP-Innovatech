@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './GestionarColaboradores.css';
 import './Menu.css'; 
+import { useUser } from './contexts/userContext';
+import { useProject } from './contexts/proyectoContext';
+import {useAuth} from './contexts/authContext';
 
 const GestionarColaboradoresScreen = () => {
   const { proyectoId } = useParams();
@@ -17,17 +20,29 @@ const GestionarColaboradoresScreen = () => {
   const [colaboradoresActuales, setColabActuales] = useState([]);
   const [proyecto, setProyecto] = useState({});
 
+  const {infoAllUsers, colabs, changeStatusUser} = useUser();
+  const {getProject, project, editProject} = useProject();
+  const {id} = useAuth();
+
   useEffect(() => {
-    const colabFecthData = async () => {
-      // Simular fetch de datos
-      const responseColab = colaboradoresData.filter(colab => colab.estado === 'libre');
-      const responseProject = projectData.find(proj => proj._id === proyectoId);
-      setColaboradores(responseColab);
-      setColabActuales(responseProject.colaboradores);
-      setProyecto(responseProject);
-      console.log("ColabActuales:", responseProject.colaboradores);
-    };
-    colabFecthData();
+    if (project != []){
+      setProyecto(project)
+      project.colaboradores.forEach((colab) => {
+        if(!colaboradoresActuales.includes(colab._id)){
+          setColabActuales([...colaboradoresActuales, colab._id])
+        }
+      })
+    }
+  }, [project])
+
+  useEffect(() => {
+    if(colabs != []) {
+      setColaboradores(colabs)
+    }
+  }, [colabs])
+  useEffect(() => {
+    infoAllUsers(id);
+    getProject(proyectoId);
   }, [proyectoId]);
 
   // Función para manejar la selección/deselección de colaboradores
@@ -40,9 +55,23 @@ const GestionarColaboradoresScreen = () => {
 
   // Función para manejar el guardado de cambios
   const handleGuardarCambios = async () => {
-    console.log('Colaboradores seleccionados para el proyecto:', colaboradoresActuales);
-    // Aquí se implementaría la lógica para actualizar la asignación de colaboradores en el backend
-    // Simulación de cambio de estado de colaboradores
+    //console.log('Colaboradores seleccionados para el proyecto:', colaboradoresActuales);
+    //Cambiar el estado de todos los usuario
+    console.log("Colaboradores libres: ", colaboradoresLibres)
+    console.log("Colaboradores elegidos: ", colaboradoresActuales)
+    //Colaboradores disponibles
+    colaboradoresLibres.forEach((idColab) => {
+      console.log("Colaborador: ", idColab._id)
+      changeStatusUser(idColab._id, 0);
+    })
+    //Colaboradores en el proyecto
+    colaboradoresActuales.forEach((idColab) => {
+      console.log("Colaborador: ", idColab)
+      changeStatusUser(idColab, 1)
+    })
+
+    //Editar los colaboradores del proyecto
+    editProject(proyectoId, {colaboradores : colaboradoresActuales})
     setColabActuales([]);
   };
 
