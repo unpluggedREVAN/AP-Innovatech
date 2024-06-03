@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Register.css';
+import styles from './Register.module.css';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterScreen = () => {
@@ -27,13 +27,13 @@ const RegisterScreen = () => {
   };
   
   return (
-    <div className="container">
-      <img src="/logo_letra_nofondo.png" className="logo" alt="InnovaTech Logo" />
-      <h2 className="header">Registrarse</h2>
+    <div className={styles.container}>
+      <img src="/logo_letra_nofondo.png" className={styles.logo} alt="InnovaTech Logo" />
+      <h2 className={styles.header}>Registrarse</h2>
 
       <input 
         type="text" 
-        className="input" 
+        className={styles.input} 
         onChange={(e) => setFullName(e.target.value)} 
         value={fullName} 
         placeholder="Nombre Completo:" 
@@ -41,7 +41,7 @@ const RegisterScreen = () => {
       />
       <input 
         type="email" 
-        className="input" 
+        className={styles.input} 
         onChange={(e) => setEmail(e.target.value)} 
         value={email} 
         placeholder="Correo Electrónico:" 
@@ -49,21 +49,21 @@ const RegisterScreen = () => {
       />
       <input 
         type="text" 
-        className="input" 
+        className={styles.input} 
         onChange={(e) => setCedula(e.target.value)} 
         value={cedula} 
         placeholder="Cédula:" 
       />
       <input 
         type="text" 
-        className="input" 
+        className={styles.input} 
         onChange={(e) => setDepartamentoTrabajo(e.target.value)} 
         value={departamentoTrabajo} 
         placeholder="Departamento de Trabajo:" 
       />
       <input 
         type="text" 
-        className="input" 
+        className={styles.input} 
         onChange={(e) => setTelefono(e.target.value)} 
         value={telefono} 
         placeholder="Teléfono:" 
@@ -71,7 +71,7 @@ const RegisterScreen = () => {
       />
       <input 
         type="password" 
-        className="input" 
+        className={styles.input} 
         onChange={(e) => setPassword(e.target.value)} 
         value={password} 
         placeholder="Contraseña:" 
@@ -79,14 +79,14 @@ const RegisterScreen = () => {
       />
       <input 
         type="password" 
-        className="input" 
+        className={styles.input} 
         onChange={(e) => setConfirmPassword(e.target.value)} 
         value={confirmPassword} 
         placeholder="Reescribir Contraseña:" 
         secureTextEntry 
       />
 
-      <button className="button" onClick={handleRegister}>
+      <button className={styles.button} onClick={handleRegister}>
         Registrarse
       </button>
     </div>

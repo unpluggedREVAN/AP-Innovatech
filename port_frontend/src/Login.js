@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Login.css';
+import styles from './Login.module.css';
 import { useNavigate } from 'react-router-dom';
 
 const LoginScreen = () => {
@@ -20,36 +20,36 @@ const LoginScreen = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="title">InnovaTech</h1>
-      <h2 className="header">Plataforma de Gestión de Proyectos</h2>
+    <div className={styles.container}>
+      <h1 className={styles.title}>InnovaTech</h1>
+      <h2 className={styles.header}>Plataforma de Gestión de Proyectos</h2>
       
-      <img src="/logo_nofondo.png" className="logo-login" alt="InnovaTech Logo" />
+      <img src="/logo_nofondo.png" className={styles.logoLogin} alt="InnovaTech Logo" />
 
       <input
         type="email"
-        className="input"
+        className={styles.input}
         onChange={(e) => setEmail(e.target.value)}
         value={email}
         placeholder="Correo:"
       />
       <input
         type="password"
-        className="input"
+        className={styles.input}
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         placeholder="Contraseña:"
       />
 
-      <button className="button" onClick={handleLogin}>
+      <button className={styles.button} onClick={handleLogin}>
         Iniciar Sesión
       </button>
 
-      <button className="link-button" onClick={() => {/* Manejar olvido de contraseña */}}>
+      <button className={styles.linkButton} onClick={() => {/* Manejar olvido de contraseña */}}>
         ¿Olvidé mi contraseña?
       </button>
 
-      <button className="link-button" onClick={() => navigate('/register')}>
+      <button className={styles.linkButton} onClick={() => navigate('/register')}>
         ¿No tenés cuenta? Regístrate aquí
       </button>
     </div>
