@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import './Home.css';
-import './Menu.css'; 
+import styles from './Home.module.css';
 import projectData from './data.json'; // Datos de prueba
 import { useProject } from './contexts/proyectoContext';
 
@@ -41,43 +40,43 @@ const HomeScreen = () => {
   ];
 
   return (
-    <div className="dashboard">
-      <aside className="sidebar">
+    <div className={styles.dashboard}>
+      <aside className={styles.sidebar}>
         {menuItems.map(item => (
-          <Link key={item.name} to={item.path} className={`menu-item ${location.pathname === item.path ? 'active' : ''}`}>
-            <FontAwesomeIcon icon={item.icon} className="menu-icon" />
+          <Link key={item.name} to={item.path} className={`${styles.menuItem} ${location.pathname === item.path ? styles.active : ''}`}>
+            <FontAwesomeIcon icon={item.icon} className={styles.menuIcon} />
             {item.name}
           </Link>
         ))}
       </aside>
       
-      <div className="main-content">
-        <nav className="navbar">
-          <div className="logo-container">
+      <div className={styles.mainContent}>
+        <nav className={styles.navbar}>
+          <div className={styles.logoContainer}>
             <Link to="/main">
               <img 
                 src={`${process.env.PUBLIC_URL}/logo_letra_nofondo.png`} 
                 alt="InnovaTech Logo" 
-                className="logo"
+                className={styles.logo}
               />
             </Link>
           </div>
-          <div className="user-container">
-            <Link to="/cuenta" className="account-info-btn">
-              <FontAwesomeIcon icon={faUserCircle} className="menu-icon" />
+          <div className={styles.userContainer}>
+            <Link to="/cuenta" className={styles.accountInfoBtn}>
+              <FontAwesomeIcon icon={faUserCircle} className={styles.menuIcon} />
             </Link>
           </div>
         </nav>
-        <section className="content">
-          <div className="home-container">
-            <h2 className="header">Proyectos disponibles</h2>
-            <div className="proyectos-list">
+        <section className={styles.content}>
+          <div className={styles.homeContainer}>
+            <h2 className={styles.header}>Proyectos disponibles</h2>
+            <div className={styles.proyectosList}>
               {proyectos.map((proyecto) => (
-                <div key={proyecto._id} className="proyecto-card">
-                  <h3 className="proyecto-title">Proyecto: {proyecto.nombre}</h3>
-                  <p className="proyecto-description">{proyecto.descripcion}</p>
+                <div key={proyecto._id} className={styles.proyectoCard}>
+                  <h3 className={styles.proyectoTitle}>Proyecto: {proyecto.nombre}</h3>
+                  <p className={styles.proyectoDescription}>{proyecto.descripcion}</p>
                   <button
-                    className="home-options-button"
+                    className={styles.homeOptionsButton}
                     onClick={() => handleOptionsPress(proyecto._id)}
                   >
                     Gestionar proyecto
@@ -85,7 +84,7 @@ const HomeScreen = () => {
                 </div>
               ))}
             </div>
-            <button className="create-project-button" onClick={handleCrearNuevoProyecto}>
+            <button className={styles.createProjectButton} onClick={handleCrearNuevoProyecto}>
               Crear nuevo proyecto
             </button>
           </div>

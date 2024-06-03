@@ -73,6 +73,13 @@ const CrearProyectoScreen = () => {
     );
   };
 
+  const handlePresupuestoChange = (e) => {
+    const value = e.target.value;
+    if (!isNaN(value)) {
+      setPresupuesto(value);
+    }
+  };
+
   const menuItems = [
     { name: 'Home', icon: faHome, path: '/main' },
     { name: 'Colaboradores', icon: faUsers, path: '/colaboradores' },
@@ -136,7 +143,7 @@ const CrearProyectoScreen = () => {
                 className="input-form"
                 type="text"
                 value={presupuesto}
-                onChange={(e) => setPresupuesto(e.target.value)}
+                onChange={handlePresupuestoChange}
                 placeholder="Ej: 15000"
                 keyboardType="numeric"
               />
