@@ -4,8 +4,7 @@ import projectData from './data.json'; // Datos de prueba del proyecto
 import colabData from './colab_data.json'; // Datos de prueba de colaboradores
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import './ModificarTareas.css';
-import './Menu.css'; 
+import styles from './ModificarTareas.module.css';
 
 // Componente para el formulario de modificación de una tarea específica
 const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
@@ -15,41 +14,41 @@ const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
   const [responsable, setResponsable] = useState(tarea.responsable); 
 
   return (
-    <div className="modificar-tarea-form-container">
-      <h3 className="modificar-tarea-form-titulo">Modificar Tarea</h3>
+    <div className={styles.modificarTareaFormContainer}>
+      <h3 className={styles.modificarTareaFormTitulo}>Modificar Tarea</h3>
       <input
-        className="modificar-tarea-input"
+        className={styles.modificarTareaInput}
         value={nombreTarea}
         onChange={(e) => setNombreTarea(e.target.value)}
         placeholder="Nombre de la tarea"
       />
       <input
-        className="modificar-tarea-input"
+        className={styles.modificarTareaInput}
         value={storyPoints}
         onChange={(e) => setStoryPoints(e.target.value)}
         placeholder="Story Points"
         type="number"
       />
       <textarea
-        className="modificar-tarea-textarea"
+        className={styles.modificarTareaTextarea}
         value={descripcion}
         onChange={(e) => setDescripcion(e.target.value)}
         placeholder="Descripción"
       />
       <input
-        className="modificar-tarea-input"
+        className={styles.modificarTareaInput}
         value={responsable}
         onChange={(e) => setResponsable(e.target.value)}
         placeholder="Responsable"
         readOnly
       />
       <button
-        className="modificar-tarea-button modificar-tarea-guardar"
+        className={`${styles.modificarTareaButton} ${styles.modificarTareaGuardar}`}
         onClick={() => onGuardar({ nombreTarea, storyPoints, descripcion, responsable, tarea })}
       >
         Guardar
       </button>
-      <button className="modificar-tarea-button modificar-tarea-cancelar" onClick={onCancelar}>
+      <button className={`${styles.modificarTareaButton} ${styles.modificarTareaCancelar}`} onClick={onCancelar}>
         Cancelar
       </button>
     </div>
@@ -64,33 +63,33 @@ const CrearTareaForm = ({ onGuardar, onCancelar, colaboradores }) => {
   const [responsable, setResponsable] = useState('');
 
   return (
-    <div className="crear-tarea-form-container">
-      <h3 className="crear-tarea-form-titulo">Agregar Nueva Tarea</h3>
+    <div className={styles.crearTareaFormContainer}>
+      <h3 className={styles.crearTareaFormTitulo}>Agregar Nueva Tarea</h3>
       <input
-        className="crear-tarea-input"
+        className={styles.crearTareaInput}
         value={nombreTarea}
         onChange={(e) => setNombreTarea(e.target.value)}
         placeholder="Nombre de la tarea"
       />
       <input
-        className="crear-tarea-input"
+        className={styles.crearTareaInput}
         value={storyPoints}
         onChange={(e) => setStoryPoints(e.target.value)}
         placeholder="Story Points"
         type="number"
       />
       <textarea
-        className="crear-tarea-textarea"
+        className={styles.crearTareaTextarea}
         value={descripcion}
         onChange={(e) => setDescripcion(e.target.value)}
         placeholder="Descripción"
       />
-      <label className="crear-tarea-label">Responsable:</label>
-      <div className="crear-tarea-colaboradores-container">
+      <label className={styles.crearTareaLabel}>Responsable:</label>
+      <div className={styles.crearTareaColaboradoresContainer}>
         {colaboradores.map((colaborador) => (
           <button
             key={colaborador._id}
-            className={`crear-tarea-colaborador-button ${responsable === colaborador._id ? 'selected' : ''}`}
+            className={`${styles.crearTareaColaboradorButton} ${responsable === colaborador._id ? styles.selected : ''}`}
             onClick={() => setResponsable(colaborador._id)}
           >
             {colaborador.nombreCompleto}
@@ -98,12 +97,12 @@ const CrearTareaForm = ({ onGuardar, onCancelar, colaboradores }) => {
         ))}
       </div>
       <button
-        className="crear-tarea-button crear-tarea-guardar"
+        className={`${styles.crearTareaButton} ${styles.crearTareaGuardar}`}
         onClick={() => onGuardar({ nombreTarea, storyPoints, descripcion, responsable })}
       >
         Guardar
       </button>
-      <button className="crear-tarea-button crear-tarea-cancelar" onClick={onCancelar}>
+      <button className={`${styles.crearTareaButton} ${styles.crearTareaCancelar}`} onClick={onCancelar}>
         Cancelar
       </button>
     </div>
@@ -148,51 +147,51 @@ const ModificarTareasScreen = () => {
   ];
 
   return (
-    <div className="dashboard">
-      <aside className="sidebar">
+    <div className={styles.dashboard}>
+      <aside className={styles.sidebar}>
         {menuItems.map(item => (
-          <Link key={item.name} to={item.path} className={`menu-item ${location.pathname === item.path ? 'active' : ''}`}>
-            <FontAwesomeIcon icon={item.icon} className="menu-icon" />
+          <Link key={item.name} to={item.path} className={`${styles.menuItem} ${location.pathname === item.path ? styles.active : ''}`}>
+            <FontAwesomeIcon icon={item.icon} className={styles.menuIcon} />
             {item.name}
           </Link>
         ))}
       </aside>
       
-      <div className="main-content">
-        <nav className="navbar">
-          <div className="logo-container">
+      <div className={styles.mainContent}>
+        <nav className={styles.navbar}>
+          <div className={styles.logoContainer}>
             <Link to="/main">
               <img 
                 src={`${process.env.PUBLIC_URL}/logo_letra_nofondo.png`} 
                 alt="InnovaTech Logo" 
-                className="logo"
+                className={styles.logo}
               />
             </Link>
           </div>
-          <div className="user-container">
-            <Link to="/cuenta" className="account-info-btn">
-              <FontAwesomeIcon icon={faUserCircle} className="menu-icon" />
+          <div className={styles.userContainer}>
+            <Link to="/cuenta" className={styles.accountInfoBtn}>
+              <FontAwesomeIcon icon={faUserCircle} className={styles.menuIcon} />
             </Link>
           </div>
         </nav>
-        <section className="content">
-          <div className="modificar-tareas-container">
-            <h2 className="modificar-tareas-titulo">Modificar Tareas del Proyecto</h2>
+        <section className={styles.content}>
+          <div className={styles.modificarTareasContainer}>
+            <h2 className={styles.modificarTareasTitulo}>Modificar Tareas del Proyecto</h2>
             {tareas.map((tarea, index) => (
-              <div key={index} className="modificar-tareas-tarea-container">
+              <div key={index} className={styles.modificarTareasTareaContainer}>
                 <p>{tarea.nombreTarea} - SP: {tarea.storyPoints} - Descripción: {tarea.descripcion} - Responsable: {tarea.responsable}</p>
-                <div className="modificar-tareas-botones-container">
-                  <button className="modificar-tareas-button modificar-tareas-modificar" onClick={() => setTareaAEditar(tarea)}>
+                <div className={styles.modificarTareasBotonesContainer}>
+                  <button className={`${styles.modificarTareasButton} ${styles.modificarTareasModificar}`} onClick={() => setTareaAEditar(tarea)}>
                     Modificar
                   </button>
-                  <button className="modificar-tareas-button modificar-tareas-eliminar" onClick={() => setTareas(tareas.filter((t) => t !== tarea))}>
+                  <button className={`${styles.modificarTareasButton} ${styles.modificarTareasEliminar}`} onClick={() => setTareas(tareas.filter((t) => t !== tarea))}>
                     Eliminar
                   </button>
                 </div>
               </div>
             ))}
 
-            <button className="modificar-tareas-button modificar-tareas-agregar" onClick={() => setMostrarFormCrear(true)}>
+            <button className={`${styles.modificarTareasButton} ${styles.modificarTareasAgregar}`} onClick={() => setMostrarFormCrear(true)}>
               Agregar Nueva Tarea
             </button>
 

@@ -4,8 +4,7 @@ import colaboradoresData from './colab_data.json'; // Datos de colaboradores
 import projectData from './data.json'; // Datos de proyectos
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import './GestionarColaboradores.css';
-import './Menu.css'; 
+import styles from './GestionarColaboradores.module.css';
 
 const GestionarColaboradoresScreen = () => {
   const { proyectoId } = useParams();
@@ -59,49 +58,51 @@ const GestionarColaboradoresScreen = () => {
   }
 
   return (
-    <div className="dashboard">
-      <aside className="sidebar">
+    <div className={styles.dashboard}>
+      <aside className={styles.sidebar}>
         {menuItems.map(item => (
-          <Link key={item.name} to={item.path} className={`menu-item ${location.pathname === item.path ? 'active' : ''}`}>
-            <FontAwesomeIcon icon={item.icon} className="menu-icon" />
+          <Link key={item.name} to={item.path} className={`${styles.menuItem} ${location.pathname === item.path ? styles.active : ''}`}>
+            <FontAwesomeIcon icon={item.icon} className={styles.menuIcon} />
             {item.name}
           </Link>
         ))}
       </aside>
       
-      <div className="main-content">
-        <nav className="navbar">
-          <div className="logo-container">
+      <div className={styles.mainContent}>
+        <nav className={styles.navbar}>
+          <div className={styles.logoContainer}>
             <Link to="/main">
               <img 
                 src={`${process.env.PUBLIC_URL}/logo_letra_nofondo.png`} 
                 alt="InnovaTech Logo" 
-                className="logo"
+                className={styles.logo}
               />
             </Link>
           </div>
-          <div className="user-container">
-            <Link to="/cuenta" className="account-info-btn">
-              <FontAwesomeIcon icon={faUserCircle} className="menu-icon" />
+          <div className={styles.userContainer}>
+            <Link to="/cuenta" className={styles.accountInfoBtn}>
+              <FontAwesomeIcon icon={faUserCircle} className={styles.menuIcon} />
             </Link>
           </div>
         </nav>
-        <section className="content">
-          <div className="gestionar-colaboradores-container">
-            <h2 className="gestionar-colaboradores-titulo">Editar Colaboradores:</h2>
-            <p className="gestionar-colaboradores-nota">Nota: Debes seleccionar de nuevo los colaboradores que quieres asignar al proyecto.</p>
+        <section className={styles.content}>
+          <div className={styles.gestionarColaboradoresContainer}>
+            <h2 className={styles.title}>Editar Colaboradores:</h2>
+            <p className={styles.nota}>Nota: Debes seleccionar de nuevo los colaboradores que quieres asignar al proyecto.</p>
 
-            {colaboradoresLibres.map((colaborador) => (
-              <button
-                key={colaborador._id}
-                className={`gestionar-colaboradores-colaborador-container ${colaboradoresActuales.includes(colaborador._id) ? 'selected' : ''}`}
-                onClick={() => toggleColaborador(colaborador._id)}
-              >
-                {colaborador.nombreCompleto} - {colaborador.departamentoTrabajo}
-              </button>
-            ))}
+            <div className={styles.colaboradoresList}>
+              {colaboradoresLibres.map((colaborador) => (
+                <button
+                  key={colaborador._id}
+                  className={`${styles.colaboradorContainer} ${colaboradoresActuales.includes(colaborador._id) ? styles.selected : ''}`}
+                  onClick={() => toggleColaborador(colaborador._id)}
+                >
+                  {colaborador.nombreCompleto} - {colaborador.departamentoTrabajo}
+                </button>
+              ))}
+            </div>
 
-            <button className="gestionar-colaboradores-boton-guardar" onClick={handleGuardarCambios}>
+            <button className={styles.botonGuardar} onClick={handleGuardarCambios}>
               Guardar Cambios
             </button>
           </div>
