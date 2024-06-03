@@ -45,6 +45,10 @@ const EvaluacionScreen = () => {
     navigate('/burndown-chart');
   };
 
+  const handleReportes = () => {
+    navigate('/reportes');
+  };
+
   const menuItems = [
     { name: 'Home', icon: faHome, path: '/main' },
     { name: 'Colaboradores', icon: faUsers, path: '/colaboradores' },
@@ -109,6 +113,9 @@ const EvaluacionScreen = () => {
             )}
             <button className={styles.button} onClick={handleBurndownChart}>
               Burndown Chart
+            </button>
+            <button className={styles.button} onClick={handleReportes}>
+              Reportes
             </button>
           </div>
         </section>

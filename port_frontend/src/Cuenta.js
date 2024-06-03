@@ -142,7 +142,7 @@ const CuentaScreen = () => {
                 className={styles.input}
                 type="text"
                 value={colaborador.estado || ''}
-                onChange={(e) => handleInputChange('estado', e.target.value)}
+                readOnly
                 placeholder="Estado"
               />
               <button className={styles.button} onClick={handleSaveChanges}>
