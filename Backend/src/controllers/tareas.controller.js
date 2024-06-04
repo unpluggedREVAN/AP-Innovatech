@@ -33,7 +33,7 @@ export const infoTask = async (req, res) => {
 export const infoTasksToDo = async (req, res) => {
     try{
         //Buscar las tareas
-        const tasksToDo = await Task.find({proyecto : req.params.idProject, estado : 0})
+        const tasksToDo = await Task.find({proyecto : req.params.idProject, estado : 0}).populate('responsable')
 
         return res.status(200).send({data : tasksToDo})
     } catch(err) {
@@ -44,7 +44,7 @@ export const infoTasksToDo = async (req, res) => {
 export const infoTasksProgress = async (req, res) => {
     try{
         //Buscar las tareas
-        const tasksProgress = await Task.find({proyecto : req.params.idProject, estado : 1})
+        const tasksProgress = await Task.find({proyecto : req.params.idProject, estado : 1}).populate('responsable')
 
         return res.status(200).send({data : tasksProgress})
     } catch(err) {
@@ -55,7 +55,7 @@ export const infoTasksProgress = async (req, res) => {
 export const infoTasksDone = async (req, res) => {
     try{
         //Buscar las tareas
-        const tasksDone = await Task.find({proyecto : req.params.idProject, estado : 2})
+        const tasksDone = await Task.find({proyecto : req.params.idProject, estado : 2}).populate('responsable')
 
         return res.status(200).send({data : tasksDone})
     } catch(err) {

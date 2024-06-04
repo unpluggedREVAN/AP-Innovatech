@@ -5,6 +5,7 @@ import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawe
 import styles from './ProjectDetails.module.css';
 import projectData from './data.json'; // Datos de prueba del proyecto
 import {useProject} from './contexts/proyectoContext'
+import { useTask } from './contexts/tareaContext';
 
 const ProjectDetailsScreen = () => {
   const { proyectoId } = useParams();
@@ -18,6 +19,7 @@ const ProjectDetailsScreen = () => {
   const [showContent, setShowContent] = useState(false);
 
   const {getProject, project, deleteProject } = useProject();
+  const {infoTaskToDo, infoTaskPogress, infoTaskDone, taskToDo, taskProgress, taskDone} = useTask();
 
   useEffect(() => {
     if(project != null) {
@@ -33,8 +35,30 @@ const ProjectDetailsScreen = () => {
 
   useEffect(() => {
     getProject(proyectoId);
+    infoTaskToDo(proyectoId);
+    infoTaskPogress(proyectoId);
+    infoTaskDone(proyectoId);
     setTimeout(() => setShowContent(true), 1000);
   }, [proyectoId]);
+
+  useEffect(() => {
+    if(taskToDo != []) {
+      setTareasPorHacer(taskToDo)
+    }
+  }, [taskToDo])
+
+  useEffect(() => {
+    if(taskProgress != []) {
+      setTareasEnCurso(taskProgress)
+    }
+  }, [taskProgress])
+
+  useEffect(() => {
+    if(taskDone != []) {
+      setTareasFinalizadas(taskDone)
+    }
+  }, [taskDone])
+
 
   const handleEditTasks = () => {
     navigate(`/modificar-tareas/${proyectoId}`);
@@ -100,7 +124,7 @@ const ProjectDetailsScreen = () => {
                 </div>
                 <div className={styles.infoSection}>
                   <strong>Recursos Necesarios:</strong>
-                  <p>{proyecto.recursosNecesarios.join(', ')}</p>
+                  <p>{proyecto.recursosNecesarios}</p>
                 </div>
                 <div className={styles.infoSection}>
                   <strong>Colaboradores:</strong>
@@ -127,7 +151,7 @@ const ProjectDetailsScreen = () => {
                   <h4>Por Hacer</h4>
                   {tareasPorHacer.map((tarea, index) => (
                     <p key={index} className={styles.tareaInfo}>
-                      Estado : {tarea.estado} - Titulo: {tarea.nombreTarea} - {tarea.storyPoints} Points - {tarea.responsable}
+                      Titulo: {tarea.nombre} - {tarea.storyPoints} Points - {tarea.responsable.nombreCompleto}
                     </p>
                   ))}
                 </div>
@@ -135,7 +159,7 @@ const ProjectDetailsScreen = () => {
                   <h4>En Curso</h4>
                   {tareasEnCurso.map((tarea, index) => (
                     <p key={index} className={styles.tareaInfo}>
-                      Estado : {tarea.estado} - Titulo: {tarea.nombreTarea} - {tarea.storyPoints} Points - {tarea.responsable}
+                      Titulo: {tarea.nombreTarea} - {tarea.storyPoints} Points - {tarea.responsable.nombreCompleto}
                     </p>
                   ))}
                 </div>
@@ -143,7 +167,7 @@ const ProjectDetailsScreen = () => {
                   <h4>Finalizadas</h4>
                   {tareasFinalizadas.map((tarea, index) => (
                     <p key={index} className={styles.tareaInfo}>
-                      Estado : {tarea.estado} - Titulo: {tarea.nombreTarea} - {tarea.storyPoints} Points - {tarea.responsable}
+                      Titulo: {tarea.nombreTarea} - {tarea.storyPoints} Points - {tarea.responsable.nombreCompleto}
                     </p>
                   ))}
                 </div>
