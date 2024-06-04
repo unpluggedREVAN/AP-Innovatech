@@ -1,16 +1,23 @@
 import React from 'react';
-import { useParams, Link, useLocation } from 'react-router-dom';
+import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import './ReunionDetails.css';
-import './Menu.css'; 
+import styles from './ReunionDetails.module.css';
 import reunionesData from './data_reuniones.json'; // Datos de prueba de las reuniones
 
 const ReunionDetailsScreen = () => {
   const { reunionId } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const reunion = reunionesData.find(reu => reu._id === reunionId);
+
+  const handleEliminarReunion = () => {
+    // Aquí puedes agregar la lógica para eliminar la reunión
+    console.log(`Reunión con ID ${reunionId} eliminada`);
+    alert(`Reunión con ID ${reunionId} eliminada`);
+    navigate('/reuniones'); // Navegar a la lista de reuniones después de eliminar
+  };
 
   const menuItems = [
     { name: 'Home', icon: faHome, path: '/main' },
@@ -21,45 +28,48 @@ const ReunionDetailsScreen = () => {
   ];
 
   return (
-    <div className="dashboard">
-      <aside className="sidebar">
+    <div className={styles.dashboard}>
+      <aside className={styles.sidebar}>
         {menuItems.map(item => (
-          <Link key={item.name} to={item.path} className={`menu-item ${location.pathname === item.path ? 'active' : ''}`}>
-            <FontAwesomeIcon icon={item.icon} className="menu-icon" />
+          <Link key={item.name} to={item.path} className={`${styles.menuItem} ${location.pathname === item.path ? styles.active : ''}`}>
+            <FontAwesomeIcon icon={item.icon} className={styles.menuIcon} />
             {item.name}
           </Link>
         ))}
       </aside>
       
-      <div className="main-content">
-        <nav className="navbar">
-          <div className="logo-container">
+      <div className={styles.mainContent}>
+        <nav className={styles.navbar}>
+          <div className={styles.logoContainer}>
             <Link to="/main">
               <img 
                 src={`${process.env.PUBLIC_URL}/logo_letra_nofondo.png`} 
                 alt="InnovaTech Logo" 
-                className="logo"
+                className={styles.logo}
               />
             </Link>
           </div>
-          <div className="user-container">
-            <Link to="/cuenta" className="account-info-btn">
-              <FontAwesomeIcon icon={faUserCircle} className="menu-icon" />
+          <div className={styles.userContainer}>
+            <Link to="/cuenta" className={styles.accountInfoBtn}>
+              <FontAwesomeIcon icon={faUserCircle} className={styles.menuIcon} />
             </Link>
           </div>
         </nav>
-        <section className="content">
-          <div className="reunion-details-container">
+        <section className={styles.content}>
+          <div className={styles.reunionDetailsContainer}>
             {reunion ? (
               <>
-                <h2 className="title">Tema: {reunion.tema}</h2>
-                <p className="detail">Fecha: {reunion.fecha}</p>
-                <p className="detail">Medio: {reunion.medio}</p>
-                <p className="detail">Colaboradores: {reunion.colaboradores.join(', ')}</p>
-                <p className="detail">Proyecto: {reunion.proyecto}</p>
+                <h2 className={styles.title}>Tema: {reunion.tema}</h2>
+                <p className={styles.detail}>Fecha: {reunion.fecha}</p>
+                <p className={styles.detail}>Medio: {reunion.medio}</p>
+                <p className={styles.detail}>Colaboradores: {reunion.colaboradores.join(', ')}</p>
+                <p className={styles.detail}>Proyecto: {reunion.proyecto}</p>
+                <button className={styles.eliminarButton} onClick={handleEliminarReunion}>
+                  Eliminar Reunión
+                </button>
               </>
             ) : (
-              <p className="detail">Reunión no encontrada.</p>
+              <p className={styles.detail}>Reunión no encontrada.</p>
             )}
           </div>
         </section>
