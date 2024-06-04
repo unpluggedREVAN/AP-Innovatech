@@ -2,37 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import 'chart.js/auto'; // Importar para registrar los controladores de gráficos
-import styles from './Evaluacion.module.css';
+import styles from './BurndownChart.module.css';
 import projectData from './data.json';
 
-const EvaluacionScreen = () => {
+const BurndownChartScreen = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState(projectData[0]);
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-    const tareasPorEstado = selectedProject.tareas.reduce((acc, tarea) => {
-      acc[tarea.estado] = (acc[tarea.estado] || 0) + 1;
-      return acc;
-    }, {});
+    const generateBurndownData = (project) => {
+      const totalTasks = project.tareas.length;
+      const days = Array.from({ length: 14 }, (_, i) => i + 1);
+      const idealLine = days.map(day => totalTasks - (day * totalTasks / 14));
+      const actualLine = days.map(day => Math.max(totalTasks - day * Math.floor(totalTasks / 14) - Math.floor(Math.random() * 3), 0));
 
-    setChartData({
-      labels: ['Por hacer', 'En curso', 'Finalizadas'],
-      datasets: [
-        {
-          label: 'Tareas',
-          data: [
-            tareasPorEstado['por hacer'] || 0,
-            tareasPorEstado['en curso'] || 0,
-            tareasPorEstado['finalizada'] || 0,
-          ],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        },
-      ],
-    });
+      return {
+        labels: days,
+        datasets: [
+          {
+            label: 'Ideal',
+            data: idealLine,
+            borderColor: '#36A2EB',
+            fill: false,
+          },
+          {
+            label: 'Actual',
+            data: actualLine,
+            borderColor: '#FF6384',
+            fill: false,
+          },
+        ],
+      };
+    };
+
+    setChartData(generateBurndownData(selectedProject));
   }, [selectedProject]);
 
   const handleProjectChange = (event) => {
@@ -41,12 +48,8 @@ const EvaluacionScreen = () => {
     setSelectedProject(project);
   };
 
-  const handleBurndownChart = () => {
-    navigate('/burndown-chart');
-  };
-
-  const handleReportes = () => {
-    navigate('/reportes');
+  const handleBackToEvaluation = () => {
+    navigate('/evaluacion');
   };
 
   const menuItems = [
@@ -86,8 +89,8 @@ const EvaluacionScreen = () => {
           </div>
         </nav>
         <section className={styles.content}>
-          <div className={styles.evaluacionContainer}>
-            <h2 className={styles.header}>Evaluación de Proyectos</h2>
+          <div className={styles.burndownContainer}>
+            <h2 className={styles.header}>Burndown Chart</h2>
             <select className={styles.picker} value={selectedProject._id} onChange={handleProjectChange}>
               {projectData.map((proyecto) => (
                 <option key={proyecto._id} value={proyecto._id}>
@@ -97,13 +100,23 @@ const EvaluacionScreen = () => {
             </select>
             {chartData && (
               <div className={styles.chartContainer}>
-                <Bar
+                <Line
                   data={chartData}
                   options={{
                     maintainAspectRatio: true,
                     responsive: true,
                     scales: {
+                      x: {
+                        title: {
+                          display: true,
+                          text: 'Days',
+                        },
+                      },
                       y: {
+                        title: {
+                          display: true,
+                          text: 'Tasks Remaining',
+                        },
                         beginAtZero: true,
                       },
                     },
@@ -111,11 +124,8 @@ const EvaluacionScreen = () => {
                 />
               </div>
             )}
-            <button className={styles.button} onClick={handleBurndownChart}>
-              Burndown Chart
-            </button>
-            <button className={styles.button} onClick={handleReportes}>
-              Reportes
+            <button className={styles.button} onClick={handleBackToEvaluation}>
+              Volver a Evaluación
             </button>
           </div>
         </section>
@@ -124,4 +134,4 @@ const EvaluacionScreen = () => {
   );
 };
 
-export default EvaluacionScreen;
+export default BurndownChartScreen;

@@ -23,6 +23,8 @@ import ForoScreen from './ForoScreen';
 import PublicacionDetailsScreen from './PublicacionDetails';
 import CrearMensajePublicacionScreen from './CrearMensajePublicacion';
 import CrearPublicacionScreen from './CrearPublicacion';
+import BurndownChartScreen from './BurndownChart';
+import ReportesScreen from './Reportes';
 
 function App() {
   return (
@@ -52,6 +54,8 @@ function App() {
                     <Route path="/publicacion-detalles/:publicacionId" element={<PublicacionDetailsScreen />} />
                     <Route path="/crear-mensaje-publicacion" element={<CrearMensajePublicacionScreen />} />
                     <Route path="/crear-publicacion" element={<CrearPublicacionScreen />} />
+                    <Route path="/burndown-chart" element={<BurndownChartScreen />} />
+                    <Route path="/reportes" element={<ReportesScreen />} />
                     {/* Aquí puedes agregar más rutas para nuevas pantallas en el futuro */}
                   </Routes>
                 </BrowserRouter>

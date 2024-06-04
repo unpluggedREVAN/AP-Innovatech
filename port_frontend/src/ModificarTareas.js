@@ -14,7 +14,12 @@ const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
   const [nombreTarea, setNombreTarea] = useState(tarea.nombre);
   const [storyPoints, setStoryPoints] = useState(tarea.storyPoints.toString());
   const [descripcion, setDescripcion] = useState(tarea.descripcion || '');
-  const [responsable, setResponsable] = useState(tarea.responsable); 
+  const [responsable, setResponsable] = useState(tarea.responsable);
+  const [estado, setEstado] = useState(tarea.estado);
+
+  const handleEstadoChange = (e) => {
+    setEstado(e.target.value);
+  };
 
   return (
     <div className={styles.modificarTareaFormContainer}>
@@ -45,9 +50,14 @@ const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
         placeholder="Responsable"
         readOnly
       />
+      <select className={styles.modificarTareaSelect} value={estado} onChange={handleEstadoChange}>
+        <option value="por hacer">Por hacer</option>
+        <option value="en curso">En curso</option>
+        <option value="finalizada">Finalizado</option>
+      </select>
       <button
         className={`${styles.modificarTareaButton} ${styles.modificarTareaGuardar}`}
-        onClick={() => onGuardar({ nombreTarea, storyPoints, descripcion, responsable, tarea })}
+        onClick={() => onGuardar({ nombreTarea, storyPoints, descripcion, responsable, estado, tarea })}
       >
         Guardar
       </button>
@@ -64,6 +74,11 @@ const CrearTareaForm = ({ onGuardar, onCancelar, colaboradores }) => {
   const [storyPoints, setStoryPoints] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [responsable, setResponsable] = useState('');
+  const [estado, setEstado] = useState('por hacer');
+
+  const handleEstadoChange = (e) => {
+    setEstado(e.target.value);
+  };
 
   return (
     <div className={styles.crearTareaFormContainer}>
@@ -99,6 +114,11 @@ const CrearTareaForm = ({ onGuardar, onCancelar, colaboradores }) => {
           </button>
         ))}
       </div>
+      <select className={styles.crearTareaSelect} value={estado} onChange={handleEstadoChange}>
+        <option value="por hacer">Por hacer</option>
+        <option value="en curso">En curso</option>
+        <option value="finalizada">Finalizado</option>
+      </select>
       <button
         className={`${styles.crearTareaButton} ${styles.crearTareaGuardar}`}
         onClick={() => onGuardar({ nombre : nombreTarea, storyPoints : storyPoints, descripcion : descripcion, responsable : responsable, estado : 0 })}
@@ -157,6 +177,9 @@ const ModificarTareasScreen = () => {
       setIdTask(null);
     }
   }, [idTask])
+  const handleEliminarTarea = (tareaId) => {
+    // setTareas(tareas.filter((tarea) => tarea._id !== tareaId));
+  };
 
   const menuItems = [
     { name: 'Home', icon: faHome, path: '/main' },
@@ -204,7 +227,7 @@ const ModificarTareasScreen = () => {
                   <button className={`${styles.modificarTareasButton} ${styles.modificarTareasModificar}`} onClick={() => setTareaAEditar(tarea)}>
                     Modificar
                   </button>
-                  <button className={`${styles.modificarTareasButton} ${styles.modificarTareasEliminar}`} onClick={() => setTareas(tareas.filter((t) => t !== tarea))}>
+                  <button className={`${styles.modificarTareasButton} ${styles.modificarTareasEliminar}`} onClick={() => handleEliminarTarea(tarea._id)}>
                     Eliminar
                   </button>
                 </div>
