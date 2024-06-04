@@ -29,6 +29,10 @@ const ProjectDetailsScreen = () => {
       else{
         project.estadoString = "Finalizado"
       }
+      project.infoColabs = ''
+      project.colaboradores.forEach((colab) => {
+        project.infoColabs += colab.nombreCompleto + " - " + colab.departamentoTrabajo;
+      })
       setProyecto(project);
     }
   }, [project])
@@ -128,7 +132,7 @@ const ProjectDetailsScreen = () => {
                 </div>
                 <div className={styles.infoSection}>
                   <strong>Colaboradores:</strong>
-                  <p>{proyecto.colaboradores.join(', ')}</p>
+                  <p>{project.infoColabs}</p>
                 </div>
                 <div className={styles.infoSection}>
                   <strong>Responsable:</strong>

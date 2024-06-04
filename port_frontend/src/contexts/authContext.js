@@ -31,7 +31,6 @@ export const AuthProvider = ({children}) => {
     const login = async (user) => {
         try{
             const res = await loginRequest(user);
-            console.log(res);
             setIsAuthenticated(true);
             setId(res.data.id);
             alert(res.data.message);
@@ -46,7 +45,8 @@ export const AuthProvider = ({children}) => {
             register,
             login,
             isAuthenticated,
-            isRegister, 
+            isRegister,
+            setIsRegister, 
             id
         }}>
             {children}

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
-import projectData from './data.json'; // Datos de prueba del proyecto
-import colabData from './colab_data.json'; // Datos de prueba de colaboradores
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './Menu.css'; 
@@ -115,13 +113,13 @@ const CrearTareaForm = ({ onGuardar, onCancelar, colaboradores }) => {
         ))}
       </div>
       <select className={styles.crearTareaSelect} value={estado} onChange={handleEstadoChange}>
-        <option value="por hacer">Por hacer</option>
-        <option value="en curso">En curso</option>
-        <option value="finalizada">Finalizado</option>
+        <option value="0">Por hacer</option>
+        <option value="1">En curso</option>
+        <option value="2">Finalizado</option>
       </select>
       <button
         className={`${styles.crearTareaButton} ${styles.crearTareaGuardar}`}
-        onClick={() => onGuardar({ nombre : nombreTarea, storyPoints : storyPoints, descripcion : descripcion, responsable : responsable, estado : 0 })}
+        onClick={() => onGuardar({ nombre : nombreTarea, storyPoints : storyPoints, descripcion : descripcion, responsable : responsable, estado : parseInt(estado) })}
       >
         Guardar
       </button>
@@ -178,7 +176,11 @@ const ModificarTareasScreen = () => {
     }
   }, [idTask])
   const handleEliminarTarea = (tareaId) => {
-    // setTareas(tareas.filter((tarea) => tarea._id !== tareaId));
+    setTareas(tareas.filter((tarea) => tarea._id !== tareaId));
+
+    //Elimiar tarea
+
+    //Editar la información del proyecto
   };
 
   const menuItems = [

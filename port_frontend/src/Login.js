@@ -13,13 +13,10 @@ const LoginScreen = () => {
   useEffect(() => {
     if(isAuthenticated){
       navigate('/main')
-      
     }
   }, [isAuthenticated])
 
-  const handleLogin = () => {
-    console.log('Login con:', email, password);
-    
+  const handleLogin = () => { 
     const data = {
       email : email,
       contrasena : password

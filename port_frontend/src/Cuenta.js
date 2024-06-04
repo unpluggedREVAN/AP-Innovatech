@@ -47,7 +47,7 @@ const CuentaScreen = () => {
       // Simula la llamada a la API para cerrar sesión
       await fetch('/path/to/logout', { method: 'POST' });
       alert('Sesión cerrada correctamente.');
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       alert('Ocurrió un error al cerrar sesión. Por favor, intenta nuevamente.');
     }
