@@ -158,6 +158,10 @@ const ModificarTareasScreen = () => {
     setMostrarFormCrear(false); // Cerrar el formulario de creación
   };
 
+  const handleEliminarTarea = (tareaId) => {
+    // setTareas(tareas.filter((tarea) => tarea._id !== tareaId));
+  };
+
   const menuItems = [
     { name: 'Home', icon: faHome, path: '/main' },
     { name: 'Colaboradores', icon: faUsers, path: '/colaboradores' },
@@ -204,7 +208,7 @@ const ModificarTareasScreen = () => {
                   <button className={`${styles.modificarTareasButton} ${styles.modificarTareasModificar}`} onClick={() => setTareaAEditar(tarea)}>
                     Modificar
                   </button>
-                  <button className={`${styles.modificarTareasButton} ${styles.modificarTareasEliminar}`} onClick={() => setTareas(tareas.filter((t) => t !== tarea))}>
+                  <button className={`${styles.modificarTareasButton} ${styles.modificarTareasEliminar}`} onClick={() => handleEliminarTarea(tarea._id)}>
                     Eliminar
                   </button>
                 </div>
