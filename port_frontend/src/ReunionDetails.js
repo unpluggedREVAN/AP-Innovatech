@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import './ReunionDetails.css';
-import './Menu.css'; 
+import styles from './ReunionDetails.module.css';
 import reunionesData from './data_reuniones.json'; // Datos de prueba de las reuniones
 import {useReunion} from './contexts/reunionContext'
 
@@ -11,6 +11,7 @@ const ReunionDetailsScreen = () => {
   const { reunionId } = useParams();
   const location = useLocation();
   const [reunion, setReunion] = useState([]);
+  const navigate = useNavigate();
 
   const {infoMeeting, meeting} = useReunion();
 
@@ -25,6 +26,13 @@ const ReunionDetailsScreen = () => {
     infoMeeting(reunionId);
   }, [])
 
+  const handleEliminarReunion = () => {
+    // Aquí puedes agregar la lógica para eliminar la reunión
+    console.log(`Reunión con ID ${reunionId} eliminada`);
+    alert(`Reunión con ID ${reunionId} eliminada`);
+    navigate('/reuniones'); // Navegar a la lista de reuniones después de eliminar
+  };
+
   const menuItems = [
     { name: 'Home', icon: faHome, path: '/main' },
     { name: 'Colaboradores', icon: faUsers, path: '/colaboradores' },
@@ -34,30 +42,30 @@ const ReunionDetailsScreen = () => {
   ];
 
   return (
-    <div className="dashboard">
-      <aside className="sidebar">
+    <div className={styles.dashboard}>
+      <aside className={styles.sidebar}>
         {menuItems.map(item => (
-          <Link key={item.name} to={item.path} className={`menu-item ${location.pathname === item.path ? 'active' : ''}`}>
-            <FontAwesomeIcon icon={item.icon} className="menu-icon" />
+          <Link key={item.name} to={item.path} className={`${styles.menuItem} ${location.pathname === item.path ? styles.active : ''}`}>
+            <FontAwesomeIcon icon={item.icon} className={styles.menuIcon} />
             {item.name}
           </Link>
         ))}
       </aside>
       
-      <div className="main-content">
-        <nav className="navbar">
-          <div className="logo-container">
+      <div className={styles.mainContent}>
+        <nav className={styles.navbar}>
+          <div className={styles.logoContainer}>
             <Link to="/main">
               <img 
                 src={`${process.env.PUBLIC_URL}/logo_letra_nofondo.png`} 
                 alt="InnovaTech Logo" 
-                className="logo"
+                className={styles.logo}
               />
             </Link>
           </div>
-          <div className="user-container">
-            <Link to="/cuenta" className="account-info-btn">
-              <FontAwesomeIcon icon={faUserCircle} className="menu-icon" />
+          <div className={styles.userContainer}>
+            <Link to="/cuenta" className={styles.accountInfoBtn}>
+              <FontAwesomeIcon icon={faUserCircle} className={styles.menuIcon} />
             </Link>
           </div>
         </nav>
