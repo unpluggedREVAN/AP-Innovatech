@@ -25,7 +25,7 @@ const PublicacionDetailsScreen = () => {
   }, [])
 
   const handleCrearMensaje = () => {
-    navigate('/crear-mensaje-publicacion');
+    navigate(`/crear-mensaje-publicacion/${publicacionId}`);
   };
 
   const menuItems = [
