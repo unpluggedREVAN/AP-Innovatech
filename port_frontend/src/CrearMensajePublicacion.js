@@ -4,11 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './CrearMensajePublicacion.css';
 import './Menu.css'; 
+import { useForo } from './contexts/foroContext';
+import {useAuth} from './contexts/authContext';
 
 const CrearMensajePublicacionScreen = () => {
   const [mensaje, setMensaje] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
+
+  const {createMesage} = useForo();
+  const {id} = useAuth();
 
   const handleEnviarMensaje = () => {
     console.log('Mensaje enviado:', mensaje);

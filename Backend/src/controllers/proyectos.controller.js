@@ -46,7 +46,7 @@ export const getAllProjects = async (req, res) => {
 export const editProject = async (req, res) => {
     try{
         //Buscar y editar
-        const projectEdited = await Project.findByIdAndUpdate(req.params.id, req.body, {new : true, runValidators : true})
+        const projectEdited = await Project.findById(req.params.id, req.body, {new : true, runValidators : true})
 
         if(!projectEdited) {
             return res.status(404).send({message : "Proyecto no encontrado"})

@@ -5,6 +5,9 @@ import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawe
 import './CrearPublicacion.css';
 import './Menu.css'; 
 import projectData from './data.json'; // Datos simulados de proyectos
+import { useForo } from './contexts/foroContext';
+import {useProject} from './contexts/proyectoContext';
+
 
 const CrearPublicacionScreen = () => {
   const [tema, setTema] = useState('');
@@ -14,14 +17,30 @@ const CrearPublicacionScreen = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const {createForo} = useForo();
+  const {getAllProjects, projects} = useProject();
+
   useEffect(() => {
     setProyectos(projectData); // Utiliza los datos simulados del archivo data.json
+    getAllProjects()
   }, []);
+
+  useEffect(() => {
+    if(projects != []){
+      setProyectos(projects)
+    }
+  }, [projects])
 
   const handleCrearPublicacion = () => {
     console.log('Crear Publicación:', tema, tipo, proyectoSeleccionado);
+    const data = {
+      tipo : tipo,
+      titulo : tema,
+      mensajes : [],
+      proyecto : proyectoSeleccionado
+    }
+    createForo(data)
     // Aquí se puede implementar la lógica para enviar la publicación al backend
-    alert('Publicación creada: ' + tema);
     navigate(-1);
   };
 
@@ -83,7 +102,7 @@ const CrearPublicacionScreen = () => {
                 className={`proyecto-container ${proyectoSeleccionado === proyecto._id ? 'proyecto-seleccionado' : ''}`}
                 onClick={() => setProyectoSeleccionado(proyecto._id)}
               >
-                <p className="proyecto-texto">{proyecto.nombreProyecto}</p>
+                <p className="proyecto-texto">{proyecto.nombre}</p>
               </div>
             ))}
             <button className="boton" onClick={handleCrearPublicacion}>

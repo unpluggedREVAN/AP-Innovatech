@@ -27,6 +27,7 @@ const GestionarColaboradoresScreen = () => {
   useEffect(() => {
     if (project != []){
       setProyecto(project)
+      console.log(proyecto)
       project.colaboradores.forEach((colab) => {
         if(!colaboradoresActuales.includes(colab._id)){
           setColabActuales([...colaboradoresActuales, colab._id])
@@ -57,8 +58,6 @@ const GestionarColaboradoresScreen = () => {
   const handleGuardarCambios = async () => {
     //console.log('Colaboradores seleccionados para el proyecto:', colaboradoresActuales);
     //Cambiar el estado de todos los usuario
-    console.log("Colaboradores libres: ", colaboradoresLibres)
-    console.log("Colaboradores elegidos: ", colaboradoresActuales)
     //Colaboradores disponibles
     colaboradoresLibres.forEach((idColab) => {
       console.log("Colaborador: ", idColab._id)
@@ -69,6 +68,9 @@ const GestionarColaboradoresScreen = () => {
       console.log("Colaborador: ", idColab)
       changeStatusUser(idColab, 1)
     })
+
+    //Hacer que se borren las tareas de los colaboradores que quedaron libres
+    //colaboradoresLibres.forEach
 
     //Editar los colaboradores del proyecto
     editProject(proyectoId, {colaboradores : colaboradoresActuales})

@@ -5,15 +5,25 @@ import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawe
 import './ForoScreen.css';
 import './Menu.css'; 
 import forosData from './data_foros.json'; // Datos de prueba
+import {useForo} from './contexts/foroContext.js'
 
 const ForoScreen = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [publicaciones, setPublicaciones] = useState([]);
 
+  const {foros, infoAllForos} = useForo();
+
   useEffect(() => {
     setPublicaciones(forosData);
+    infoAllForos()
   }, []);
+
+  useEffect(() => {
+    if(foros != []) {
+      setPublicaciones(foros)
+    }
+  }, [foros])
 
   const handleAbrirPublicacion = (publicacion) => {
     navigate(`/publicacion-detalles/${publicacion._id}`);

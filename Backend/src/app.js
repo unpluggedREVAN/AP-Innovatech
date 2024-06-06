@@ -6,6 +6,8 @@ import projectRoutes from './routes/proyectos.routes.js'
 import meetingRoutes from './routes/reuniones.routes.js'
 import taskRoutes from './routes/tareas.routes.js'
 import userRoutes from './routes/users.routes.js'
+import foroRoutes from './routes/foros.routes.js'
+import mensajeRoutes from './routes/mensajes.routes.js'
 import mongoose from 'mongoose'
 
 const app = express();
@@ -28,5 +30,7 @@ app.use('/Innovatech', projectRoutes)
 app.use('/Innovatech', meetingRoutes)
 app.use('/Innovatech', taskRoutes)
 app.use('/Innovatech', userRoutes)
+app.use('/Innovatech', foroRoutes)
+app.use('/Innovatech', mensajeRoutes)
 
 export default app;

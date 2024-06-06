@@ -6,6 +6,12 @@ export const register = async (req, res) => {
         // hash de la contraseña
         const hashedPassword = await bcrypt.hash(req.body.contrasena, 10)
 
+        const domainEmail = req.body.email.split('@')[1];
+
+        if(domainEmail != 'estudiantec.cr') {
+            return res.status(400).send({message : "El dominio no es válido."})
+        }
+
         //Crear el colaborador
         const usuario = new User({
             ...req.body,

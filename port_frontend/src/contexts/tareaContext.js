@@ -17,6 +17,16 @@ export const TaskProvider = ({children}) => {
     const [taskProgress, setTaskProgress] = useState([]);
     const [taskDone, setTaskDone] = useState([]);
 
+    const editTask = async (data, id) => {
+        try{
+            const res = await editTaskRequest(data, id)
+            alert("Task edited")
+        } catch(error) {
+            console.log(error)
+            alert("Erro")
+        }
+    }
+
     const infoTaskToDo = async (idProject) => {
         try{
             const res = await infoTaksToDoRequest(idProject)
@@ -80,7 +90,8 @@ export const TaskProvider = ({children}) => {
             taskToDo,
             taskProgress,
             taskDone,
-            deleteTask
+            deleteTask,
+            editTask
         }}>
             {children}
         </TaskContext.Provider>

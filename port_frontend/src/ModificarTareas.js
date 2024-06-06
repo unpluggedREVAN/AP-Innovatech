@@ -49,13 +49,13 @@ const ModificarTareaForm = ({ tarea, onGuardar, onCancelar }) => {
         readOnly
       />
       <select className={styles.modificarTareaSelect} value={estado} onChange={handleEstadoChange}>
-        <option value="por hacer">Por hacer</option>
-        <option value="en curso">En curso</option>
-        <option value="finalizada">Finalizado</option>
+        <option value="0">Por hacer</option>
+        <option value="1">En curso</option>
+        <option value="2">Finalizado</option>
       </select>
       <button
         className={`${styles.modificarTareaButton} ${styles.modificarTareaGuardar}`}
-        onClick={() => onGuardar({ nombreTarea, storyPoints, descripcion, responsable, estado, tarea })}
+        onClick={() => onGuardar({ nombre: nombreTarea, storyPoints : storyPoints, descripcion : descripcion, responsable: responsable, estado: parseInt(estado), tareaId : tarea })}
       >
         Guardar
       </button>
@@ -139,7 +139,7 @@ const ModificarTareasScreen = () => {
   const [colaboradores, setColaboradores] = useState([]);
 
   const {getProject, project, editProject} = useProject();
-  const {createTask, idTask, setIdTask} = useTask();
+  const {createTask, idTask, setIdTask, editTask} = useTask();
 
   useEffect(() => {
     if(project != []) {
@@ -153,6 +153,15 @@ const ModificarTareasScreen = () => {
   }, [proyectoId]);
 
   const handleGuardarModificacion = async (modificaciones) => {
+    console.log(modificaciones.tareaId)
+    const data = {
+      nombre : modificaciones.nombre,
+      storyPoints : modificaciones.storyPoints,
+      descripcion : modificaciones.descripcion,
+      estado : modificaciones.estado
+    }
+    
+    editTask(data, modificaciones.tareaId._id)
     const nuevasTareas = tareas.map((t) =>
       t.nombreTarea === tareaAEditar.nombreTarea ? { ...t, ...modificaciones } : t
     );

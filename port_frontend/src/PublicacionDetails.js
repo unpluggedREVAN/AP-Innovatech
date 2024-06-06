@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams, Link } from 'react-router-dom'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './PublicacionDetails.css';
 import './Menu.css'; 
-import forosData from './data_foros.json'; // Datos de prueba
+import { useForo } from './contexts/foroContext';
 
 const PublicacionDetailsScreen = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { publicacionId } = useParams();
-  const publicacion = forosData.find(p => p._id === publicacionId);
+  const [publicacion, setPublicacion] = useState({tipo : '', titulo : '', mensajes : []})
 
-  if (!publicacion) {
-    return <div>Publicación no encontrada</div>;
-  }
+  const {infoForo, foroInfo} = useForo();
+  
+  useEffect(() => {
+    if(foroInfo != null){
+      setPublicacion(foroInfo)
+    }
+  }, [foroInfo])
+
+  useEffect(() => {
+    infoForo(publicacionId)
+  }, [])
 
   const handleCrearMensaje = () => {
     navigate('/crear-mensaje-publicacion');
