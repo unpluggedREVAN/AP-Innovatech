@@ -41,7 +41,7 @@ function App() {
         <Route path="/gestionar-colaboradores/:proyectoId" element={<GestionarColaboradoresScreen />} />
         <Route path="/foro" element={<ForoScreen />} />
         <Route path="/publicacion-detalles/:publicacionId" element={<PublicacionDetailsScreen />} />
-        <Route path="/crear-mensaje-publicacion" element={<CrearMensajePublicacionScreen />} />
+        <Route path="/crear-mensaje-publicacion/:publicacionId" element={<CrearMensajePublicacionScreen />} />
         <Route path="/crear-publicacion" element={<CrearPublicacionScreen />} />
         <Route path="/burndown-chart" element={<BurndownChartScreen />} />
         <Route path="/reportes" element={<ReportesScreen />} />

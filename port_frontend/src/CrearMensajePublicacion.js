@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faBriefcase, faChartBar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './CrearMensajePublicacion.css';
@@ -9,11 +9,11 @@ const CrearMensajePublicacionScreen = () => {
   const [mensaje, setMensaje] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
+  const { publicacionId } = useParams();
 
   const handleEnviarMensaje = () => {
-    console.log('Mensaje enviado:', mensaje);
-    // Aquí se puede implementar la lógica para enviar el mensaje al backend
-    // Después de enviar el mensaje, redirige a la página anterior
+    console.log('Mensaje enviado:', mensaje, 'para la publicación ID:', publicacionId);
+    // Ese mensajito era para probar que pasara bien el id
     navigate(-1);
   };
 
